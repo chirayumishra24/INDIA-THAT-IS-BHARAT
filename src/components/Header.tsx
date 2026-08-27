@@ -11,6 +11,7 @@ interface HeaderProps {
   onNavigate: (sectionId: SectionId) => void;
   onOpenNotes: () => void;
   onOpenBookmarks: () => void;
+  onOpenCulturalMap: () => void;
   onResetProgress?: () => void;
 }
 
@@ -20,6 +21,7 @@ export const Header: React.FC<HeaderProps> = ({
   onNavigate,
   onOpenNotes,
   onOpenBookmarks,
+  onOpenCulturalMap,
   onResetProgress
 }) => {
   // Calculate progress percentage
@@ -79,6 +81,15 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <Compass className="w-3.5 h-3.5" />
             Roadmap
+          </button>
+
+          <button
+            onClick={onOpenCulturalMap}
+            className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-sm hover:from-amber-700 hover:to-orange-700"
+            title="Explore Interactive Cultural Map of India"
+          >
+            <span>🗺️</span>
+            <span>Cultural Map</span>
           </button>
 
           <button

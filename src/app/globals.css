@@ -63,3 +63,31 @@
   font-family: 'Cambria', 'Georgia', serif;
   letter-spacing: 0.02em;
 }
+
+/* Ambient Indian Cultural Map Watermark Background */
+.ambient-map-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(circle at center, rgba(250, 247, 242, 0.88) 0%, rgba(250, 247, 242, 0.96) 100%), url('/images/india_cultural_map.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.16;
+  filter: contrast(110%) sepia(20%);
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 20s linear infinite;
+}
+

@@ -9,12 +9,14 @@ interface ChapterCoverProps {
   studentState: StudentState;
   onStartLearning: () => void;
   onNavigate: (sectionId: SectionId) => void;
+  onOpenCulturalMap?: () => void;
 }
 
 export const ChapterCover: React.FC<ChapterCoverProps> = ({
   studentState,
   onStartLearning,
   onNavigate,
+  onOpenCulturalMap
 }) => {
   const completedCount = studentState.completedSections.filter(id =>
     LESSON_SECTIONS.some(sec => sec.id === id)
@@ -109,12 +111,22 @@ export const ChapterCover: React.FC<ChapterCoverProps> = ({
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
 
+            {onOpenCulturalMap && (
+              <button
+                onClick={onOpenCulturalMap}
+                className="w-full sm:w-auto px-6 py-4 bg-gradient-to-r from-amber-700 to-orange-700 hover:from-amber-800 hover:to-orange-800 text-white rounded-2xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
+              >
+                <span>🗺️</span>
+                <span>Explore Map of Bharat</span>
+              </button>
+            )}
+
             <button
               onClick={() => onNavigate('roadmap')}
               className="w-full sm:w-auto px-6 py-4 bg-[#FAF6EE] hover:bg-[#F4ECE0] text-[#1B2A4A] border border-[#DACBBB] rounded-2xl font-semibold text-sm transition-colors flex items-center justify-center gap-2"
             >
               <Compass className="w-4 h-4 text-amber-700" />
-              <span>View Learning Roadmap</span>
+              <span>Learning Roadmap</span>
             </button>
           </div>
 
@@ -136,6 +148,49 @@ export const ChapterCover: React.FC<ChapterCoverProps> = ({
             </div>
           </div>
 
+        </div>
+      </div>
+
+      {/* Cultural Tapestry Map Spotlight Banner */}
+      <div className="bg-gradient-to-br from-[#1B2A4A] to-[#121B30] rounded-3xl border-2 border-amber-500/30 p-6 sm:p-8 text-white shadow-academic-lg relative overflow-hidden">
+        <div className="absolute -right-10 -bottom-10 w-96 h-96 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
+        <div className="relative z-10 flex flex-col md:flex-row items-center gap-6">
+          <div className="w-full md:w-5/12 rounded-2xl overflow-hidden border border-amber-400/30 shadow-lg cursor-pointer group" onClick={onOpenCulturalMap}>
+            <img
+              src="/images/india_cultural_map.jpg"
+              alt="Cultural Map of India"
+              className="w-full h-48 sm:h-56 object-cover transform group-hover:scale-105 transition-transform duration-500"
+            />
+            <div className="bg-black/60 backdrop-blur-xs py-1.5 px-3 text-[11px] text-amber-300 font-semibold text-center flex items-center justify-center gap-1.5">
+              <span>Click to open interactive state explorer</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </div>
+          </div>
+
+          <div className="w-full md:w-7/12 space-y-3.5 text-left">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-bold uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5" />
+              Interactive Geographic & Cultural Atlas
+            </div>
+            <h3 className="text-xl sm:text-2xl font-serif font-bold text-white leading-tight">
+              The Living Tapestry of Indian States & Heritage
+            </h3>
+            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-serif">
+              Discover how every state—from Kashmir's saffron & monasteries to Tamil Nadu's soaring temple gopurams and Assam's tea valleys—weaves the grand civilizational identity of Bharat.
+            </p>
+            <div className="pt-2 flex flex-wrap items-center gap-3">
+              <button
+                onClick={onOpenCulturalMap}
+                className="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-[#1B2A4A] rounded-xl font-bold text-xs shadow-md transition-colors flex items-center gap-2"
+              >
+                <span>Launch Cultural Map Explorer</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+              <span className="text-[11px] text-gray-400">
+                Covers monuments, dances, arts, cuisine & civilizational roots
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 

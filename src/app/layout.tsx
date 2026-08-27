@@ -13,8 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="min-h-screen bg-[#FAF7F2] text-[#14213D] antialiased flex flex-col selection:bg-amber-200">
-        {children}
+      <body className="min-h-screen bg-[#FAF7F2] text-[#14213D] antialiased flex flex-col selection:bg-amber-200 relative">
+        <div className="ambient-map-bg" aria-hidden="true" />
+        <div className="relative z-10 flex flex-col flex-1">
+          {children}
+        </div>
       </body>
     </html>
   );

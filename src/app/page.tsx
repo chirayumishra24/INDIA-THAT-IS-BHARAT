@@ -11,6 +11,7 @@ import { RevisionDesk } from '@/components/RevisionDesk';
 import { AssessmentEngine } from '@/components/AssessmentEngine';
 import { TeacherDashboard } from '@/components/TeacherDashboard';
 import { NotesAndBookmarksModal } from '@/components/interactive/NotesAndBookmarksModal';
+import { IndiaCulturalMapModal } from '@/components/interactive/IndiaCulturalMapModal';
 
 const STORAGE_KEY = 'bharat_learning_studio_state_v1';
 
@@ -31,6 +32,7 @@ export default function Home() {
 
   // Modal states
   const [activeModal, setActiveModal] = useState<'notes' | 'bookmarks' | null>(null);
+  const [isMapModalOpen, setIsMapModalOpen] = useState(false);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -128,6 +130,7 @@ export default function Home() {
         onNavigate={navigateTo}
         onOpenNotes={() => setActiveModal('notes')}
         onOpenBookmarks={() => setActiveModal('bookmarks')}
+        onOpenCulturalMap={() => setIsMapModalOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -142,6 +145,7 @@ export default function Home() {
               navigateTo(firstIncomplete ? firstIncomplete.id : 'dual-name');
             }}
             onNavigate={navigateTo}
+            onOpenCulturalMap={() => setIsMapModalOpen(true)}
           />
         )}
 
@@ -207,6 +211,12 @@ export default function Home() {
         onUpdateNote={handleUpdateNote}
         onRemoveBookmark={handleToggleBookmark}
         onNavigateSection={navigateTo}
+      />
+
+      {/* Interactive Cultural Map & State Heritage Explorer Modal */}
+      <IndiaCulturalMapModal
+        isOpen={isMapModalOpen}
+        onClose={() => setIsMapModalOpen(false)}
       />
 
     </div>
