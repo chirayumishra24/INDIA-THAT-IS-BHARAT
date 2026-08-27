@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 33% 98%;
+    --foreground: 222 47% 11%;
+  }
+
+  body {
+    background-color: #FAF7F2;
+    color: #14213D;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+}
+
+/* Custom Academic Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F4ECE0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C7B49F;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A94310;
+}
+
+/* Custom text selection */
+::selection {
+  background-color: #FDE68A;
+  color: #1B2A4A;
+}
+
+/* Paper card subtle texture */
+.paper-card {
+  background-color: #FFFFFF;
+  border: 1px solid #EAE0CF;
+  box-shadow: 0 4px 14px -2px rgba(27, 42, 74, 0.05);
+}
+
+.paper-card-highlight {
+  background-color: #FDFBF7;
+  border: 1.5px solid #E06D26;
+  box-shadow: 0 6px 20px -2px rgba(224, 109, 38, 0.12);
+}
+
+.manuscript-border {
+  border-left: 4px solid #E06D26;
+}
+
+.sanskrit-font {
+  font-family: 'Cambria', 'Georgia', serif;
+  letter-spacing: 0.02em;
+}
