@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Sparkles, MessageSquare, Volume2, Quote, Eye } from 'lucide-react';
+import { ZoomableImage } from '@/components/ui/ZoomableImage';
 
 export interface ComicDialogue {
   speaker: string;
@@ -62,10 +63,12 @@ export const VisionaryComicCard: React.FC<VisionaryComicCardProps> = ({
 
       {/* Comic Illustration with Overlay Speech Nodes */}
       <div className="relative rounded-2xl overflow-hidden border border-[#DACBBB] shadow-md group">
-        <img
+        <ZoomableImage
           src={imageSrc}
           alt={imageAlt}
-          className="w-full h-auto object-cover max-h-[460px] transform group-hover:scale-[1.01] transition-transform duration-500"
+          caption={`${title} — ${activeDialogue.speaker}: “${activeDialogue.quote}”`}
+          className="w-full h-auto object-cover max-h-[460px]"
+          containerClassName="w-full block"
         />
 
         {/* Floating speech bubble prompt */}

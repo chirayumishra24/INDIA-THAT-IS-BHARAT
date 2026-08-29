@@ -4,6 +4,7 @@ import React from 'react';
 import { SectionId, StudentState } from '@/types';
 import { CHAPTER_METADATA, LESSON_SECTIONS } from '@/data/chapterContent';
 import { BookOpen, Compass, CheckCircle2, Clock, Award, ArrowRight, Sparkles, ScrollText, Landmark, MapPin } from 'lucide-react';
+import { ZoomableImage } from '@/components/ui/ZoomableImage';
 
 interface ChapterCoverProps {
   studentState: StudentState;
@@ -58,12 +59,14 @@ export const ChapterCover: React.FC<ChapterCoverProps> = ({
 
           {/* Panoramic Comic Banner: Tapestry of the Past */}
           <div className="relative rounded-2xl overflow-hidden border border-[#DACBBB] shadow-md group">
-            <img
+            <ZoomableImage
               src="/images/tapestry_comic.jpg"
               alt="The Tapestry of the Past: Civilizational Continuity for Bharat"
-              className="w-full h-auto object-cover max-h-[360px] transform group-hover:scale-[1.01] transition-transform duration-500"
+              caption="From Ashoka's Edicts & Nalanda to the Constitution — One Unbroken Tapestry"
+              className="w-full h-auto object-cover max-h-[360px]"
+              containerClassName="w-full block"
             />
-            <div className="absolute bottom-2 left-2 right-2 sm:bottom-3 sm:left-3 sm:right-3 bg-[#FAF6EE]/95 backdrop-blur-md p-2.5 sm:p-3.5 rounded-xl border border-[#DACBBB] shadow-lg flex items-center justify-between gap-2 text-xs">
+            <div className="absolute bottom-2 left-2 right-2 sm:bottom-3 sm:left-3 sm:right-3 bg-[#FAF6EE]/95 backdrop-blur-md p-2.5 sm:p-3.5 rounded-xl border border-[#DACBBB] shadow-lg flex items-center justify-between gap-2 text-xs pointer-events-none">
               <div className="text-[#1B2A4A] font-semibold text-left text-[11px] sm:text-xs">
                 <span className="font-bold text-amber-800 uppercase block sm:inline sm:mr-1">Civilizational Continuity:</span>
                 “From Ashoka's Edicts & Nalanda to the Constitution — One Unbroken Tapestry.”
@@ -155,13 +158,18 @@ export const ChapterCover: React.FC<ChapterCoverProps> = ({
       <div className="bg-gradient-to-br from-[#1B2A4A] to-[#121B30] rounded-3xl border-2 border-amber-500/30 p-6 sm:p-8 text-white shadow-academic-lg relative overflow-hidden">
         <div className="absolute -right-10 -bottom-10 w-96 h-96 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row items-center gap-6">
-          <div className="w-full md:w-5/12 rounded-2xl overflow-hidden border border-amber-400/30 shadow-lg cursor-pointer group" onClick={onOpenCulturalMap}>
-            <img
+          <div className="w-full md:w-5/12 rounded-2xl overflow-hidden border border-amber-400/30 shadow-lg group">
+            <ZoomableImage
               src="/images/india_cultural_map.jpg"
-              alt="Cultural Map of India"
-              className="w-full h-48 sm:h-56 object-cover transform group-hover:scale-105 transition-transform duration-500"
+              alt="Cultural Tapestry Map of India"
+              caption="The Cultural Tapestry of India — High-resolution illustrated map with regional heritage & monuments"
+              className="w-full h-48 sm:h-56 object-cover"
+              containerClassName="w-full block"
             />
-            <div className="bg-black/60 backdrop-blur-xs py-1.5 px-3 text-[11px] text-amber-300 font-semibold text-center flex items-center justify-center gap-1.5">
+            <div 
+              onClick={onOpenCulturalMap}
+              className="bg-black/60 hover:bg-black/80 cursor-pointer backdrop-blur-xs py-1.5 px-3 text-[11px] text-amber-300 font-semibold text-center flex items-center justify-center gap-1.5 transition-colors"
+            >
               <span>Click to open interactive state explorer</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </div>

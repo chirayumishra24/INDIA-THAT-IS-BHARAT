@@ -20,6 +20,8 @@ import {
   ChevronRight
 } from 'lucide-react';
 
+import { ZoomableImage } from '@/components/ui/ZoomableImage';
+
 interface IndiaCulturalMapModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -186,12 +188,14 @@ export const IndiaCulturalMapModal: React.FC<IndiaCulturalMapModalProps> = ({
             /* Dedicated High-Res Poster View */
             <div className="space-y-4">
               <div className="relative rounded-2xl overflow-hidden border-2 border-[#DACBBB] shadow-academic-lg bg-[#FAF6EE] group">
-                <img
+                <ZoomableImage
                   src="/images/india_cultural_map.jpg"
                   alt="Detailed Illustrated Cultural Map of India"
-                  className="w-full h-auto object-cover max-h-[75vh] mx-auto transition-transform duration-700 group-hover:scale-[1.02]"
+                  caption="The Cultural Tapestry of India — State-by-state heritage, monuments, classical arts & geographical frontiers"
+                  className="w-full h-auto object-cover max-h-[75vh] mx-auto"
+                  containerClassName="w-full block"
                 />
-                <div className="absolute top-4 left-4 bg-[#1B2A4A]/90 backdrop-blur-md text-white px-4 py-2 rounded-xl text-xs border border-amber-500/40 shadow-lg">
+                <div className="absolute top-4 left-4 bg-[#1B2A4A]/90 backdrop-blur-md text-white px-4 py-2 rounded-xl text-xs border border-amber-500/40 shadow-lg pointer-events-none">
                   <div className="text-amber-300 font-serif font-bold text-sm">Civilizational Tapestry of India</div>
                   <div className="text-[11px] text-gray-300">Each state adorned with historical monuments, folk arts & cultural icons</div>
                 </div>
