@@ -171,9 +171,33 @@ export const ACTIVITIES_CATALOG: ActivityMeta[] = [
   }
 ];
 
-export const ActivityArena: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<ActivityMode>('team-battles');
-  const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null);
+export interface ActivityArenaProps {
+  activeTab?: ActivityMode;
+  onTabChange?: (tab: ActivityMode) => void;
+  selectedActivityId?: string | null;
+  onSelectActivity?: (id: string | null) => void;
+}
+
+export const ActivityArena: React.FC<ActivityArenaProps> = ({
+  activeTab: controlledActiveTab,
+  onTabChange,
+  selectedActivityId: controlledSelectedActivityId,
+  onSelectActivity
+}) => {
+  const [internalActiveTab, setInternalActiveTab] = useState<ActivityMode>('all-games');
+  const [internalSelectedActivityId, setInternalSelectedActivityId] = useState<string | null>(null);
+
+  const activeTab = controlledActiveTab !== undefined ? controlledActiveTab : internalActiveTab;
+  const setActiveTab = (tab: ActivityMode) => {
+    if (onTabChange) onTabChange(tab);
+    setInternalActiveTab(tab);
+  };
+
+  const selectedActivityId = controlledSelectedActivityId !== undefined ? controlledSelectedActivityId : internalSelectedActivityId;
+  const setSelectedActivityId = (id: string | null) => {
+    if (onSelectActivity) onSelectActivity(id);
+    setInternalSelectedActivityId(id);
+  };
 
   const filteredActivities = ACTIVITIES_CATALOG.filter(act => {
     if (activeTab === 'team-battles') return act.category === 'team';

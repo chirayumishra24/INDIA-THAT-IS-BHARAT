@@ -65,7 +65,8 @@ export const Header: React.FC<HeaderProps> = ({
         <nav className="flex items-center gap-2 bg-[#F4ECE0]/90 backdrop-blur-md p-1.5 rounded-2xl border border-[#DACBBB]/80 shadow-inner">
           <button
             onClick={() => onNavigate('activity-arena')}
-            className="px-4 py-2 rounded-xl text-xs font-black whitespace-nowrap transition-all flex items-center gap-2 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-black shadow-md shadow-amber-950/20 scale-105"
+            className="px-4 py-2 rounded-xl text-xs font-black whitespace-nowrap transition-all flex items-center gap-2 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-500 text-black shadow-md shadow-amber-950/20 active:scale-95 cursor-pointer"
+            title="View All 10 Competitive Activities"
           >
             <span className="text-base">🎮</span>
             <span>All 10 Competitive Activities</span>

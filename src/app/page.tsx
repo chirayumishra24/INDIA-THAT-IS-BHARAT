@@ -4,9 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { SectionId, StudentState, ConfidenceRating } from '@/types';
 import { Header } from '@/components/Header';
 import { IndiaCulturalMapModal } from '@/components/interactive/IndiaCulturalMapModal';
+import { NotesAndBookmarksModal } from '@/components/interactive/NotesAndBookmarksModal';
 import { CivilizationalEntryPortal } from '@/components/ui/CivilizationalEntryPortal';
 import { BackgroundVideo } from '@/components/ui/BackgroundVideo';
-import { ActivityArena } from '@/components/activities/ActivityArena';
+import { ActivityArena, ActivityMode } from '@/components/activities/ActivityArena';
 
 const STORAGE_KEY = 'bharat_learning_studio_state_v1';
 const PORTAL_SEEN_KEY = 'bharat_portal_seen_session_v1';
@@ -26,6 +27,8 @@ export default function Home() {
   const [studentState, setStudentState] = useState<StudentState>(INITIAL_STATE);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showEntryPortal, setShowEntryPortal] = useState(true);
+  const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<ActivityMode>('all-games');
 
   // Modal states
   const [activeModal, setActiveModal] = useState<'notes' | 'bookmarks' | null>(null);
@@ -80,6 +83,8 @@ export default function Home() {
       ...prev,
       currentSectionId: sectionId
     }));
+    setSelectedActivityId(null);
+    setActiveTab('all-games');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -158,7 +163,12 @@ export default function Home() {
 
       {/* Main Content Area: Pure Activity Arena */}
       <main className="flex-1 pb-16 relative z-10">
-        <ActivityArena />
+        <ActivityArena
+          selectedActivityId={selectedActivityId}
+          onSelectActivity={setSelectedActivityId}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
       </main>
 
       {/* Footer */}
@@ -170,6 +180,18 @@ export default function Home() {
           10 Interactive Team & 1v1 Battle Activities
         </div>
       </footer>
+
+      {/* Study Notebook & Bookmarks Modal */}
+      <NotesAndBookmarksModal
+        isOpen={activeModal !== null}
+        type={activeModal || 'notes'}
+        onClose={() => setActiveModal(null)}
+        bookmarks={studentState.bookmarks}
+        notes={studentState.notes}
+        onUpdateNote={handleUpdateNote}
+        onRemoveBookmark={handleToggleBookmark}
+        onNavigateSection={navigateTo}
+      />
 
       {/* Interactive Cultural Map & State Heritage Explorer Modal */}
       <IndiaCulturalMapModal
