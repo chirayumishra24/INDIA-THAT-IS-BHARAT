@@ -121,7 +121,7 @@ export default function Home() {
   const activeLesson = LESSON_SECTIONS.find(s => s.id === studentState.currentSectionId);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#14213D]">
+    <div className="min-h-screen flex flex-col text-[#14213D]">
       
       {/* Persistent Navigation Header */}
       <Header

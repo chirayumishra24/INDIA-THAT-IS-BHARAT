@@ -28,7 +28,7 @@ export const ChapterCover: React.FC<ChapterCoverProps> = ({
     <div className="py-8 px-4 max-w-5xl mx-auto space-y-8 animate-in fade-in duration-300">
       
       {/* Hero Card / Book Cover Presentation */}
-      <div className="relative bg-white rounded-3xl border border-[#EAE0CF] shadow-academic-lg p-6 sm:p-10 lg:p-14 overflow-hidden">
+      <div className="relative bg-white/92 backdrop-blur-md rounded-3xl border border-[#EAE0CF] shadow-academic-lg p-6 sm:p-10 lg:p-14 overflow-hidden">
         
         {/* Subtle decorative background motif */}
         <div className="absolute top-0 right-0 -mr-16 -mt-16 w-80 h-80 rounded-full bg-amber-100/50 blur-3xl pointer-events-none" />
