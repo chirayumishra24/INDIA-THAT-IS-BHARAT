@@ -4,6 +4,9 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'India, That Is Bharat | Class VI Social Science Learning Studio',
   description: 'A complete interactive digital learning experience for NCERT Class 6 Social Science Chapter 5: India, That Is Bharat (Theme B: Tapestry of the Past).',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({
