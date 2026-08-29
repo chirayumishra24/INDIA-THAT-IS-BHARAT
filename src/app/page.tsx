@@ -2,15 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { SectionId, StudentState, ConfidenceRating } from '@/types';
-import { LESSON_SECTIONS } from '@/data/chapterContent';
 import { Header } from '@/components/Header';
-import { ChapterCover } from '@/components/ChapterCover';
-import { LearningRoadmap } from '@/components/LearningRoadmap';
-import { LessonSectionView } from '@/components/LessonSectionView';
-import { RevisionDesk } from '@/components/RevisionDesk';
-import { AssessmentEngine } from '@/components/AssessmentEngine';
-import { TeacherDashboard } from '@/components/TeacherDashboard';
-import { NotesAndBookmarksModal } from '@/components/interactive/NotesAndBookmarksModal';
 import { IndiaCulturalMapModal } from '@/components/interactive/IndiaCulturalMapModal';
 import { CivilizationalEntryPortal } from '@/components/ui/CivilizationalEntryPortal';
 import { BackgroundVideo } from '@/components/ui/BackgroundVideo';
@@ -20,10 +12,10 @@ const STORAGE_KEY = 'bharat_learning_studio_state_v1';
 const PORTAL_SEEN_KEY = 'bharat_portal_seen_session_v1';
 
 const INITIAL_STATE: StudentState = {
-  currentSectionId: 'intro',
+  currentSectionId: 'activity-arena',
   completedSections: [],
   confidenceRatings: {},
-  bookmarks: ['src-hathigumpha'],
+  bookmarks: [],
   notes: {},
   formativeAnswers: {},
   summativeAnswers: {},
@@ -143,11 +135,8 @@ export default function Home() {
     }));
   };
 
-  // Find active lesson section if current view is a lesson
-  const activeLesson = LESSON_SECTIONS.find(s => s.id === studentState.currentSectionId);
-
   return (
-    <div className="min-h-screen flex flex-col text-[#14213D] relative">
+    <div className="min-h-screen flex flex-col text-[#14213D] relative bg-[#07090e]">
       
       {/* Background Ambient Video Layer */}
       <BackgroundVideo />
@@ -167,89 +156,20 @@ export default function Home() {
         onOpenCulturalMap={() => setIsMapModalOpen(true)}
       />
 
-      {/* Main Content Area */}
+      {/* Main Content Area: Pure Activity Arena */}
       <main className="flex-1 pb-16 relative z-10">
-        {studentState.currentSectionId === 'activity-arena' && (
-          <ActivityArena />
-        )}
-
-        {studentState.currentSectionId === 'intro' && (
-          <ChapterCover
-            studentState={studentState}
-            onStartLearning={() => {
-              const firstIncomplete = LESSON_SECTIONS.find(
-                s => !studentState.completedSections.includes(s.id)
-              );
-              navigateTo(firstIncomplete ? firstIncomplete.id : 'dual-name');
-            }}
-            onNavigate={navigateTo}
-            onOpenCulturalMap={() => setIsMapModalOpen(true)}
-          />
-        )}
-
-        {studentState.currentSectionId === 'roadmap' && (
-          <LearningRoadmap
-            studentState={studentState}
-            onNavigateSection={navigateTo}
-          />
-        )}
-
-        {activeLesson && (
-          <LessonSectionView
-            section={activeLesson}
-            studentState={studentState}
-            onNavigateSection={navigateTo}
-            onRecordConfidence={handleRecordConfidence}
-            onToggleBookmark={handleToggleBookmark}
-            onOpenNotes={() => setActiveModal('notes')}
-            onMarkCompleted={handleMarkCompleted}
-          />
-        )}
-
-        {studentState.currentSectionId === 'revision' && (
-          <RevisionDesk
-            studentState={studentState}
-            onNavigateSection={navigateTo}
-            onStartAssessment={() => navigateTo('assessment')}
-          />
-        )}
-
-        {studentState.currentSectionId === 'assessment' && (
-          <AssessmentEngine
-            studentState={studentState}
-            onSaveAssessmentScore={handleSaveAssessmentScore}
-            onNavigateSection={navigateTo}
-          />
-        )}
-
-        {studentState.currentSectionId === 'teacher-dashboard' && (
-          <TeacherDashboard
-            onNavigateSection={navigateTo}
-          />
-        )}
+        <ActivityArena />
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#FAF6EE] border-t border-[#EAE0CF] py-6 px-4 text-center text-xs text-gray-500 space-y-1">
+      <footer className="bg-[#FAF6EE] border-t border-[#EAE0CF] py-6 px-4 text-center text-xs text-gray-500 space-y-1 relative z-10">
         <div>
-          <strong>Bharat Learning Studio</strong> • Class VI Social Science (Theme B: Tapestry of the Past)
+          <strong>India, That Is Bharat • Activity & Game Arena</strong> • Class VI Social Science
         </div>
         <div>
-          Based directly on NCERT <em>Exploring Society: India and Beyond</em> • Chapter 5: "India, That Is Bharat"
+          10 Interactive Team & 1v1 Battle Activities
         </div>
       </footer>
-
-      {/* Study Notebook & Bookmarks Modal */}
-      <NotesAndBookmarksModal
-        isOpen={activeModal !== null}
-        type={activeModal || 'notes'}
-        onClose={() => setActiveModal(null)}
-        bookmarks={studentState.bookmarks}
-        notes={studentState.notes}
-        onUpdateNote={handleUpdateNote}
-        onRemoveBookmark={handleToggleBookmark}
-        onNavigateSection={navigateTo}
-      />
 
       {/* Interactive Cultural Map & State Heritage Explorer Modal */}
       <IndiaCulturalMapModal

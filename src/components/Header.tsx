@@ -61,76 +61,24 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
         </div>
 
-        {/* Center: Navigation Pill Tabs */}
-        <nav className="hidden md:flex items-center gap-1 bg-[#F4ECE0]/90 backdrop-blur-md p-1 rounded-2xl border border-[#DACBBB]/80 shadow-inner shrink-0">
-          <button
-            onClick={() => onNavigate('intro')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
-              currentSection === 'intro' 
-                ? 'bg-white text-[#1B2A4A] shadow-xs font-bold' 
-                : 'text-gray-600 hover:text-[#1B2A4A] hover:bg-white/60'
-            }`}
-          >
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>Cover</span>
-          </button>
-
-          <button
-            onClick={() => onNavigate('roadmap')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
-              currentSection === 'roadmap' 
-                ? 'bg-white text-[#1B2A4A] shadow-xs font-bold' 
-                : 'text-gray-600 hover:text-[#1B2A4A] hover:bg-white/60'
-            }`}
-          >
-            <Compass className="w-3.5 h-3.5" />
-            <span>Roadmap</span>
-          </button>
-
+        {/* Center: Navigation Tabs */}
+        <nav className="flex items-center gap-2 bg-[#F4ECE0]/90 backdrop-blur-md p-1.5 rounded-2xl border border-[#DACBBB]/80 shadow-inner">
           <button
             onClick={() => onNavigate('activity-arena')}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-black whitespace-nowrap transition-all flex items-center gap-1.5 ${
-              currentSection === 'activity-arena'
-                ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-black shadow-md shadow-amber-950/20 scale-105'
-                : 'bg-amber-500/20 border border-amber-500/40 text-amber-900 hover:bg-amber-500/30'
-            }`}
+            className="px-4 py-2 rounded-xl text-xs font-black whitespace-nowrap transition-all flex items-center gap-2 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-black shadow-md shadow-amber-950/20 scale-105"
           >
-            <span className="text-sm">🎮</span>
-            <span>Activity Arena</span>
-            <span className="px-1.5 py-0.2 bg-amber-600 text-white text-[9px] rounded-full font-bold">10 Games</span>
+            <span className="text-base">🎮</span>
+            <span>All 10 Competitive Activities</span>
+            <span className="px-2 py-0.5 bg-black text-amber-300 text-[10px] rounded-full font-bold">Arena</span>
           </button>
 
           <button
             onClick={onOpenCulturalMap}
-            className="px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white shadow-xs hover:shadow-md hover:scale-[1.02] active:scale-95"
+            className="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 bg-[#1B2A4A] hover:bg-[#23365d] text-amber-200 shadow-xs hover:shadow-md transition-all active:scale-95"
             title="Explore Interactive Cultural Map of India"
           >
-            <Map className="w-3.5 h-3.5 text-amber-100" />
-            <span>Cultural Map</span>
-          </button>
-
-          <button
-            onClick={() => onNavigate('revision')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
-              currentSection === 'revision' 
-                ? 'bg-white text-[#1B2A4A] shadow-xs font-bold' 
-                : 'text-gray-600 hover:text-[#1B2A4A] hover:bg-white/60'
-            }`}
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            <span>Revision Desk</span>
-          </button>
-
-          <button
-            onClick={() => onNavigate('assessment')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
-              currentSection === 'assessment' 
-                ? 'bg-[#1B2A4A] text-white shadow-xs' 
-                : 'text-gray-700 hover:text-[#1B2A4A] hover:bg-white/60'
-            }`}
-          >
-            <GraduationCap className="w-3.5 h-3.5" />
-            <span>Assessment {studentState.assessmentSubmitted && '✓'}</span>
+            <Map className="w-3.5 h-3.5 text-amber-300" />
+            <span>Interactive Map</span>
           </button>
         </nav>
 
