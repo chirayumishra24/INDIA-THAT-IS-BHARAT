@@ -109,6 +109,14 @@ export const ChapterCover: React.FC<ChapterCoverProps> = ({
             </button>
 
             <button
+              onClick={() => onNavigate('activity-arena')}
+              className="w-full sm:w-auto px-6 py-3.5 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-black font-black rounded-2xl text-sm transition-all shadow-lg hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+            >
+              <span className="text-base">🎮</span>
+              <span>Enter Activity Arena (10 Games)</span>
+            </button>
+
+            <button
               onClick={() => onNavigate('roadmap')}
               className="w-full sm:w-auto px-6 py-3.5 bg-[#FAF6EE] hover:bg-[#F2E8D8] text-[#1B2A4A] rounded-2xl font-semibold text-sm border border-[#DACBBB] transition-colors flex items-center justify-center gap-2"
             >

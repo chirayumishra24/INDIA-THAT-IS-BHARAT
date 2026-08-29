@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { BackgroundVideo } from '@/components/ui/BackgroundVideo';
 
 export const metadata: Metadata = {
   title: 'India, That Is Bharat | Class VI Social Science Learning Studio',
@@ -17,8 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="min-h-screen bg-[#FAF7F2]/80 text-[#14213D] antialiased flex flex-col selection:bg-amber-200 relative">
-        <BackgroundVideo />
+      <body className="min-h-screen bg-[#FAF7F2] text-[#14213D] antialiased flex flex-col selection:bg-amber-200 relative">
         <div className="relative z-10 flex flex-col flex-1">
           {children}
         </div>

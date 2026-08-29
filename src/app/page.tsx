@@ -13,6 +13,8 @@ import { TeacherDashboard } from '@/components/TeacherDashboard';
 import { NotesAndBookmarksModal } from '@/components/interactive/NotesAndBookmarksModal';
 import { IndiaCulturalMapModal } from '@/components/interactive/IndiaCulturalMapModal';
 import { CivilizationalEntryPortal } from '@/components/ui/CivilizationalEntryPortal';
+import { BackgroundVideo } from '@/components/ui/BackgroundVideo';
+import { ActivityArena } from '@/components/activities/ActivityArena';
 
 const STORAGE_KEY = 'bharat_learning_studio_state_v1';
 const PORTAL_SEEN_KEY = 'bharat_portal_seen_session_v1';
@@ -145,8 +147,11 @@ export default function Home() {
   const activeLesson = LESSON_SECTIONS.find(s => s.id === studentState.currentSectionId);
 
   return (
-    <div className="min-h-screen flex flex-col text-[#14213D]">
+    <div className="min-h-screen flex flex-col text-[#14213D] relative">
       
+      {/* Background Ambient Video Layer */}
+      <BackgroundVideo />
+
       {/* Civilizational Prologue Entry Animation */}
       {showEntryPortal && (
         <CivilizationalEntryPortal onEnter={handleDismissPortal} />
@@ -163,7 +168,11 @@ export default function Home() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 pb-16">
+      <main className="flex-1 pb-16 relative z-10">
+        {studentState.currentSectionId === 'activity-arena' && (
+          <ActivityArena />
+        )}
+
         {studentState.currentSectionId === 'intro' && (
           <ChapterCover
             studentState={studentState}

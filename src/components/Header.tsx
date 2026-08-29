@@ -88,6 +88,19 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
 
           <button
+            onClick={() => onNavigate('activity-arena')}
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-black whitespace-nowrap transition-all flex items-center gap-1.5 ${
+              currentSection === 'activity-arena'
+                ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-black shadow-md shadow-amber-950/20 scale-105'
+                : 'bg-amber-500/20 border border-amber-500/40 text-amber-900 hover:bg-amber-500/30'
+            }`}
+          >
+            <span className="text-sm">🎮</span>
+            <span>Activity Arena</span>
+            <span className="px-1.5 py-0.2 bg-amber-600 text-white text-[9px] rounded-full font-bold">10 Games</span>
+          </button>
+
+          <button
             onClick={onOpenCulturalMap}
             className="px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white shadow-xs hover:shadow-md hover:scale-[1.02] active:scale-95"
             title="Explore Interactive Cultural Map of India"

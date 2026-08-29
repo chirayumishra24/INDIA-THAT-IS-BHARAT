@@ -1,6 +1,7 @@
 export type SectionId = 
   | 'intro'
   | 'roadmap'
+  | 'activity-arena'
   | 'dual-name'
   | 'bharat-origin'
   | 'jambudvipa'
