@@ -72,7 +72,7 @@ export const VisionaryComicCard: React.FC<VisionaryComicCardProps> = ({
         />
 
         {/* Floating speech bubble prompt */}
-        <div className="absolute bottom-3 left-3 right-3 bg-[#FAF6EE]/95 backdrop-blur-md p-3.5 rounded-xl border border-[#DACBBB] shadow-lg flex items-center justify-between gap-3 text-xs">
+        <div className="absolute bottom-3 left-3 right-3 bg-[#FAF6EE]/95 backdrop-blur-md p-3.5 rounded-xl border border-[#DACBBB] shadow-lg flex items-center justify-between gap-3 text-xs pointer-events-none">
           <div className="flex items-center gap-2 text-[#1B2A4A] font-semibold">
             <Quote className="w-4 h-4 text-amber-700 shrink-0" />
             <span className="truncate">{activeDialogue.speaker}: “{activeDialogue.quote.slice(0, 65)}...”</span>
