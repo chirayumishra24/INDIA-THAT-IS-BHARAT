@@ -103,17 +103,17 @@ export const TravelerAuction: React.FC<TravelerAuctionProps> = ({ onGameComplete
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-4 sm:p-6 bg-[#0f111a] rounded-3xl border border-amber-500/20 text-white shadow-2xl">
+    <div className="max-w-5xl mx-auto p-4 sm:p-6 bg-white/85 backdrop-blur-xl rounded-3xl border border-amber-500/40 text-[#14213D] shadow-2xl">
       {/* Top Banner & Coin Vault */}
-      <div className="bg-gradient-to-r from-gray-900 via-gray-950 to-gray-900 rounded-2xl border border-amber-500/30 p-4 sm:p-5 mb-6 shadow-xl">
+      <div className="bg-amber-50/80 backdrop-blur-md rounded-2xl border border-amber-200 p-4 sm:p-5 mb-6 shadow-md">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <Gavel className="w-5 h-5 text-amber-400" />
+            <Gavel className="w-5 h-5 text-amber-700" />
             <div>
-              <h2 className="text-lg font-black text-amber-200 uppercase tracking-wide">
+              <h2 className="text-lg font-black text-amber-950 uppercase tracking-wide">
                 Activity 4 • Ancient Traveler Auction
               </h2>
-              <p className="text-xs text-gray-400">
+              <p className="text-xs text-gray-700 font-medium">
                 {phase === 'auction' ? 'Phase 1: Bid Gold to Win Traveler Knowledge Packs' : 'Phase 2: The Grand Knowledge Showdown'}
               </p>
             </div>
@@ -121,23 +121,23 @@ export const TravelerAuction: React.FC<TravelerAuctionProps> = ({ onGameComplete
 
           <div className="flex items-center gap-4">
             {/* Lion Treasury */}
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-amber-950/40 border border-amber-500/50 rounded-xl">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-amber-100 border border-amber-400 rounded-xl">
               <span className="text-lg">🦁</span>
               <div>
-                <div className="text-[10px] uppercase font-bold text-amber-400">Team Lion</div>
-                <div className="text-xs font-black text-amber-200 flex items-center gap-1">
-                  <Coins className="w-3 h-3 text-amber-400" /> {coins.lion} Gold
+                <div className="text-[10px] uppercase font-bold text-amber-900">Team Lion</div>
+                <div className="text-xs font-black text-amber-950 flex items-center gap-1">
+                  <Coins className="w-3 h-3 text-amber-600" /> {coins.lion} Gold
                 </div>
               </div>
             </div>
 
             {/* Peacock Treasury */}
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-teal-950/40 border border-teal-500/50 rounded-xl">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-teal-100 border border-teal-400 rounded-xl">
               <span className="text-lg">🦚</span>
               <div>
-                <div className="text-[10px] uppercase font-bold text-teal-400">Team Peacock</div>
-                <div className="text-xs font-black text-teal-200 flex items-center gap-1">
-                  <Coins className="w-3 h-3 text-teal-400" /> {coins.peacock} Gold
+                <div className="text-[10px] uppercase font-bold text-teal-900">Team Peacock</div>
+                <div className="text-xs font-black text-teal-950 flex items-center gap-1">
+                  <Coins className="w-3 h-3 text-teal-600" /> {coins.peacock} Gold
                 </div>
               </div>
             </div>

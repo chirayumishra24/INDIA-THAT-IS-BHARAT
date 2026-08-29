@@ -96,7 +96,7 @@ export const SourceTugOfWar: React.FC<SourceTugOfWarProps> = ({ onGameComplete }
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-4 sm:p-6 bg-[#0f111a] rounded-3xl border border-amber-500/20 text-white shadow-2xl">
+    <div className="max-w-5xl mx-auto p-4 sm:p-6 bg-white/85 backdrop-blur-xl rounded-3xl border border-amber-500/40 text-[#14213D] shadow-2xl">
       {/* Persistent Team Scoreboard with Buzzers */}
       <TeamScoreboard
         teamLionScore={scores.lion}
@@ -109,26 +109,26 @@ export const SourceTugOfWar: React.FC<SourceTugOfWarProps> = ({ onGameComplete }
       />
 
       {/* Visual Rope Tug-of-War Arena */}
-      <div className="bg-gradient-to-b from-gray-900 via-gray-950 to-black p-5 rounded-2xl border border-gray-800 mb-6 shadow-inner relative overflow-hidden">
-        <div className="flex items-center justify-between text-xs font-bold text-gray-400 mb-2">
-          <span className="text-amber-400 flex items-center gap-1 font-black">
+      <div className="bg-amber-50/80 backdrop-blur-md p-5 rounded-2xl border border-amber-200 mb-6 shadow-inner relative overflow-hidden">
+        <div className="flex items-center justify-between text-xs font-black text-gray-700 mb-2">
+          <span className="text-amber-800 flex items-center gap-1 font-black">
             🦁 Lion Goal Zone
           </span>
           <span className="text-gray-500 uppercase tracking-widest text-[10px]">
             Dynamic Rope Physics
           </span>
-          <span className="text-teal-400 flex items-center gap-1 font-black">
+          <span className="text-teal-800 flex items-center gap-1 font-black">
             Peacock Goal Zone 🦚
           </span>
         </div>
 
         {/* Rope Track */}
-        <div className="relative h-12 w-full bg-black/60 rounded-full border border-gray-800 flex items-center px-4 overflow-hidden">
+        <div className="relative h-12 w-full bg-white/90 rounded-full border border-amber-300 flex items-center px-4 overflow-hidden shadow-inner">
           {/* Center Marker Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-700 -translate-x-1/2 z-0 border-l border-dashed border-gray-500"></div>
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-400 -translate-x-1/2 z-0 border-l border-dashed border-gray-400"></div>
 
           {/* Rope Texture */}
-          <div className="w-full h-3 bg-gradient-to-r from-amber-700 via-yellow-600 to-teal-700 rounded-full relative shadow-inner">
+          <div className="w-full h-3 bg-gradient-to-r from-amber-600 via-yellow-500 to-teal-600 rounded-full relative shadow-inner">
             {/* The Moving Tug Flag */}
             <div
               className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r from-amber-400 to-yellow-300 border-2 border-white shadow-xl flex items-center justify-center text-xs font-black text-black transition-all duration-700 ease-out z-10"
@@ -140,10 +140,10 @@ export const SourceTugOfWar: React.FC<SourceTugOfWarProps> = ({ onGameComplete }
         </div>
 
         {/* Distance percentages */}
-        <div className="flex justify-between text-[11px] font-mono text-gray-400 mt-2">
-          <span className="text-amber-400">{Math.round(100 - ropePosition)}% Pull</span>
+        <div className="flex justify-between text-[11px] font-mono text-gray-600 font-bold mt-2">
+          <span className="text-amber-800">{Math.round(100 - ropePosition)}% Pull</span>
           <span className="text-gray-500">Center: 50%</span>
-          <span className="text-teal-400">{Math.round(ropePosition)}% Pull</span>
+          <span className="text-teal-800">{Math.round(ropePosition)}% Pull</span>
         </div>
       </div>
 

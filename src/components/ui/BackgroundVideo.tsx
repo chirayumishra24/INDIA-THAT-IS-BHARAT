@@ -7,7 +7,7 @@ export const BackgroundVideo: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
-  const [opacity, setOpacity] = useState<number>(0.35);
+  const [opacity, setOpacity] = useState<number>(0.85);
   const [showControls, setShowControls] = useState(false);
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export const BackgroundVideo: React.FC = () => {
         </video>
 
         {/* Soft Vignette Overlay for Readability */}
-        <div className="absolute inset-0 bg-radial from-transparent via-[#FAF7F2]/40 to-[#FAF7F2]/80 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/30 pointer-events-none" />
       </div>
 
       {/* Subtle Floating Ambient Video Controls in bottom left */}

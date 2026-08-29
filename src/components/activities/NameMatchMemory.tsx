@@ -115,7 +115,7 @@ export const NameMatchMemory: React.FC<NameMatchMemoryProps> = ({ onGameComplete
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-[#0e121e] rounded-3xl border border-indigo-500/30 text-white shadow-2xl">
+    <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-white/85 backdrop-blur-xl rounded-3xl border border-indigo-500/40 text-[#14213D] shadow-2xl">
       <OneOnOneScoreboard
         player1Score={scores.p1}
         player2Score={scores.p2}
@@ -123,23 +123,23 @@ export const NameMatchMemory: React.FC<NameMatchMemoryProps> = ({ onGameComplete
       />
 
       {/* Header Info */}
-      <div className="bg-gray-900/90 p-4 sm:p-5 rounded-2xl border border-gray-800 mb-6 flex flex-wrap items-center justify-between gap-4 shadow-xl">
+      <div className="bg-amber-50/80 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-amber-200 mb-6 flex flex-wrap items-center justify-between gap-4 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 bg-amber-500/20 text-amber-300 text-xs font-bold rounded-full border border-amber-500/40 uppercase">
+            <span className="px-2.5 py-0.5 bg-amber-200 text-amber-950 text-xs font-black rounded-full border border-amber-300 uppercase">
               Activity 8 • 1v1 Memory Flip
             </span>
-            <span className="text-xs text-gray-400">Match Ancient Terms with Sources</span>
+            <span className="text-xs text-gray-600 font-semibold">Match Ancient Terms with Sources</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-amber-100 mt-1">
+          <h2 className="text-xl sm:text-2xl font-black text-amber-950 mt-1">
             Ancient Scroll Memory Duel
           </h2>
-          <p className="text-xs text-gray-400">
-            Turn: <strong className={activePlayer === 1 ? 'text-indigo-300' : 'text-rose-300'}>Player {activePlayer}</strong> • Flip 2 cards to discover matching pairs. Matches grant an extra turn!
+          <p className="text-xs sm:text-sm text-gray-700 font-medium">
+            Turn: <strong className={activePlayer === 1 ? 'text-indigo-800' : 'text-rose-800'}>Player {activePlayer}</strong> • Flip 2 cards to discover matching pairs. Matches grant an extra turn!
           </p>
         </div>
 
-        <div className="px-3 py-1.5 bg-amber-950/40 border border-amber-500/40 rounded-xl text-xs font-bold text-amber-300">
+        <div className="px-3 py-1.5 bg-amber-100 border border-amber-300 rounded-xl text-xs font-bold text-amber-900">
           Pairs Matched: {matchedPairKeys.length} / 8
         </div>
       </div>

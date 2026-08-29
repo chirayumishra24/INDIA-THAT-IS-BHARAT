@@ -125,7 +125,7 @@ export const EtymologyDuel: React.FC<EtymologyDuelProps> = ({ onGameComplete }) 
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-[#0e121e] rounded-3xl border border-indigo-500/30 text-white shadow-2xl">
+    <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-white/85 backdrop-blur-xl rounded-3xl border border-indigo-500/40 text-[#14213D] shadow-2xl">
       <OneOnOneScoreboard
         player1Score={scores.p1}
         player2Score={scores.p2}
@@ -136,23 +136,23 @@ export const EtymologyDuel: React.FC<EtymologyDuelProps> = ({ onGameComplete }) 
       />
 
       {/* Header Info */}
-      <div className="bg-gray-900/90 p-4 sm:p-5 rounded-2xl border border-gray-800 mb-6 flex flex-wrap items-center justify-between gap-4 shadow-xl">
+      <div className="bg-indigo-50/80 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-indigo-200 mb-6 flex flex-wrap items-center justify-between gap-4 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 bg-indigo-500/20 text-indigo-300 text-xs font-bold rounded-full border border-indigo-500/40 uppercase">
+            <span className="px-2.5 py-0.5 bg-indigo-200 text-indigo-950 text-xs font-black rounded-full border border-indigo-300 uppercase">
               Activity 6 • 1v1 Etymology Duel
             </span>
-            <span className="text-xs text-amber-400 font-semibold">{activeChain.lineage} Lineage</span>
+            <span className="text-xs text-amber-800 font-bold">{activeChain.lineage} Lineage</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-white mt-1">
+          <h2 className="text-xl sm:text-2xl font-black text-indigo-950 mt-1">
             {activeChain.title}
           </h2>
-          <p className="text-xs text-gray-400">
-            Current turn: <strong className={activePlayer === 1 ? 'text-indigo-300' : 'text-rose-300'}>Player {activePlayer}</strong> • Identify the next phonetic shift!
+          <p className="text-xs sm:text-sm text-gray-700 font-medium">
+            Current turn: <strong className={activePlayer === 1 ? 'text-indigo-800' : 'text-rose-800'}>Player {activePlayer}</strong> • Identify the next phonetic shift!
           </p>
         </div>
 
-        <div className="px-3 py-1.5 bg-indigo-950/40 border border-indigo-500/30 rounded-xl text-xs font-bold text-indigo-300">
+        <div className="px-3 py-1.5 bg-indigo-100 border border-indigo-300 rounded-xl text-xs font-bold text-indigo-900">
           Step {currentStepIndex + 1} of {activeChain.steps.length}
         </div>
       </div>

@@ -71,7 +71,7 @@ export const RiverToNameFlow: React.FC<RiverToNameFlowProps> = ({ onGameComplete
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-[#0e121e] rounded-3xl border border-indigo-500/30 text-white shadow-2xl">
+    <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-white/85 backdrop-blur-xl rounded-3xl border border-indigo-500/40 text-[#14213D] shadow-2xl">
       <OneOnOneScoreboard
         player1Score={scores.p1}
         player2Score={scores.p2}
@@ -79,23 +79,23 @@ export const RiverToNameFlow: React.FC<RiverToNameFlowProps> = ({ onGameComplete
       />
 
       {/* Header */}
-      <div className="bg-gray-900/90 p-4 sm:p-5 rounded-2xl border border-gray-800 mb-6 flex flex-wrap items-center justify-between gap-4 shadow-xl">
+      <div className="bg-indigo-50/80 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-indigo-200 mb-6 flex flex-wrap items-center justify-between gap-4 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 bg-indigo-500/20 text-indigo-300 text-xs font-bold rounded-full border border-indigo-500/40 uppercase">
+            <span className="px-2.5 py-0.5 bg-indigo-200 text-indigo-950 text-xs font-black rounded-full border border-indigo-300 uppercase">
               Activity 9 • River to Name Flow
             </span>
-            <span className="text-xs text-gray-400">Sacred Geography & Linguistic Offshoots</span>
+            <span className="text-xs text-gray-600 font-semibold">Sacred Geography & Linguistic Offshoots</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-white mt-1">
+          <h2 className="text-xl sm:text-2xl font-black text-indigo-950 mt-1">
             Connect Ancient Geographic Origins to Civilizational Names
           </h2>
-          <p className="text-xs text-gray-400">
-            Turn: <strong className={activePlayer === 1 ? 'text-indigo-300' : 'text-rose-300'}>Player {activePlayer}</strong> • Click an Origin on the left, then click its corresponding Name/Outcome on the right.
+          <p className="text-xs sm:text-sm text-gray-700 font-medium">
+            Turn: <strong className={activePlayer === 1 ? 'text-indigo-800' : 'text-rose-800'}>Player {activePlayer}</strong> • Click an Origin on the left, then click its corresponding Name/Outcome on the right.
           </p>
         </div>
 
-        <div className="px-3 py-1.5 bg-indigo-950/40 border border-indigo-500/30 rounded-xl text-xs font-bold text-indigo-300">
+        <div className="px-3 py-1.5 bg-indigo-100 border border-indigo-300 rounded-xl text-xs font-bold text-indigo-900">
           Connected: {completedConnectionIds.length} / {RIVER_FLOW_CONNECTIONS.length}
         </div>
       </div>

@@ -104,7 +104,7 @@ export const FactSniper: React.FC<FactSniperProps> = ({ onGameComplete }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-[#0e121e] rounded-3xl border border-indigo-500/30 text-white shadow-2xl">
+    <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-white/85 backdrop-blur-xl rounded-3xl border border-indigo-500/40 text-[#14213D] shadow-2xl">
       <OneOnOneScoreboard
         player1Score={scores.p1}
         player2Score={scores.p2}
@@ -114,23 +114,23 @@ export const FactSniper: React.FC<FactSniperProps> = ({ onGameComplete }) => {
       />
 
       {/* Header */}
-      <div className="bg-gray-900/90 p-4 sm:p-5 rounded-2xl border border-gray-800 mb-6 flex flex-wrap items-center justify-between gap-4 shadow-xl">
+      <div className="bg-rose-50/80 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-rose-200 mb-6 flex flex-wrap items-center justify-between gap-4 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 bg-rose-500/20 text-rose-300 text-xs font-bold rounded-full border border-rose-500/40 uppercase">
+            <span className="px-2.5 py-0.5 bg-rose-200 text-rose-950 text-xs font-black rounded-full border border-rose-300 uppercase">
               Activity 10 • Fact Sniper
             </span>
-            <span className="text-xs text-gray-400">Target Gallery (Fact vs Myth)</span>
+            <span className="text-xs text-gray-600 font-semibold">Target Gallery (Fact vs Myth)</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-white mt-1">
+          <h2 className="text-xl sm:text-2xl font-black text-rose-950 mt-1">
             Historical Fact Sniper Gallery
           </h2>
-          <p className="text-xs text-gray-400">
-            Turn: <strong className={activePlayer === 1 ? 'text-indigo-300' : 'text-rose-300'}>Player {activePlayer}</strong> • Shoot only TRUE facts. Let false myths pass safely!
+          <p className="text-xs sm:text-sm text-gray-700 font-medium">
+            Turn: <strong className={activePlayer === 1 ? 'text-indigo-800' : 'text-rose-800'}>Player {activePlayer}</strong> • Shoot only TRUE facts. Let false myths pass safely!
           </p>
         </div>
 
-        <div className="px-3 py-1.5 bg-rose-950/40 border border-rose-500/30 rounded-xl text-xs font-bold text-rose-300">
+        <div className="px-3 py-1.5 bg-rose-100 border border-rose-300 rounded-xl text-xs font-bold text-rose-900">
           Target {currentTargetIndex + 1} of {FACT_SNIPER_TARGETS.length}
         </div>
       </div>

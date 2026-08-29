@@ -136,7 +136,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col text-[#14213D] relative bg-[#07090e]">
+    <div className="min-h-screen flex flex-col text-[#14213D] relative bg-transparent">
       
       {/* Background Ambient Video Layer */}
       <BackgroundVideo />

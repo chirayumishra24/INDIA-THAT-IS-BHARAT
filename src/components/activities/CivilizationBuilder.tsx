@@ -101,7 +101,7 @@ export const CivilizationBuilder: React.FC<CivilizationBuilderProps> = ({ onGame
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-4 sm:p-6 bg-[#0f111a] rounded-3xl border border-amber-500/20 text-white shadow-2xl">
+    <div className="max-w-5xl mx-auto p-4 sm:p-6 bg-white/85 backdrop-blur-xl rounded-3xl border border-amber-500/40 text-[#14213D] shadow-2xl">
       <TeamScoreboard
         teamLionScore={scores.lion}
         teamPeacockScore={scores.peacock}
@@ -111,24 +111,24 @@ export const CivilizationBuilder: React.FC<CivilizationBuilderProps> = ({ onGame
       />
 
       {/* Header Info */}
-      <div className="flex flex-wrap items-center justify-between gap-4 bg-gray-900/80 p-4 rounded-2xl border border-gray-800 mb-6">
+      <div className="flex flex-wrap items-center justify-between gap-4 bg-amber-50/80 backdrop-blur-md p-4 rounded-2xl border border-amber-200 mb-6">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 bg-amber-500/20 text-amber-300 text-xs font-bold rounded-full border border-amber-500/30 uppercase tracking-wide">
+            <span className="px-2.5 py-0.5 bg-amber-200 text-amber-950 text-xs font-black rounded-full border border-amber-300 uppercase tracking-wide">
               Activity 5 • Civilization Builder
             </span>
-            <span className="text-xs text-gray-400">Sacred Geography Accuracy Challenge</span>
+            <span className="text-xs text-gray-600 font-semibold">Sacred Geography Accuracy Challenge</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-amber-100 mt-1">
+          <h2 className="text-xl sm:text-2xl font-black text-amber-950 mt-1">
             Place Landmark: {currentElement?.title}
           </h2>
-          <p className="text-xs sm:text-sm text-gray-400">
-            Hint: <strong className="text-amber-300">{currentElement?.zoneHint}</strong> • {currentElement?.historicalSignificance}
+          <p className="text-xs sm:text-sm text-gray-700 font-medium">
+            Hint: <strong className="text-amber-800">{currentElement?.zoneHint}</strong> • {currentElement?.historicalSignificance}
           </p>
         </div>
 
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-black/60 border border-gray-700 rounded-xl text-xs font-bold text-amber-300">
-          <Target className="w-4 h-4 text-amber-400" />
+        <div className="flex items-center gap-2 px-3 py-1.5 bg-white/80 border border-amber-300 rounded-xl text-xs font-bold text-amber-900 shadow-xs">
+          <Target className="w-4 h-4 text-amber-700" />
           Turn: {activeTeam === 'lion' ? 'Team Lion 🦁' : 'Team Peacock 🦚'}
         </div>
       </div>
