@@ -12,8 +12,10 @@ import { AssessmentEngine } from '@/components/AssessmentEngine';
 import { TeacherDashboard } from '@/components/TeacherDashboard';
 import { NotesAndBookmarksModal } from '@/components/interactive/NotesAndBookmarksModal';
 import { IndiaCulturalMapModal } from '@/components/interactive/IndiaCulturalMapModal';
+import { CivilizationalEntryPortal } from '@/components/ui/CivilizationalEntryPortal';
 
 const STORAGE_KEY = 'bharat_learning_studio_state_v1';
+const PORTAL_SEEN_KEY = 'bharat_portal_seen_session_v1';
 
 const INITIAL_STATE: StudentState = {
   currentSectionId: 'intro',
@@ -29,10 +31,32 @@ const INITIAL_STATE: StudentState = {
 export default function Home() {
   const [studentState, setStudentState] = useState<StudentState>(INITIAL_STATE);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showEntryPortal, setShowEntryPortal] = useState(true);
 
   // Modal states
   const [activeModal, setActiveModal] = useState<'notes' | 'bookmarks' | null>(null);
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
+
+  // Check portal session state on mount
+  useEffect(() => {
+    try {
+      const portalSeen = sessionStorage.getItem(PORTAL_SEEN_KEY);
+      if (portalSeen === 'true') {
+        setShowEntryPortal(false);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+
+  const handleDismissPortal = () => {
+    setShowEntryPortal(false);
+    try {
+      sessionStorage.setItem(PORTAL_SEEN_KEY, 'true');
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -123,6 +147,11 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col text-[#14213D]">
       
+      {/* Civilizational Prologue Entry Animation */}
+      {showEntryPortal && (
+        <CivilizationalEntryPortal onEnter={handleDismissPortal} />
+      )}
+
       {/* Persistent Navigation Header */}
       <Header
         currentSection={studentState.currentSectionId}
