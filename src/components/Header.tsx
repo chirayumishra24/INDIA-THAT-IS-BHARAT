@@ -35,7 +35,7 @@ export const Header: React.FC<HeaderProps> = ({
   const bookmarksCount = studentState.bookmarks.length;
 
   return (
-    <header className="sticky top-0 z-40 bg-[#FAF6EE]/95 backdrop-blur-md border-b border-[#EAE0CF] px-3 sm:px-6 lg:px-8 py-2.5 transition-all">
+    <header className="sticky top-0 z-40 bg-[#FAF6EE]/85 backdrop-blur-xl border-b border-[#EAE0CF]/80 shadow-xs px-3 sm:px-6 lg:px-8 py-2.5 transition-all">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 lg:gap-6">
         
         {/* Left: Branding & Chapter Title */}
@@ -45,13 +45,13 @@ export const Header: React.FC<HeaderProps> = ({
             className="flex items-center gap-2.5 group text-left focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-xl p-1 transition-all"
             title="Go to Chapter Cover"
           >
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#1B2A4A] text-amber-400 flex items-center justify-center font-serif font-bold text-base sm:text-lg shadow-md group-hover:bg-[#0F1829] transition-colors shrink-0">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#1B2A4A] to-[#0D1527] border border-amber-400/50 text-amber-300 flex items-center justify-center font-serif font-bold text-base sm:text-lg shadow-md shadow-amber-950/10 group-hover:border-amber-400 group-hover:scale-105 transition-all shrink-0">
               भ
             </div>
             <div className="min-w-0">
-              <div className="text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase text-amber-800 flex items-center gap-1.5 whitespace-nowrap leading-none mb-1">
-                <span>{CHAPTER_METADATA.classLevel}</span>
-                <span className="text-gray-300">•</span>
+              <div className="text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-amber-800 flex items-center gap-1.5 whitespace-nowrap leading-none mb-1">
+                <span className="bg-amber-100/80 px-1.5 py-0.5 rounded text-[10px] text-amber-900 border border-amber-300/40">{CHAPTER_METADATA.classLevel}</span>
+                <span className="text-gray-400">•</span>
                 <span>{CHAPTER_METADATA.theme}</span>
               </div>
               <h1 className="text-xs sm:text-sm lg:text-base font-serif font-bold text-[#14213D] truncate group-hover:text-amber-700 transition-colors leading-tight">
@@ -62,12 +62,12 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Center: Navigation Pill Tabs */}
-        <nav className="hidden md:flex items-center gap-1 bg-[#F4ECE0] p-1 rounded-2xl border border-[#DACBBB] shadow-inner shrink-0">
+        <nav className="hidden md:flex items-center gap-1 bg-[#F4ECE0]/90 backdrop-blur-md p-1 rounded-2xl border border-[#DACBBB]/80 shadow-inner shrink-0">
           <button
             onClick={() => onNavigate('intro')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
               currentSection === 'intro' 
-                ? 'bg-white text-[#1B2A4A] shadow-xs' 
+                ? 'bg-white text-[#1B2A4A] shadow-xs font-bold' 
                 : 'text-gray-600 hover:text-[#1B2A4A] hover:bg-white/60'
             }`}
           >
@@ -79,7 +79,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => onNavigate('roadmap')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
               currentSection === 'roadmap' 
-                ? 'bg-white text-[#1B2A4A] shadow-xs' 
+                ? 'bg-white text-[#1B2A4A] shadow-xs font-bold' 
                 : 'text-gray-600 hover:text-[#1B2A4A] hover:bg-white/60'
             }`}
           >
@@ -89,7 +89,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={onOpenCulturalMap}
-            className="px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-white shadow-xs"
+            className="px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white shadow-xs hover:shadow-md hover:scale-[1.02] active:scale-95"
             title="Explore Interactive Cultural Map of India"
           >
             <Map className="w-3.5 h-3.5 text-amber-100" />
@@ -100,7 +100,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => onNavigate('revision')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
               currentSection === 'revision' 
-                ? 'bg-white text-[#1B2A4A] shadow-xs' 
+                ? 'bg-white text-[#1B2A4A] shadow-xs font-bold' 
                 : 'text-gray-600 hover:text-[#1B2A4A] hover:bg-white/60'
             }`}
           >

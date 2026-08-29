@@ -33,24 +33,24 @@ export const VisionaryComicCard: React.FC<VisionaryComicCardProps> = ({
   const activeDialogue = dialogues[activeDialogueIndex] || dialogues[0];
 
   return (
-    <div className="bg-white rounded-3xl border border-[#EAE0CF] p-5 sm:p-7 shadow-academic space-y-5 overflow-hidden">
+    <div className="gold-filigree-card rounded-3xl p-5 sm:p-7 shadow-academic space-y-5 overflow-hidden">
       
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#EAE0CF] pb-4">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-amber-600 text-white flex items-center justify-center">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-600 to-amber-800 text-white flex items-center justify-center shadow-sm">
             <MessageSquare className="w-4 h-4" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-900 bg-amber-100/80 px-2 py-0.5 rounded border border-amber-300/60 shadow-xs">
                 {eraBadge}
               </span>
               <span className="text-xs font-serif font-bold text-[#14213D]">
                 Graphic Novel Vision & Dialogue
               </span>
             </div>
-            <h4 className="text-base font-serif font-bold text-[#14213D] mt-0.5">
+            <h4 className="text-base sm:text-lg font-serif font-bold text-[#14213D] mt-0.5">
               {title}
             </h4>
           </div>

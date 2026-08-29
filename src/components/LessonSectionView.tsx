@@ -13,6 +13,7 @@ import { ThinkAndConnect } from './interactive/ThinkAndConnect';
 import { KeyTermsLab } from './interactive/KeyTermsLab';
 import { ConfidenceCheck } from './interactive/ConfidenceCheck';
 import { VisionaryComicCard } from './interactive/VisionaryComicCard';
+import { CivilizationalTimelineRibbon } from './ui/CivilizationalTimelineRibbon';
 import { 
   CheckCircle2, 
   ArrowLeft, 
@@ -58,16 +59,17 @@ export const LessonSectionView: React.FC<LessonSectionViewProps> = ({
     selectedOption !== null
   );
 
-  const [activeConceptCardId, setActiveConceptCardId] = useState<string>(
-    section.conceptCards?.[0]?.id || ''
-  );
-
   const handleOptionSelect = (index: number) => {
     setSelectedOption(index);
     setShowExplanation(true);
-    // Mark section as completed
-    onMarkCompleted(section.id);
+    if (index === section.formativeCheck.correctIndex) {
+      onMarkCompleted(section.id);
+    }
   };
+
+  const [activeConceptCardId, setActiveConceptCardId] = useState<string>(
+    section.conceptCards?.[0]?.id || ''
+  );
 
   const currentConfidence = studentState.confidenceRatings[section.id];
   const isSectionBookmarked = studentState.bookmarks.includes(section.id);
@@ -75,10 +77,16 @@ export const LessonSectionView: React.FC<LessonSectionViewProps> = ({
   return (
     <div className="py-6 px-4 max-w-5xl mx-auto space-y-8 animate-in fade-in duration-300">
       
-      {/* Top Breadcrumb & Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-[#EAE0CF] shadow-xs">
+      {/* Top Civilizational Timeline Ribbon */}
+      <CivilizationalTimelineRibbon
+        currentSection={section.id}
+        onNavigate={onNavigateSection}
+      />
+
+      {/* Top Metadata Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE0CF] pb-3">
         <div className="flex items-center gap-2 text-xs font-semibold text-gray-500">
-          <span className="text-amber-800 uppercase tracking-wider">Part {section.number} of {LESSON_SECTIONS.length}</span>
+          <span className="text-amber-800 uppercase tracking-wider font-bold">Part {section.number} of {LESSON_SECTIONS.length}</span>
           <span>•</span>
           <span className="flex items-center gap-1 text-gray-600">
             <Clock className="w-3.5 h-3.5" /> {section.durationMinutes} mins
@@ -113,10 +121,10 @@ export const LessonSectionView: React.FC<LessonSectionViewProps> = ({
       </div>
 
       {/* Main Section Header */}
-      <div className="bg-white rounded-3xl border border-[#EAE0CF] p-6 sm:p-10 shadow-academic space-y-4">
+      <div className="gold-filigree-card rounded-3xl p-6 sm:p-10 shadow-academic space-y-4">
         
         <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
+          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-50/80 px-3 py-1 rounded-full border border-amber-300/60 shadow-xs">
             <span>LESSON PART {section.number}</span>
           </div>
           
@@ -129,9 +137,9 @@ export const LessonSectionView: React.FC<LessonSectionViewProps> = ({
           </p>
         </div>
 
-        {/* Short explanation with highlighted words */}
+        {/* Short explanation with illuminated drop cap */}
         <div className="pt-2 border-t border-[#EAE0CF]">
-          <p className="text-sm sm:text-base text-gray-800 leading-relaxed font-sans">
+          <p className="text-sm sm:text-base text-gray-800 leading-relaxed font-serif manuscript-lead">
             {section.shortExplanation}
           </p>
 
