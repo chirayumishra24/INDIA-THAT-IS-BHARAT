@@ -61,7 +61,7 @@ export const ChapterCover: React.FC<ChapterCoverProps> = ({
           {/* Panoramic Comic Banner: Tapestry of the Past */}
           <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4C3AC] shadow-academic-md group">
             <ZoomableImage
-              src="/images/comic_tapestry_banner.png"
+              src="/images/tapestry_comic.jpg"
               alt="The Tapestry of the Past: Civilizational Continuity for Bharat (NCERT Theme B Illustration)"
               caption="From Ashoka's Edicts & Nalanda to the Constitution — One Unbroken Tapestry"
               className="w-full h-auto object-cover max-h-[380px]"
