@@ -113,9 +113,22 @@ export const ZoomableImage: React.FC<ZoomableImageProps> = ({
       onMouseUp={handleMouseUp}
       style={{ isolation: 'isolate' }}
     >
+      {/* Prominent Floating Top-Right Cross Button */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          handleClose();
+        }}
+        className="fixed top-4 right-4 sm:top-6 sm:right-6 z-50 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/80 hover:bg-red-600 border-2 border-white/40 hover:border-white text-white shadow-2xl transition-all duration-200 flex items-center justify-center hover:scale-110 active:scale-95 group focus:outline-none focus:ring-4 focus:ring-red-500/50"
+        title="Close Preview (ESC)"
+        aria-label="Close image preview"
+      >
+        <X className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" />
+      </button>
+
       {/* Top Controls Bar */}
       <div 
-        className="w-full max-w-6xl mx-auto flex items-center justify-between gap-4 text-white z-20 shrink-0 pb-2 border-b border-white/10"
+        className="w-full max-w-6xl mx-auto flex items-center justify-between gap-4 text-white z-20 shrink-0 pb-2 pr-14 sm:pr-16 border-b border-white/10"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-gray-200 truncate">
@@ -154,17 +167,9 @@ export const ZoomableImage: React.FC<ZoomableImageProps> = ({
           <button
             onClick={handleResetZoom}
             className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all active:scale-95"
-            title="Reset (0)"
+            title="Reset Zoom (0)"
           >
             <RotateCcw className="w-4 h-4" />
-          </button>
-
-          <button
-            onClick={handleClose}
-            className="p-2 rounded-xl bg-red-600 hover:bg-red-700 text-white transition-all ml-2 shadow-md active:scale-95"
-            title="Close (ESC)"
-          >
-            <X className="w-5 h-5" />
           </button>
         </div>
       </div>
