@@ -30,23 +30,46 @@ interface IndiaCulturalMapModalProps {
 
 // Hotspot coordinates for visual pins on the map image (% based)
 const MAP_HOTSPOTS: { id: string; name: string; top: string; left: string; tag: string }[] = [
-  { id: 'jk-ladakh', name: 'Kashmir & Ladakh', top: '15%', left: '38%', tag: 'Saffron & Monasteries' },
-  { id: 'punjab', name: 'Punjab', top: '22%', left: '37%', tag: 'Golden Temple & Bhangra' },
-  { id: 'himachal-pradesh', name: 'Himachal & Devbhoomi', top: '19%', left: '42%', tag: 'Himalayas & Kangra Art' },
-  { id: 'uttarakhand', name: 'Uttarakhand', top: '25%', left: '45%', tag: 'Char Dham & Ganga Source' },
-  { id: 'rajasthan', name: 'Rajasthan', top: '34%', left: '33%', tag: 'Amer Fort & Ghoomar' },
-  { id: 'gujarat', name: 'Gujarat', top: '48%', left: '29%', tag: 'Garba & Asiatic Lions' },
-  { id: 'uttar-pradesh', name: 'Uttar Pradesh', top: '33%', left: '49%', tag: 'Varanasi Ghats & Kathak' },
-  { id: 'bihar', name: 'Bihar', top: '41%', left: '60%', tag: 'Nalanda & Madhubani' },
-  { id: 'madhya-pradesh-chhattisgarh', name: 'Madhya Pradesh', top: '49%', left: '46%', tag: 'Sanchi Stupa & Gond Art' },
-  { id: 'west-bengal', name: 'West Bengal', top: '49%', left: '65%', tag: 'Durga Puja & Terracotta' },
+  // North
+  { id: 'jammu-kashmir', name: 'Jammu & Kashmir', top: '13%', left: '37%', tag: 'Saffron & Pashmina' },
+  { id: 'ladakh', name: 'Ladakh', top: '11%', left: '43%', tag: 'Hemis & Monasteries' },
+  { id: 'himachal-pradesh', name: 'Himachal Pradesh', top: '18%', left: '42%', tag: 'Devbhoomi & Kullu Shawls' },
+  { id: 'punjab', name: 'Punjab', top: '22%', left: '36%', tag: 'Golden Temple & Bhangra' },
+  { id: 'haryana', name: 'Haryana', top: '25%', left: '39%', tag: 'Kurukshetra & Rakhigarhi' },
+  { id: 'delhi', name: 'Delhi (NCT)', top: '28%', left: '41%', tag: 'Red Fort & National Capital' },
+  { id: 'uttarakhand', name: 'Uttarakhand', top: '23%', left: '46%', tag: 'Char Dham & Ganga Aarti' },
+  { id: 'uttar-pradesh', name: 'Uttar Pradesh', top: '34%', left: '48%', tag: 'Varanasi Ghats & Sarnath' },
+  
+  // West
+  { id: 'rajasthan', name: 'Rajasthan', top: '35%', left: '32%', tag: 'Amer Fort & Ghoomar' },
+  { id: 'gujarat', name: 'Gujarat', top: '46%', left: '28%', tag: 'Garba & Statue of Unity' },
+  { id: 'maharashtra', name: 'Maharashtra', top: '58%', left: '36%', tag: 'Ajanta Caves & Shivaji Forts' },
+  { id: 'goa', name: 'Goa', top: '72%', left: '33%', tag: 'UNESCO Baroque Churches & Beaches' },
+
+  // East & Central
+  { id: 'bihar', name: 'Bihar', top: '38%', left: '60%', tag: 'Nalanda Mahavihara & Madhubani' },
+  { id: 'jharkhand', name: 'Jharkhand', top: '46%', left: '60%', tag: 'Sohrai Art & Baidyanath Jyotirlinga' },
+  { id: 'west-bengal', name: 'West Bengal', top: '48%', left: '66%', tag: 'Durga Puja & Bishnupur Terracotta' },
   { id: 'odisha', name: 'Odisha', top: '56%', left: '60%', tag: 'Konark Sun Wheel & Odissi' },
-  { id: 'maharashtra', name: 'Maharashtra', top: '59%', left: '38%', tag: 'Ajanta Caves & Lavani' },
-  { id: 'andhra-pradesh-telangana', name: 'Andhra & Telangana', top: '69%', left: '48%', tag: 'Kuchipudi & Charminar' },
-  { id: 'karnataka', name: 'Karnataka', top: '75%', left: '41%', tag: 'Hampi Ruins & Mysore Palace' },
-  { id: 'kerala', name: 'Kerala', top: '88%', left: '41%', tag: 'Kathakali & Backwaters' },
-  { id: 'tamil-nadu', name: 'Tamil Nadu', top: '86%', left: '48%', tag: 'Meenakshi Temple & Bharatanatyam' },
-  { id: 'assam-northeast', name: 'Assam & North-East', top: '34%', left: '76%', tag: 'Kaziranga & Bihu' }
+  { id: 'madhya-pradesh', name: 'Madhya Pradesh', top: '46%', left: '45%', tag: 'Sanchi Stupa & Khajuraho' },
+  { id: 'chhattisgarh', name: 'Chhattisgarh', top: '53%', left: '52%', tag: 'Bastar Dhokra & Chitrakote Falls' },
+
+  // South
+  { id: 'karnataka', name: 'Karnataka', top: '74%', left: '40%', tag: 'Hampi Ruins & Mysore Palace' },
+  { id: 'andhra-pradesh', name: 'Andhra Pradesh', top: '68%', left: '50%', tag: 'Kuchipudi & Tirupati Balaji' },
+  { id: 'telangana', name: 'Telangana', top: '62%', left: '46%', tag: 'Charminar & Ramappa Temple' },
+  { id: 'tamil-nadu', name: 'Tamil Nadu', top: '85%', left: '46%', tag: 'Brihadeeswarar & Bharatanatyam' },
+  { id: 'kerala', name: 'Kerala', top: '87%', left: '40%', tag: 'Kathakali & Serene Backwaters' },
+
+  // North-East
+  { id: 'sikkim', name: 'Sikkim', top: '31%', left: '65%', tag: 'Kanchenjunga Peak & Rumtek' },
+  { id: 'assam', name: 'Assam', top: '34%', left: '77%', tag: 'Kaziranga Rhino & Bihu Dance' },
+  { id: 'arunachal-pradesh', name: 'Arunachal Pradesh', top: '26%', left: '82%', tag: 'Tawang Monastery & Dawn Mountains' },
+  { id: 'meghalaya', name: 'Meghalaya', top: '39%', left: '74%', tag: 'Living Root Bridges & Cherrapunji' },
+  { id: 'nagaland', name: 'Nagaland', top: '35%', left: '86%', tag: 'Hornbill Festival & Clan Shawls' },
+  { id: 'manipur', name: 'Manipur', top: '42%', left: '85%', tag: 'Loktak Floating Lake & Raas Leela' },
+  { id: 'mizoram', name: 'Mizoram', top: '47%', left: '81%', tag: 'Cheraw Bamboo Dance & Chapchar Kut' },
+  { id: 'tripura', name: 'Tripura', top: '45%', left: '76%', tag: 'Unakoti Rock Carvings & Neermahal' }
 ];
 
 export const IndiaCulturalMapModal: React.FC<IndiaCulturalMapModalProps> = ({
@@ -261,7 +284,7 @@ export const IndiaCulturalMapModal: React.FC<IndiaCulturalMapModalProps> = ({
                       </span>
                     </div>
                     <span className="text-[10px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full border border-amber-200 shrink-0">
-                      17 Cultural Zones
+                      {INDIA_STATES_CULTURE.length} States & UTs
                     </span>
                   </div>
                 </div>
