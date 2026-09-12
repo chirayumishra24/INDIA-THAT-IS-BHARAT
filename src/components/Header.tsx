@@ -3,7 +3,7 @@
 import React from 'react';
 import { SectionId, StudentState } from '@/types';
 import { LESSON_SECTIONS, CHAPTER_METADATA } from '@/data/chapterContent';
-import { BookOpen, Bookmark, Edit3, Compass, Map, GraduationCap, School, RotateCcw } from 'lucide-react';
+import { BookOpen, Bookmark, Edit3, Compass, Map, GraduationCap, School, RotateCcw, Maximize2, Minimize2, PlayCircle } from 'lucide-react';
 
 interface HeaderProps {
   currentSection: SectionId;
@@ -13,6 +13,13 @@ interface HeaderProps {
   onOpenBookmarks: () => void;
   onOpenCulturalMap: () => void;
   onResetProgress?: () => void;
+  activeActivity?: {
+    id: string;
+    title: string;
+    icon: string;
+  } | null;
+  onBackToArena?: () => void;
+  onOpenTutorial?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -22,7 +29,10 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenNotes,
   onOpenBookmarks,
   onOpenCulturalMap,
-  onResetProgress
+  onResetProgress,
+  activeActivity,
+  onBackToArena,
+  onOpenTutorial
 }) => {
   // Calculate progress percentage
   const totalSteps = LESSON_SECTIONS.length; // 7 lessons
@@ -33,6 +43,28 @@ export const Header: React.FC<HeaderProps> = ({
 
   const notesCount = Object.keys(studentState.notes).filter(k => studentState.notes[k]?.trim()).length;
   const bookmarksCount = studentState.bookmarks.length;
+
+  const [isFullscreen, setIsFullscreen] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch((err) => {
+        console.error('Error attempting to enable fullscreen:', err);
+      });
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  };
 
   return (
     <header className="sticky top-0 z-40 bg-[#FAF6EE]/85 backdrop-blur-xl border-b border-[#EAE0CF]/80 shadow-xs px-3 sm:px-6 lg:px-8 py-2.5 transition-all">
@@ -61,41 +93,77 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
         </div>
 
-        {/* Center: Navigation Tabs */}
-        <nav className="flex items-center gap-2 bg-[#F4ECE0]/90 backdrop-blur-md p-1.5 rounded-2xl border border-[#DACBBB]/80 shadow-inner">
-          <button
-            onClick={() => onNavigate('activity-arena')}
-            className="px-4 py-2 rounded-xl text-xs font-black whitespace-nowrap transition-all flex items-center gap-2 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-500 text-black shadow-md shadow-amber-950/20 active:scale-95 cursor-pointer"
-            title="View All 10 Competitive Activities"
-          >
-            <span className="text-base">🎮</span>
-            <span>All 10 Competitive Activities</span>
-            <span className="px-2 py-0.5 bg-black text-amber-300 text-[10px] rounded-full font-bold">Arena</span>
-          </button>
+        {/* Center: Navigation Tabs OR Active Activity Control Strip */}
+        {activeActivity ? (
+          <div className="flex items-center gap-2 sm:gap-3 bg-white/90 backdrop-blur-md p-1.5 rounded-2xl border border-amber-500/40 shadow-sm min-w-0">
+            <button
+              onClick={onBackToArena}
+              className="px-3 sm:px-4 py-1.5 bg-gray-900 hover:bg-black text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow active:scale-95 cursor-pointer shrink-0"
+              title="Return to Arena Games"
+            >
+              <span className="text-amber-400 font-black">←</span>
+              <span className="hidden md:inline">Back to Arena Games</span>
+              <span className="md:hidden">Back</span>
+            </button>
 
-          <button
-            onClick={onOpenCulturalMap}
-            className="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 bg-[#1B2A4A] hover:bg-[#23365d] text-amber-200 shadow-xs hover:shadow-md transition-all active:scale-95"
-            title="Explore Interactive Cultural Map of India"
-          >
-            <Map className="w-3.5 h-3.5 text-amber-300" />
-            <span>Interactive Map</span>
-          </button>
-        </nav>
+            <div className="flex items-center gap-1.5 px-2 py-0.5 min-w-0">
+              <span className="text-xs text-gray-500 hidden xl:inline">Playing:</span>
+              <span className="text-xs sm:text-sm font-black text-[#14213D] flex items-center gap-1.5 truncate">
+                <span className="text-base">{activeActivity.icon}</span>
+                <span className="truncate">{activeActivity.title}</span>
+              </span>
+            </div>
+
+            {onOpenTutorial && (
+              <button
+                onClick={onOpenTutorial}
+                className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-black font-black text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-sm hover:shadow-md cursor-pointer active:scale-95 shrink-0"
+                title="Watch Animated How to Play Demo"
+              >
+                <PlayCircle className="w-4 h-4 text-black shrink-0" />
+                <span className="hidden sm:inline">How to Play Demo</span>
+                <span className="sm:hidden">Demo</span>
+              </button>
+            )}
+          </div>
+        ) : (
+          <nav className="flex items-center gap-2 bg-[#F4ECE0]/90 backdrop-blur-md p-1.5 rounded-2xl border border-[#DACBBB]/80 shadow-inner">
+            <button
+              onClick={() => onNavigate('activity-arena')}
+              className="px-4 py-2 rounded-xl text-xs font-black whitespace-nowrap transition-all flex items-center gap-2 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-500 text-black shadow-md shadow-amber-950/20 active:scale-95 cursor-pointer"
+              title="View All 8 Competitive Activities"
+            >
+              <span className="text-base">🎮</span>
+              <span>All 8 Competitive Activities</span>
+              <span className="px-2 py-0.5 bg-black text-amber-300 text-[10px] rounded-full font-bold">Arena</span>
+            </button>
+
+            <button
+              onClick={onOpenCulturalMap}
+              className="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 bg-[#1B2A4A] hover:bg-[#23365d] text-amber-200 shadow-xs hover:shadow-md transition-all active:scale-95"
+              title="Explore Interactive Cultural Map of India"
+            >
+              <Map className="w-3.5 h-3.5 text-amber-300" />
+              <span>Interactive Map</span>
+            </button>
+          </nav>
+        )}
 
         {/* Right: Progress Meter & Utilities */}
-        <div className="flex items-center gap-2 shrink-0">
-          {/* Progress Bar Badge */}
-          <div className="hidden xl:flex items-center gap-2.5 bg-white px-3 py-1.5 rounded-xl border border-[#EAE0CF] shadow-xs whitespace-nowrap">
-            <span className="text-[11px] text-gray-500 font-medium">Learning Progress:</span>
-            <div className="w-16 lg:w-20 bg-gray-200 rounded-full h-2 overflow-hidden">
-              <div 
-                className="bg-amber-600 h-2 rounded-full transition-all duration-500" 
-                style={{ width: `${progressPct}%` }}
-              />
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          {/* Progress Bar Badge (hidden when activeActivity is set to avoid clutter) */}
+          {!activeActivity && (
+            <div className="hidden xl:flex items-center gap-2.5 bg-white px-3 py-1.5 rounded-xl border border-[#EAE0CF] shadow-xs whitespace-nowrap">
+              <span className="text-[11px] text-gray-500 font-medium">Learning Progress:</span>
+              <div className="w-16 lg:w-20 bg-gray-200 rounded-full h-2 overflow-hidden">
+                <div 
+                  className="bg-amber-600 h-2 rounded-full transition-all duration-500" 
+                  style={{ width: `${progressPct}%` }}
+                />
+              </div>
+              <span className="text-xs font-bold text-[#1B2A4A]">{progressPct}%</span>
             </div>
-            <span className="text-xs font-bold text-[#1B2A4A]">{progressPct}%</span>
-          </div>
+          )}
 
           {/* Bookmarks Toggle */}
           <button
@@ -137,6 +205,21 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <School className="w-4 h-4 text-amber-600" />
             <span className="hidden sm:inline">Teacher View</span>
+          </button>
+
+          {/* Fullscreen Toggle */}
+          <button
+            onClick={toggleFullscreen}
+            className="px-2.5 sm:px-3 py-1.5 rounded-xl bg-white border border-[#EAE0CF] hover:bg-amber-50 hover:border-amber-300 text-gray-800 relative transition-all flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95 text-xs font-bold"
+            title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+            aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+          >
+            {isFullscreen ? (
+              <Minimize2 className="w-4 h-4 text-amber-800 shrink-0" />
+            ) : (
+              <Maximize2 className="w-4 h-4 text-amber-800 shrink-0" />
+            )}
+            <span className="hidden sm:inline">{isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}</span>
           </button>
         </div>
       </div>

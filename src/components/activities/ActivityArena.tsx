@@ -19,11 +19,11 @@ import {
   Layers
 } from 'lucide-react';
 
+import { ActivityTutorialModal } from './ActivityTutorialModal';
+
 import { NameTrailRelay } from './NameTrailRelay';
 import { SourceTugOfWar } from './SourceTugOfWar';
-import { MapPuzzleRace } from './MapPuzzleRace';
 import { TravelerAuction } from './TravelerAuction';
-import { CivilizationBuilder } from './CivilizationBuilder';
 import { EtymologyDuel } from './EtymologyDuel';
 import { InscriptionDetective } from './InscriptionDetective';
 import { NameMatchMemory } from './NameMatchMemory';
@@ -55,114 +55,90 @@ export const ACTIVITIES_CATALOG: ActivityMeta[] = [
     type: 'Team Chronology Relay',
     players: '2 Teams (Lion vs Peacock)',
     duration: '3-4 min',
-    icon: '🗺️',
-    description: 'Teams race side-by-side to drag 8 historical name milestones into exact chronological order with freeze penalties.',
-    tags: ['Rigveda', 'Sindhu to India', 'Article 1']
+    icon: '📜',
+    description: 'Race collaboratively to arrange ancient historical names in true chronological sequence while overcoming surprise penalty traps.',
+    tags: ['Chronology', 'Fast-Paced', 'Primary Traps']
   },
   {
     id: 'act-source-tug',
     number: 2,
     title: 'Source vs Source — Tug of War',
     category: 'team',
-    type: 'Team Buzzer Battle',
-    players: '2 Teams',
-    duration: '5 min',
-    icon: '⚔️',
-    description: 'Animated tug-of-war rope! Buzz in, judge historical claims, and cite Hathigumpha, Vishnu Purana, or Ashokan edicts to pull.',
-    tags: ['Buzzer', 'Primary Sources', 'Epigraphy']
-  },
-  {
-    id: 'act-map-puzzle',
-    number: 3,
-    title: 'Map Puzzle Race',
-    category: 'team',
-    type: 'Jigsaw & Decoy Filter',
-    players: '2 Teams',
+    type: 'Team Evidence Battle',
+    players: '2 Teams (Sanskrit vs Persian Scholars)',
     duration: '4-5 min',
-    icon: '🧩',
-    description: 'Assemble the ancient map of Bharat from Himalayas to Ocean while identifying and discarding deceptive modern decoys.',
-    tags: ['Vishnu Purana', 'Uttarapatha', 'Decoy Traps']
+    icon: '⚔️',
+    description: 'Two teams pull the historical rope toward their side by verifying texts, coins, and pillar inscriptions against myths.',
+    tags: ['Epigraphy', 'Evidence Battle', 'Dynamic Physics']
   },
   {
     id: 'act-traveler-auction',
-    number: 4,
-    title: 'Ancient Traveler Auction',
+    number: 3,
+    title: 'Foreign Travelers Auction',
     category: 'team',
-    type: 'Bidding & Strategy',
-    players: '2 Teams',
-    duration: '6-7 min',
-    icon: '🎭',
-    description: 'Bid gold coins on dossiers of Xuanzang, Megasthenes, and Al-Biruni to unlock and dominate knowledge showdowns.',
-    tags: ['Xuanzang', 'Megasthenes', 'Coin Economy']
-  },
-  {
-    id: 'act-civ-builder',
-    number: 5,
-    title: 'Build Ancient Bharat',
-    category: 'team',
-    type: 'Civilization Coordinate Builder',
-    players: '2 Teams',
-    duration: '5 min',
-    icon: '🏗️',
-    description: 'Place sacred rivers, trade gateways, and mountain fortresses directly on the ancient subcontinental grid for proximity points.',
-    tags: ['Sacred Geography', 'Highways', 'Accuracy']
+    type: 'Strategic Resource Bidding',
+    players: '2 Teams (Megasthenes vs Xuanzang Guilds)',
+    duration: '4-5 min',
+    icon: '🏛️',
+    description: 'Use ancient gold coins to bid on real quotes from Megasthenes, Faxian, Xuanzang, and Al-Biruni to reconstruct historical boundaries.',
+    tags: ['Auction', 'Primary Quotes', 'Resource Management']
   },
 
-  // 1v1 Duels
+  // 1v1 Duel Activities
   {
     id: 'act-etymology-duel',
-    number: 6,
-    title: 'Etymology Duel',
+    number: 4,
+    title: 'Etymology Duel: Sindhu to India',
     category: '1v1',
-    type: 'Speed Word Chain',
-    players: '1v1 (P1 vs P2)',
-    duration: '3 min',
-    icon: '⚡',
-    description: 'Rapid phonetic duel tracing the linguistic transmutation from Sindhu to Hindu, Indos, and modern India.',
-    tags: ['Phonetics', 'Linguistic Shifts', 'Streaks']
+    type: 'Head-to-Head Speed Matcher',
+    players: '1v1 (Player 1 vs Player 2)',
+    duration: '2-3 min',
+    icon: '🔤',
+    description: 'Connect language shifts across Sanskrit, Old Persian, Greek, and Latin before your opponent snatches the match.',
+    tags: ['Linguistics', 'Sound Shifts', 'Head-to-Head']
   },
   {
     id: 'act-inscription-detective',
-    number: 7,
-    title: 'Inscription Detective',
+    number: 5,
+    title: 'Inscription Detective 3D',
     category: '1v1',
-    type: 'Observation & Spot Error',
-    players: '1v1 (P1 vs P2)',
-    duration: '4 min',
+    type: 'Interactive Pillar Investigation',
+    players: '1v1 or Solo vs Clock',
+    duration: '3-4 min',
     icon: '🔍',
-    description: 'Inspect stone slab translations of King Kharavela and Ashoka to catch fraudulent anachronisms and modern decoys.',
-    tags: ['Kharavela', 'Ashoka Edicts', 'Historical Truth']
+    description: 'Inspect 3D stone surfaces with flashlight and magnifying tools to find the earliest recorded mention of Bharatavarsha.',
+    tags: ['3D Artifact', 'Hathigumpha', 'Epigraphy']
   },
   {
     id: 'act-memory-flip',
-    number: 8,
-    title: 'Name Match Memory Flip',
+    number: 6,
+    title: 'Ancient Names Memory Duel',
     category: '1v1',
-    type: '3D Scroll Matching',
-    players: '1v1 (P1 vs P2)',
-    duration: '3-4 min',
+    type: 'Rapid Cognitive Recall',
+    players: '1v1 (Alternating Turns)',
+    duration: '2-3 min',
     icon: '🃏',
-    description: 'Flip ancient palm leaf cards on a 4x4 grid to match civilizational terms with their foundational textual definitions.',
-    tags: ['Jambudvipa', 'Bharatavarsha', 'Memory']
+    description: 'Flip pairs of ancient territorial names and their historical meanings or sources before your opponent builds a winning streak.',
+    tags: ['Memory Grid', 'Ancient Terms', 'Turn-Based']
   },
   {
     id: 'act-river-flow',
-    number: 9,
-    title: 'River to Name Flow',
+    number: 7,
+    title: 'River of Names: Sapta Sindhava',
     category: '1v1',
-    type: 'Connection Matrix',
-    players: '1v1 (P1 vs P2)',
+    type: 'Geographic Flow Puzzle',
+    players: '1v1 (Head-to-Head)',
     duration: '3 min',
     icon: '🌊',
-    description: 'Draw connections from physical geography (Sindhu, Himalayas, Kalinga) to cultural terms and foreign accounts.',
-    tags: ['Geography Flow', 'Trade Nodes', 'Speed']
+    description: 'Reconstruct the 7 sacred rivers of Vedic geography and their evolution into the root name of India.',
+    tags: ['Geography', 'Vedic Rivers', 'Fluid Logic']
   },
   {
     id: 'act-fact-sniper',
-    number: 10,
-    title: 'Fact Sniper Gallery',
+    number: 8,
+    title: 'Fact vs Myth Sniper',
     category: '1v1',
-    type: 'True/Myth Target Shooter',
+    type: 'Precision Reflex Challenge',
     players: '1v1 (P1 vs P2)',
     duration: '3 min',
     icon: '🎯',
@@ -176,16 +152,21 @@ export interface ActivityArenaProps {
   onTabChange?: (tab: ActivityMode) => void;
   selectedActivityId?: string | null;
   onSelectActivity?: (id: string | null) => void;
+  isTutorialOpen?: boolean;
+  onTutorialOpenChange?: (open: boolean) => void;
 }
 
 export const ActivityArena: React.FC<ActivityArenaProps> = ({
   activeTab: controlledActiveTab,
   onTabChange,
   selectedActivityId: controlledSelectedActivityId,
-  onSelectActivity
+  onSelectActivity,
+  isTutorialOpen: controlledTutorialOpen,
+  onTutorialOpenChange
 }) => {
   const [internalActiveTab, setInternalActiveTab] = useState<ActivityMode>('all-games');
   const [internalSelectedActivityId, setInternalSelectedActivityId] = useState<string | null>(null);
+  const [internalTutorialOpen, setInternalTutorialOpen] = useState(false);
 
   const activeTab = controlledActiveTab !== undefined ? controlledActiveTab : internalActiveTab;
   const setActiveTab = (tab: ActivityMode) => {
@@ -199,6 +180,12 @@ export const ActivityArena: React.FC<ActivityArenaProps> = ({
     setInternalSelectedActivityId(id);
   };
 
+  const isTutorialOpen = controlledTutorialOpen !== undefined ? controlledTutorialOpen : internalTutorialOpen;
+  const setIsTutorialOpen = (open: boolean) => {
+    if (onTutorialOpenChange) onTutorialOpenChange(open);
+    setInternalTutorialOpen(open);
+  };
+
   const filteredActivities = ACTIVITIES_CATALOG.filter(act => {
     if (activeTab === 'team-battles') return act.category === 'team';
     if (activeTab === 'one-on-one') return act.category === '1v1';
@@ -207,10 +194,22 @@ export const ActivityArena: React.FC<ActivityArenaProps> = ({
 
   const activeActivity = ACTIVITIES_CATALOG.find(a => a.id === selectedActivityId);
 
+  React.useEffect(() => {
+    if (selectedActivityId) {
+      const isMuted = localStorage.getItem(`hide_tutorial_${selectedActivityId}`) === 'true';
+      if (!isMuted) {
+        setIsTutorialOpen(true);
+      }
+    } else {
+      setIsTutorialOpen(false);
+    }
+  }, [selectedActivityId]);
+
   return (
-    <div className="min-h-screen bg-transparent text-[#14213D] py-6 px-4 sm:px-6 lg:px-8">
-      {/* ARENA HERO BANNER */}
-      <div className="max-w-6xl mx-auto mb-8">
+    <div className={`min-h-screen bg-transparent text-[#14213D] ${selectedActivityId === 'act-source-tug' ? 'py-4 px-2 sm:px-4' : 'py-6 px-4 sm:px-6 lg:px-8'}`}>
+      {/* ARENA HERO BANNER - Show only in catalog, hide inside activities */}
+      {!selectedActivityId && (
+        <div className="max-w-6xl mx-auto mb-8">
         <div className="relative rounded-3xl bg-white/75 backdrop-blur-xl border-2 border-amber-500/50 p-6 sm:p-10 shadow-2xl overflow-hidden">
           {/* Subtle Background Art / Glow */}
           <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 bg-amber-400/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -283,7 +282,7 @@ export const ActivityArena: React.FC<ActivityArenaProps> = ({
             {/* Quick Badge / Stats */}
             <div className="flex flex-row md:flex-col gap-3 flex-shrink-0">
               <div className="p-3.5 bg-white/80 backdrop-blur-md border border-amber-500/40 rounded-2xl text-center min-w-[120px] shadow-md">
-                <div className="text-2xl font-black text-amber-700">10</div>
+                <div className="text-2xl font-black text-amber-700">8</div>
                 <div className="text-[10px] text-gray-600 uppercase font-bold">Games Ready</div>
               </div>
               <div className="p-3.5 bg-white/80 backdrop-blur-md border border-teal-500/40 rounded-2xl text-center min-w-[120px] shadow-md">
@@ -294,34 +293,27 @@ export const ActivityArena: React.FC<ActivityArenaProps> = ({
           </div>
         </div>
       </div>
+      )}
 
       {/* ACTIVE GAME CONTAINER OR GRID OF ACTIVITIES */}
-      <div className="max-w-6xl mx-auto">
+      <div className={selectedActivityId === 'act-source-tug' ? "w-full" : "max-w-6xl mx-auto"}>
         {selectedActivityId ? (
           <div>
-            {/* Top Bar with Back Button */}
-            <div className="flex items-center justify-between bg-white/80 backdrop-blur-xl border border-amber-500/30 p-4 rounded-2xl mb-6 shadow-xl">
-              <button
-                onClick={() => setSelectedActivityId(null)}
-                className="px-4 py-2 bg-gray-900 hover:bg-black text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow"
-              >
-                ← Back to Arena Games
-              </button>
-
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-600">Playing:</span>
-                <span className="text-sm font-black text-[#14213D]">
-                  {activeActivity?.icon} {activeActivity?.title}
-                </span>
-              </div>
-            </div>
+            {/* How to Play Animated Pop-up Modal */}
+            {activeActivity && (
+              <ActivityTutorialModal
+                activityId={activeActivity.id}
+                activityTitle={activeActivity.title}
+                activityIcon={activeActivity.icon}
+                isOpen={isTutorialOpen}
+                onClose={() => setIsTutorialOpen(false)}
+              />
+            )}
 
             {/* Render Selected Activity Component */}
             {selectedActivityId === 'act-name-trail' && <NameTrailRelay />}
             {selectedActivityId === 'act-source-tug' && <SourceTugOfWar />}
-            {selectedActivityId === 'act-map-puzzle' && <MapPuzzleRace />}
             {selectedActivityId === 'act-traveler-auction' && <TravelerAuction />}
-            {selectedActivityId === 'act-civ-builder' && <CivilizationBuilder />}
             {selectedActivityId === 'act-etymology-duel' && <EtymologyDuel />}
             {selectedActivityId === 'act-inscription-detective' && <InscriptionDetective />}
             {selectedActivityId === 'act-memory-flip' && <NameMatchMemory />}
@@ -335,7 +327,7 @@ export const ActivityArena: React.FC<ActivityArenaProps> = ({
                 {activeTab === 'team-battles' ? (
                   <>
                     <Users className="w-5 h-5 text-amber-700" />
-                    2-Team Competitive Arena (5 Team Games)
+                    2-Team Competitive Arena (3 Team Games)
                   </>
                 ) : activeTab === 'one-on-one' ? (
                   <>
@@ -345,7 +337,7 @@ export const ActivityArena: React.FC<ActivityArenaProps> = ({
                 ) : (
                   <>
                     <Layers className="w-5 h-5 text-teal-700" />
-                    Complete 10-Game Activity Roster
+                    Complete 8-Game Activity Roster
                   </>
                 )}
               </h2>

@@ -99,9 +99,12 @@ export const EtymologyDuel: React.FC<EtymologyDuelProps> = ({ onGameComplete }) 
     } else {
       setStreaks(prev => ({ ...prev, [activePlayer === 1 ? 'p1' : 'p2']: 0 }));
       setFeedback({
-        text: `❌ Phonetic mismatch! "${word}" is not the next evolutionary step.`,
+        text: `❌ Phonetic mismatch! "${word}" is not the next evolutionary step. Turn passes to Player ${activePlayer === 1 ? 2 : 1}!`,
         isGood: false
       });
+      setTimeout(() => {
+        handleNextTurn();
+      }, 1200);
     }
   };
 
@@ -125,7 +128,7 @@ export const EtymologyDuel: React.FC<EtymologyDuelProps> = ({ onGameComplete }) 
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-white/85 backdrop-blur-xl rounded-3xl border border-indigo-500/40 text-[#14213D] shadow-2xl">
+    <div className="w-full text-[#14213D] space-y-4">
       <OneOnOneScoreboard
         player1Score={scores.p1}
         player2Score={scores.p2}
@@ -158,10 +161,10 @@ export const EtymologyDuel: React.FC<EtymologyDuelProps> = ({ onGameComplete }) 
       </div>
 
       {/* Chain Progress Visualization */}
-      <div className="mb-6 bg-black/40 p-4 rounded-2xl border border-gray-800">
-        <div className="flex items-center justify-between text-xs text-gray-400 mb-3 font-semibold">
+      <div className="mb-6 bg-white p-4 rounded-2xl border-2 border-indigo-200 shadow-md">
+        <div className="flex items-center justify-between text-xs text-gray-700 mb-3 font-bold">
           <span>Evolution Path</span>
-          <span>Target: {activeChain.steps[currentStepIndex]?.culture}</span>
+          <span className="text-indigo-900 font-black">Target: {activeChain.steps[currentStepIndex]?.culture}</span>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
@@ -172,18 +175,18 @@ export const EtymologyDuel: React.FC<EtymologyDuelProps> = ({ onGameComplete }) 
             return (
               <React.Fragment key={idx}>
                 <div
-                  className={`px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                  className={`px-3 py-2 rounded-xl text-xs font-black transition-all ${
                     isCompleted
-                      ? 'bg-emerald-950/80 border border-emerald-500 text-emerald-200 shadow-md'
+                      ? 'bg-emerald-100 border-2 border-emerald-500 text-emerald-950 shadow-sm'
                       : isCurrent
-                      ? 'bg-indigo-600 border border-indigo-400 text-white animate-pulse shadow-lg ring-2 ring-indigo-400/50'
-                      : 'bg-gray-900 border border-gray-800 text-gray-500'
+                      ? 'bg-indigo-600 border-2 border-indigo-700 text-white animate-pulse shadow-md ring-2 ring-indigo-400/50'
+                      : 'bg-gray-100 border border-gray-300 text-gray-700'
                   }`}
                 >
                   {isCompleted ? step.word : isCurrent ? `❓ Stage ${idx + 1}` : `Locked`}
                 </div>
                 {idx < activeChain.steps.length - 1 && (
-                  <ArrowRight className="w-3.5 h-3.5 text-gray-600" />
+                  <ArrowRight className="w-3.5 h-3.5 text-gray-400" />
                 )}
               </React.Fragment>
             );
@@ -194,10 +197,10 @@ export const EtymologyDuel: React.FC<EtymologyDuelProps> = ({ onGameComplete }) 
       {/* Feedback Banner */}
       {feedback && (
         <div
-          className={`p-3.5 rounded-xl border mb-6 text-xs sm:text-sm font-medium animate-fade-in ${
+          className={`p-3.5 rounded-xl border-2 mb-6 text-xs sm:text-sm font-bold animate-fade-in ${
             feedback.isGood
-              ? 'bg-emerald-950/70 border-emerald-500 text-emerald-200'
-              : 'bg-rose-950/70 border-rose-500 text-rose-200'
+              ? 'bg-emerald-50 border-emerald-500 text-emerald-950'
+              : 'bg-rose-50 border-rose-500 text-rose-950'
           }`}
         >
           {feedback.text}
@@ -206,11 +209,11 @@ export const EtymologyDuel: React.FC<EtymologyDuelProps> = ({ onGameComplete }) 
 
       {/* Clue Prompt */}
       {!isGameOver && (
-        <div className="bg-gradient-to-r from-gray-900 via-gray-950 to-gray-900 border border-gray-800 p-5 rounded-2xl mb-6 shadow-lg">
-          <div className="text-xs uppercase font-bold text-amber-400 tracking-wider mb-1">
+        <div className="bg-white border-2 border-amber-400 p-5 rounded-2xl mb-6 shadow-md">
+          <div className="text-xs uppercase font-black text-amber-900 tracking-wider mb-1">
             Historical Clue ({activeChain.steps[currentStepIndex]?.approxYear})
           </div>
-          <p className="text-sm sm:text-base text-gray-200 font-medium">
+          <p className="text-base sm:text-lg text-black font-extrabold leading-relaxed">
             "{activeChain.steps[currentStepIndex]?.phoneticShift}"
           </p>
         </div>
@@ -223,11 +226,11 @@ export const EtymologyDuel: React.FC<EtymologyDuelProps> = ({ onGameComplete }) 
             <button
               key={idx}
               onClick={() => handleSelectWord(word)}
-              className="p-4 bg-gradient-to-br from-gray-900 via-gray-850 to-gray-900 hover:from-indigo-950/60 hover:to-gray-900 border border-gray-700 hover:border-indigo-400 rounded-2xl font-bold text-sm sm:text-base text-white text-left transition-all duration-200 hover:scale-[1.02] active:scale-95 shadow-lg group"
+              className="p-4 sm:p-5 bg-white hover:bg-indigo-50 border-2 border-gray-300 hover:border-indigo-600 rounded-2xl font-black text-base sm:text-lg text-black text-left transition-all duration-200 hover:scale-[1.02] active:scale-95 shadow-md hover:shadow-xl group"
             >
               <div className="flex items-center justify-between">
-                <span>{word}</span>
-                <Zap className="w-4 h-4 text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <span className="text-black font-black">{word}</span>
+                <Zap className="w-5 h-5 text-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
             </button>
           ))}
@@ -236,16 +239,16 @@ export const EtymologyDuel: React.FC<EtymologyDuelProps> = ({ onGameComplete }) 
 
       {/* Game Over Banner */}
       {isGameOver && (
-        <div className="bg-gradient-to-r from-indigo-950/90 via-black to-rose-950/90 border-2 border-indigo-500/60 rounded-3xl p-8 text-center shadow-2xl animate-fade-in">
-          <Trophy className="w-14 h-14 text-amber-400 mx-auto mb-2" />
-          <h2 className="text-3xl font-black text-white mb-2">
+        <div className="bg-white border-4 border-indigo-500 rounded-3xl p-8 text-center shadow-2xl animate-fade-in text-black">
+          <Trophy className="w-14 h-14 text-amber-500 mx-auto mb-2" />
+          <h2 className="text-3xl font-black text-black mb-2">
             {scores.p1 > scores.p2
               ? '👑 Player 1 Claims Etymology Mastery!'
               : scores.p2 > scores.p1
               ? '👑 Player 2 Claims Etymology Mastery!'
               : 'Duel Tied! Linguistic Brilliance from Both!'}
           </h2>
-          <p className="text-sm text-gray-300 mb-6">
+          <p className="text-base font-bold text-gray-700 mb-6">
             Player 1 ({scores.p1} pts) vs Player 2 ({scores.p2} pts)
           </p>
           <button
@@ -258,7 +261,7 @@ export const EtymologyDuel: React.FC<EtymologyDuelProps> = ({ onGameComplete }) 
               setTimeLeft(30);
               setIsGameOver(false);
             }}
-            className="px-8 py-3.5 bg-indigo-500 hover:bg-indigo-400 text-white font-black rounded-xl text-xs uppercase tracking-wider transition-all shadow-xl"
+            className="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-xl text-xs uppercase tracking-wider transition-all shadow-xl"
           >
             Rematch Duel ↺
           </button>

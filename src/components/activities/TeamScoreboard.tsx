@@ -33,7 +33,7 @@ export const TeamScoreboard: React.FC<TeamScoreboardProps> = ({
   const isTied = teamLionScore === teamPeacockScore;
 
   return (
-    <div className="w-full bg-white/80 backdrop-blur-xl rounded-2xl border border-amber-500/40 p-4 sm:p-5 shadow-xl text-[#14213D] mb-6">
+    <div className="w-full bg-white/80 backdrop-blur-xl rounded-2xl 2xl:rounded-3xl border border-amber-500/40 p-4 sm:p-5 2xl:p-6 shadow-xl text-[#14213D] mb-6 2xl:mb-8 select-none touch-manipulation">
       {/* Top Banner with Round counter */}
       <div className="flex items-center justify-between border-b border-amber-200/60 pb-3 mb-4">
         <div className="flex items-center gap-2">
@@ -41,13 +41,13 @@ export const TeamScoreboard: React.FC<TeamScoreboardProps> = ({
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-600"></span>
           </span>
-          <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-amber-900 flex items-center gap-1.5">
-            <Users className="w-4 h-4 text-amber-700" />
+          <span className="text-xs sm:text-sm 2xl:text-base font-black uppercase tracking-widest text-amber-900 flex items-center gap-1.5">
+            <Users className="w-4 h-4 2xl:w-5 2xl:h-5 text-amber-700" />
             2-Team Battle Arena
           </span>
         </div>
 
-        <div className="px-3 py-1 bg-amber-100 border border-amber-300 rounded-full text-xs font-bold text-amber-900">
+        <div className="px-3 py-1 2xl:px-4 2xl:py-1.5 bg-amber-100 border border-amber-300 rounded-full text-xs 2xl:text-sm font-bold text-amber-900">
           Round {roundNumber} of {totalRounds}
         </div>
       </div>
@@ -56,7 +56,7 @@ export const TeamScoreboard: React.FC<TeamScoreboardProps> = ({
       <div className="grid grid-cols-2 gap-3 sm:gap-6 items-stretch">
         {/* TEAM LION */}
         <div
-          className={`relative rounded-xl p-4 transition-all duration-300 border ${
+          className={`relative rounded-xl 2xl:rounded-2xl p-4 2xl:p-5 transition-all duration-300 border ${
             buzzedTeam === 'lion'
               ? 'bg-amber-100 border-amber-500 ring-4 ring-amber-400/50 scale-[1.02]'
               : activeTurn === 'lion' || activeTurn === 'both'
@@ -65,26 +65,26 @@ export const TeamScoreboard: React.FC<TeamScoreboardProps> = ({
           }`}
         >
           {isLionLeading && (
-            <span className="absolute -top-2.5 right-3 px-2 py-0.5 bg-amber-500 text-black text-[10px] font-black rounded-full uppercase tracking-wide flex items-center gap-1 shadow">
-              <Award className="w-3 h-3" /> Leading
+            <span className="absolute -top-2.5 right-3 px-2 py-0.5 bg-amber-500 text-black text-[10px] 2xl:text-xs font-black rounded-full uppercase tracking-wide flex items-center gap-1 shadow">
+              <Award className="w-3 h-3 2xl:w-4 2xl:h-4" /> Leading
             </span>
           )}
 
           <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <div className="w-9 h-9 rounded-lg bg-amber-200/80 border border-amber-400 flex items-center justify-center text-xl shadow-inner">
+            <div className="flex items-center gap-2 2xl:gap-3">
+              <div className="w-9 h-9 2xl:w-12 2xl:h-12 rounded-lg 2xl:rounded-xl bg-amber-200/80 border border-amber-400 flex items-center justify-center text-xl 2xl:text-2xl shadow-inner">
                 🦁
               </div>
               <div>
-                <h3 className="font-bold text-sm sm:text-base text-amber-950">{teamLionName}</h3>
-                <p className="text-[11px] text-amber-800 font-semibold">Saffron Roar</p>
+                <h3 className="font-bold text-sm sm:text-base 2xl:text-xl text-amber-950">{teamLionName}</h3>
+                <p className="text-[11px] 2xl:text-xs text-amber-800 font-semibold">Saffron Roar</p>
               </div>
             </div>
             <div className="text-right">
-              <span className="text-2xl sm:text-4xl font-black text-amber-700 tracking-tight">
+              <span className="text-2xl sm:text-4xl 2xl:text-5xl font-black text-amber-700 tracking-tight">
                 {teamLionScore}
               </span>
-              <span className="text-[10px] text-gray-500 block -mt-1 font-bold uppercase">pts</span>
+              <span className="text-[10px] 2xl:text-xs text-gray-500 block -mt-1 font-bold uppercase">pts</span>
             </div>
           </div>
 
@@ -92,7 +92,7 @@ export const TeamScoreboard: React.FC<TeamScoreboardProps> = ({
             <button
               onClick={() => onBuzzer('lion')}
               disabled={buzzedTeam !== null}
-              className={`w-full mt-2 py-2.5 px-3 rounded-lg font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg ${
+              className={`w-full mt-2 py-2.5 2xl:py-3.5 px-3 rounded-lg 2xl:rounded-xl font-black text-xs 2xl:text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg touch-manipulation select-none cursor-pointer ${
                 buzzedTeam === 'lion'
                   ? 'bg-amber-500 text-black animate-pulse'
                   : buzzedTeam !== null
@@ -100,7 +100,7 @@ export const TeamScoreboard: React.FC<TeamScoreboardProps> = ({
                   : 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-black active:scale-95'
               }`}
             >
-              <Zap className="w-4 h-4" />
+              <Zap className="w-4 h-4 2xl:w-5 2xl:h-5" />
               {buzzedTeam === 'lion' ? 'BUZZED IN!' : 'BUZZ IN (Team 1)'}
             </button>
           )}
@@ -108,7 +108,7 @@ export const TeamScoreboard: React.FC<TeamScoreboardProps> = ({
 
         {/* TEAM PEACOCK */}
         <div
-          className={`relative rounded-xl p-4 transition-all duration-300 border ${
+          className={`relative rounded-xl 2xl:rounded-2xl p-4 2xl:p-5 transition-all duration-300 border ${
             buzzedTeam === 'peacock'
               ? 'bg-teal-100 border-teal-500 ring-4 ring-teal-400/50 scale-[1.02]'
               : activeTurn === 'peacock' || activeTurn === 'both'
@@ -117,26 +117,26 @@ export const TeamScoreboard: React.FC<TeamScoreboardProps> = ({
           }`}
         >
           {isPeacockLeading && (
-            <span className="absolute -top-2.5 right-3 px-2 py-0.5 bg-teal-500 text-white text-[10px] font-black rounded-full uppercase tracking-wide flex items-center gap-1 shadow">
-              <Award className="w-3 h-3" /> Leading
+            <span className="absolute -top-2.5 right-3 px-2 py-0.5 bg-teal-500 text-white text-[10px] 2xl:text-xs font-black rounded-full uppercase tracking-wide flex items-center gap-1 shadow">
+              <Award className="w-3 h-3 2xl:w-4 2xl:h-4" /> Leading
             </span>
           )}
 
           <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <div className="w-9 h-9 rounded-lg bg-teal-200/80 border border-teal-400 flex items-center justify-center text-xl shadow-inner">
+            <div className="flex items-center gap-2 2xl:gap-3">
+              <div className="w-9 h-9 2xl:w-12 2xl:h-12 rounded-lg 2xl:rounded-xl bg-teal-200/80 border border-teal-400 flex items-center justify-center text-xl 2xl:text-2xl shadow-inner">
                 🦚
               </div>
               <div>
-                <h3 className="font-bold text-sm sm:text-base text-teal-950">{teamPeacockName}</h3>
-                <p className="text-[11px] text-teal-800 font-semibold">Emerald Feather</p>
+                <h3 className="font-bold text-sm sm:text-base 2xl:text-xl text-teal-950">{teamPeacockName}</h3>
+                <p className="text-[11px] 2xl:text-xs text-teal-800 font-semibold">Emerald Feather</p>
               </div>
             </div>
             <div className="text-right">
-              <span className="text-2xl sm:text-4xl font-black text-teal-700 tracking-tight">
+              <span className="text-2xl sm:text-4xl 2xl:text-5xl font-black text-teal-700 tracking-tight">
                 {teamPeacockScore}
               </span>
-              <span className="text-[10px] text-gray-500 block -mt-1 font-bold uppercase">pts</span>
+              <span className="text-[10px] 2xl:text-xs text-gray-500 block -mt-1 font-bold uppercase">pts</span>
             </div>
           </div>
 

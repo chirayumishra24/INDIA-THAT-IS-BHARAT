@@ -142,7 +142,7 @@ export const NameTrailRelay: React.FC<NameTrailRelayProps> = ({ onGameComplete }
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-4 sm:p-6 bg-white/85 backdrop-blur-xl rounded-3xl border border-amber-500/40 text-[#14213D] shadow-2xl">
+    <div className="w-full text-[#14213D] space-y-4">
       {/* Team Scoreboard */}
       <TeamScoreboard
         teamLionScore={scores.lion}
@@ -285,8 +285,8 @@ export const NameTrailRelay: React.FC<NameTrailRelayProps> = ({ onGameComplete }
 
       {/* Round End Modal / Banner */}
       {isRoundOver && (
-        <div className="mt-8 bg-gradient-to-r from-amber-950/80 via-black to-teal-950/80 border-2 border-amber-500/50 rounded-3xl p-6 text-center shadow-2xl animate-fade-in">
-          <h3 className="text-2xl font-black text-amber-300 mb-1">
+        <div className="mt-8 bg-white border-4 border-amber-500/60 rounded-3xl p-6 sm:p-8 text-center shadow-2xl animate-fade-in text-black">
+          <h3 className="text-2xl sm:text-3xl font-black text-black mb-1">
             {isMatchComplete
               ? scores.lion > scores.peacock
                 ? '🏆 Team Lion 🦁 Wins the Relay Race!'
@@ -295,7 +295,7 @@ export const NameTrailRelay: React.FC<NameTrailRelayProps> = ({ onGameComplete }
                 : '🤝 Honorable Tie in the Relay Race!'
               : roundWinner}
           </h3>
-          <p className="text-sm text-gray-300 mb-6">
+          <p className="text-sm sm:text-base text-gray-800 font-bold mb-6 max-w-xl mx-auto">
             {isMatchComplete
               ? `Both teams completed their unique historical questions! Final Score: Team Lion ${scores.lion} pts — Team Peacock ${scores.peacock} pts.`
               : activeTeam === 'lion'
@@ -305,7 +305,7 @@ export const NameTrailRelay: React.FC<NameTrailRelayProps> = ({ onGameComplete }
 
           <button
             onClick={handleNextTurnOrRound}
-            className="px-8 py-3.5 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-black font-black rounded-xl text-sm uppercase tracking-wider transition-all shadow-xl hover:scale-105 active:scale-95"
+            className="px-8 py-3.5 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-black font-black rounded-xl text-sm uppercase tracking-wider transition-all shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
           >
             {activeTeam === 'lion'
               ? 'Pass Relay to Team Peacock 🦚 (New Question 2 ➔)'

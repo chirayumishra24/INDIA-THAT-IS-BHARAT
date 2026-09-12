@@ -71,7 +71,7 @@ export const RiverToNameFlow: React.FC<RiverToNameFlowProps> = ({ onGameComplete
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-white/85 backdrop-blur-xl rounded-3xl border border-indigo-500/40 text-[#14213D] shadow-2xl">
+    <div className="w-full text-[#14213D] space-y-4">
       <OneOnOneScoreboard
         player1Score={scores.p1}
         player2Score={scores.p2}
@@ -112,8 +112,8 @@ export const RiverToNameFlow: React.FC<RiverToNameFlowProps> = ({ onGameComplete
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         {/* Left Column: Origins */}
         <div className="space-y-3">
-          <h4 className="text-xs uppercase font-bold text-amber-400 tracking-wider flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5" /> 1. Ancient Origins & Landmarks
+          <h4 className="text-xs uppercase font-black text-amber-950 tracking-wider flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-amber-700" /> 1. Ancient Origins & Landmarks
           </h4>
 
           {RIVER_FLOW_CONNECTIONS.map(item => {
@@ -125,25 +125,25 @@ export const RiverToNameFlow: React.FC<RiverToNameFlowProps> = ({ onGameComplete
                 key={item.id}
                 onClick={() => handleSelectLeft(item)}
                 disabled={isCompleted || isGameOver}
-                className={`w-full p-4 rounded-2xl border text-left transition-all duration-200 flex items-center justify-between ${
+                className={`w-full p-4 rounded-2xl border-2 text-left transition-all duration-200 flex items-center justify-between cursor-pointer ${
                   isCompleted
-                    ? 'bg-emerald-950/40 border-emerald-500/50 text-emerald-300 opacity-60'
+                    ? 'bg-emerald-100 border-emerald-600 text-emerald-950 opacity-80 cursor-default'
                     : isSelected
-                    ? 'bg-indigo-600 border-indigo-300 text-white ring-4 ring-indigo-400/40 scale-[1.02] shadow-lg'
-                    : 'bg-gray-900/90 border-gray-800 hover:border-indigo-400/60 text-gray-200 hover:bg-gray-850 shadow-md'
+                    ? 'bg-indigo-600 border-indigo-700 text-white ring-4 ring-indigo-400/50 scale-[1.02] shadow-xl'
+                    : 'bg-white border-gray-300 hover:border-indigo-500 text-black hover:bg-indigo-50/60 shadow-md'
                 }`}
               >
                 <div>
-                  <div className="text-xs uppercase tracking-wide font-bold text-amber-400/80">
+                  <div className={`text-xs uppercase tracking-wide font-black ${isSelected ? 'text-amber-300' : 'text-amber-900'}`}>
                     {item.originType}
                   </div>
-                  <div className="text-sm font-black mt-0.5">{item.originName}</div>
+                  <div className={`text-base font-black mt-0.5 ${isSelected ? 'text-white' : 'text-black'}`}>{item.originName}</div>
                 </div>
 
                 {isCompleted ? (
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600" />
                 ) : (
-                  <ArrowRight className="w-4 h-4 text-gray-500" />
+                  <ArrowRight className={`w-4 h-4 ${isSelected ? 'text-white' : 'text-gray-400'}`} />
                 )}
               </button>
             );
@@ -152,8 +152,8 @@ export const RiverToNameFlow: React.FC<RiverToNameFlowProps> = ({ onGameComplete
 
         {/* Right Column: Outcomes & Cultures */}
         <div className="space-y-3">
-          <h4 className="text-xs uppercase font-bold text-teal-400 tracking-wider flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5" /> 2. Historical Terms & Traditions
+          <h4 className="text-xs uppercase font-black text-teal-950 tracking-wider flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-teal-700" /> 2. Historical Terms & Traditions
           </h4>
 
           {shuffledTargets.map(item => {
@@ -164,22 +164,22 @@ export const RiverToNameFlow: React.FC<RiverToNameFlowProps> = ({ onGameComplete
                 key={item.id}
                 onClick={() => handleSelectRight(item)}
                 disabled={isCompleted || isGameOver || !selectedLeft}
-                className={`w-full p-4 rounded-2xl border text-left transition-all duration-200 flex items-center justify-between ${
+                className={`w-full p-4 rounded-2xl border-2 text-left transition-all duration-200 flex items-center justify-between cursor-pointer ${
                   isCompleted
-                    ? 'bg-emerald-950/40 border-emerald-500/50 text-emerald-300 opacity-60'
+                    ? 'bg-emerald-100 border-emerald-600 text-emerald-950 opacity-80 cursor-default'
                     : selectedLeft
-                    ? 'bg-gray-900 border-teal-500/40 hover:border-teal-400 hover:bg-teal-950/30 text-gray-200 shadow-md'
-                    : 'bg-gray-900/50 border-gray-800 text-gray-400 cursor-not-allowed'
+                    ? 'bg-white border-teal-500 hover:border-teal-600 hover:bg-teal-50 text-black shadow-md'
+                    : 'bg-gray-100 border-gray-300 text-gray-400 cursor-not-allowed'
                 }`}
               >
                 <div>
-                  <div className="text-xs uppercase tracking-wide font-bold text-teal-400">
+                  <div className="text-xs uppercase tracking-wide font-black text-teal-800">
                     {item.targetCulture}
                   </div>
-                  <div className="text-sm font-black text-white mt-0.5">{item.targetTerm}</div>
+                  <div className="text-base font-black text-black mt-0.5">{item.targetTerm}</div>
                 </div>
 
-                {isCompleted && <CheckCircle2 className="w-5 h-5 text-emerald-400" />}
+                {isCompleted && <CheckCircle2 className="w-5 h-5 text-emerald-600" />}
               </button>
             );
           })}
@@ -188,16 +188,16 @@ export const RiverToNameFlow: React.FC<RiverToNameFlowProps> = ({ onGameComplete
 
       {/* Game Over Banner */}
       {isGameOver && (
-        <div className="bg-gradient-to-r from-indigo-950/90 via-black to-rose-950/90 border-2 border-indigo-500/60 rounded-3xl p-8 text-center shadow-2xl animate-fade-in">
-          <Trophy className="w-14 h-14 text-amber-400 mx-auto mb-2" />
-          <h2 className="text-3xl font-black text-white mb-2">
+        <div className="bg-white border-4 border-teal-500 rounded-3xl p-8 text-center shadow-2xl animate-fade-in text-black">
+          <Trophy className="w-14 h-14 text-amber-500 mx-auto mb-2" />
+          <h2 className="text-3xl font-black text-black mb-2">
             {scores.p1 > scores.p2
               ? '👑 Player 1 Claims River Flow Victory!'
               : scores.p2 > scores.p1
               ? '👑 Player 2 Claims River Flow Victory!'
               : 'Flawless Geographic Harmony from Both!'}
           </h2>
-          <p className="text-sm text-gray-300 mb-6">
+          <p className="text-base font-bold text-gray-700 mb-6">
             Player 1 ({scores.p1} pts) vs Player 2 ({scores.p2} pts)
           </p>
           <button
@@ -207,7 +207,7 @@ export const RiverToNameFlow: React.FC<RiverToNameFlowProps> = ({ onGameComplete
               setIsGameOver(false);
               initRound();
             }}
-            className="px-8 py-3.5 bg-indigo-500 hover:bg-indigo-400 text-white font-black rounded-xl text-xs uppercase tracking-wider transition-all shadow-xl"
+            className="px-8 py-3.5 bg-teal-600 hover:bg-teal-700 text-white font-black rounded-xl text-xs uppercase tracking-wider transition-all shadow-xl"
           >
             Play Rematch ↺
           </button>

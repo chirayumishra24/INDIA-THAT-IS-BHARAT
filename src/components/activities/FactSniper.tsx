@@ -104,7 +104,7 @@ export const FactSniper: React.FC<FactSniperProps> = ({ onGameComplete }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-white/85 backdrop-blur-xl rounded-3xl border border-indigo-500/40 text-[#14213D] shadow-2xl">
+    <div className="w-full text-[#14213D] space-y-4">
       <OneOnOneScoreboard
         player1Score={scores.p1}
         player2Score={scores.p2}
@@ -137,15 +137,12 @@ export const FactSniper: React.FC<FactSniperProps> = ({ onGameComplete }) => {
 
       {/* TARGET SHIELD DISPLAY */}
       {!isGameOver && (
-        <div className="relative bg-gradient-to-b from-gray-900 via-[#131722] to-black border-2 border-indigo-500/40 rounded-3xl p-6 sm:p-8 mb-6 shadow-2xl overflow-hidden text-center">
-          {/* Target Reticle Watermark */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-indigo-500/10 rounded-full pointer-events-none"></div>
-
-          <span className="inline-block px-3 py-1 bg-indigo-500/20 text-indigo-300 text-xs font-black rounded-full uppercase tracking-wider mb-4 border border-indigo-500/30">
+        <div className="relative bg-white border-4 border-indigo-500/50 rounded-3xl p-6 sm:p-8 mb-6 shadow-2xl text-center">
+          <span className="inline-block px-3 py-1 bg-indigo-100 text-indigo-950 text-xs font-black rounded-full uppercase tracking-wider mb-4 border border-indigo-300">
             Incoming Statement Target
           </span>
 
-          <h3 className="text-lg sm:text-2xl font-extrabold text-white leading-relaxed max-w-2xl mx-auto mb-6">
+          <h3 className="text-xl sm:text-3xl font-black text-black leading-relaxed max-w-2xl mx-auto mb-6">
             "{currentTarget?.statement}"
           </h3>
 
@@ -154,7 +151,7 @@ export const FactSniper: React.FC<FactSniperProps> = ({ onGameComplete }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto">
               <button
                 onClick={handleShoot}
-                className="py-4 px-6 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black rounded-2xl text-sm uppercase tracking-wider transition-all shadow-xl shadow-emerald-950/60 active:scale-95 flex items-center justify-center gap-2"
+                className="py-4 px-6 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black rounded-2xl text-sm uppercase tracking-wider transition-all shadow-xl active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Crosshair className="w-5 h-5 text-emerald-200" />
                 🎯 SHOOT (TRUE FACT)
@@ -162,9 +159,9 @@ export const FactSniper: React.FC<FactSniperProps> = ({ onGameComplete }) => {
 
               <button
                 onClick={handleLetPass}
-                className="py-4 px-6 bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 text-gray-200 font-black rounded-2xl text-sm uppercase tracking-wider transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2"
+                className="py-4 px-6 bg-white hover:bg-gray-100 border-2 border-gray-400 hover:border-gray-600 text-black font-black rounded-2xl text-sm uppercase tracking-wider transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
               >
-                <Shield className="w-5 h-5 text-gray-300" />
+                <Shield className="w-5 h-5 text-gray-700" />
                 🛡️ LET PASS (FALSE MYTH)
               </button>
             </div>
@@ -173,19 +170,19 @@ export const FactSniper: React.FC<FactSniperProps> = ({ onGameComplete }) => {
               <div
                 className={`p-5 rounded-2xl border-2 mb-4 text-left ${
                   feedback.status === 'bullseye' || feedback.status === 'spared-myth'
-                    ? 'bg-emerald-950/80 border-emerald-500 text-emerald-200'
-                    : 'bg-rose-950/80 border-rose-500 text-rose-200'
+                    ? 'bg-emerald-50 border-emerald-500 text-emerald-950'
+                    : 'bg-rose-50 border-rose-500 text-rose-950'
                 }`}
               >
-                <div className="font-bold text-sm sm:text-base mb-1">{feedback.message}</div>
-                <div className="text-xs text-amber-300 font-semibold">
+                <div className="font-black text-base mb-1">{feedback.message}</div>
+                <div className="text-xs text-amber-900 font-bold">
                   Source: {feedback.citation}
                 </div>
               </div>
 
               <button
                 onClick={handleNextTarget}
-                className="px-8 py-3 bg-amber-500 hover:bg-amber-400 text-black font-black rounded-xl text-xs uppercase tracking-wider transition-all shadow-xl active:scale-95"
+                className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-xl text-xs uppercase tracking-wider transition-all shadow-xl active:scale-95 cursor-pointer"
               >
                 Next Target ➔
               </button>
@@ -196,16 +193,16 @@ export const FactSniper: React.FC<FactSniperProps> = ({ onGameComplete }) => {
 
       {/* Game Over Banner */}
       {isGameOver && (
-        <div className="bg-gradient-to-r from-indigo-950/90 via-black to-rose-950/90 border-2 border-indigo-500/60 rounded-3xl p-8 text-center shadow-2xl animate-fade-in">
-          <Trophy className="w-14 h-14 text-amber-400 mx-auto mb-2" />
-          <h2 className="text-3xl font-black text-white mb-2">
+        <div className="bg-white border-4 border-indigo-500 rounded-3xl p-8 text-center shadow-2xl animate-fade-in text-black">
+          <Trophy className="w-14 h-14 text-amber-500 mx-auto mb-2" />
+          <h2 className="text-3xl font-black text-black mb-2">
             {scores.p1 > scores.p2
               ? '👑 Player 1 Crowned Top Fact Sniper!'
               : scores.p2 > scores.p1
               ? '👑 Player 2 Crowned Top Fact Sniper!'
               : 'Sharpshooter Tie! Both Possess Impeccable Historical Accuracy!'}
           </h2>
-          <p className="text-sm text-gray-300 mb-6">
+          <p className="text-base font-bold text-gray-700 mb-6">
             Player 1 ({scores.p1} pts) vs Player 2 ({scores.p2} pts)
           </p>
           <button

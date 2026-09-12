@@ -102,7 +102,7 @@ export const InscriptionDetective: React.FC<InscriptionDetectiveProps> = ({ onGa
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-white/85 backdrop-blur-xl rounded-3xl border border-indigo-500/40 text-[#14213D] shadow-2xl">
+    <div className="w-full text-[#14213D] space-y-4">
       <OneOnOneScoreboard
         player1Score={scores.p1}
         player2Score={scores.p2}
@@ -132,28 +132,25 @@ export const InscriptionDetective: React.FC<InscriptionDetectiveProps> = ({ onGa
       </div>
 
       {/* Ancient Stone Inscription Slab */}
-      <div className="relative bg-gradient-to-b from-[#1c1917] via-[#141210] to-[#0c0a09] border-4 border-[#78350f]/60 rounded-3xl p-6 sm:p-8 mb-6 shadow-2xl overflow-hidden">
-        {/* Ancient Stone Texture & Chiseled Watermark */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
-
-        <div className="flex items-center justify-between border-b border-amber-900/50 pb-3 mb-4">
-          <span className="text-xs uppercase font-serif tracking-widest text-amber-500/80 font-bold flex items-center gap-1.5">
-            <Scroll className="w-4 h-4" /> Chiseled Brahmi Epigraph • Translation
+      <div className="relative bg-white border-4 border-amber-600/50 rounded-3xl p-6 sm:p-8 mb-6 shadow-2xl overflow-hidden">
+        <div className="flex items-center justify-between border-b border-amber-200 pb-3 mb-4">
+          <span className="text-xs uppercase font-serif tracking-widest text-amber-900 font-black flex items-center gap-1.5">
+            <Scroll className="w-4 h-4 text-amber-700" /> Chiseled Brahmi Epigraph • Translation
           </span>
-          <span className="text-xs text-gray-400">Click any suspect phrase below to debunk</span>
+          <span className="text-xs text-gray-600 font-bold">Click any suspect phrase below to debunk</span>
         </div>
 
         {/* The Corrupted Inscription Text */}
-        <div className="p-4 bg-black/40 border border-amber-900/40 rounded-2xl mb-6">
-          <p className="text-sm sm:text-base text-amber-100/90 font-serif leading-loose">
+        <div className="p-5 bg-amber-50/90 border-2 border-amber-300 rounded-2xl mb-6 shadow-sm">
+          <p className="text-base sm:text-lg text-black font-serif leading-loose font-bold">
             "{activeTablet.fullTextFormatted}"
           </p>
         </div>
 
         {/* Detective Clue Buttons */}
         <div>
-          <h4 className="text-xs uppercase font-bold text-amber-400 tracking-wider mb-2 flex items-center gap-1.5">
-            <Search className="w-3.5 h-3.5" /> Suspect Keywords & Historical Phrases
+          <h4 className="text-xs uppercase font-black text-amber-950 tracking-wider mb-2 flex items-center gap-1.5">
+            <Search className="w-3.5 h-3.5 text-amber-700" /> Suspect Keywords & Historical Phrases
           </h4>
 
           <div className="flex flex-wrap gap-2">
@@ -164,10 +161,10 @@ export const InscriptionDetective: React.FC<InscriptionDetectiveProps> = ({ onGa
                   key={err.id}
                   onClick={() => handleSpotPhrase(err.distortedText)}
                   disabled={isFound || isGameOver}
-                  className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all ${
+                  className={`px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-black border-2 transition-all ${
                     isFound
-                      ? 'bg-emerald-950/80 border-emerald-500 text-emerald-300 opacity-60 cursor-not-allowed'
-                      : 'bg-amber-950/40 border-amber-500/50 text-amber-200 hover:bg-amber-500/20 hover:scale-105 active:scale-95 shadow-md'
+                      ? 'bg-emerald-100 border-emerald-600 text-emerald-950 line-through opacity-80 cursor-not-allowed'
+                      : 'bg-white border-amber-400 text-black hover:bg-amber-100 hover:border-amber-600 hover:scale-105 active:scale-95 shadow-md'
                   }`}
                 >
                   {isFound ? `✅ Debunked: ${err.distortedText}` : `🔍 Examine: "${err.distortedText}"`}
@@ -180,30 +177,30 @@ export const InscriptionDetective: React.FC<InscriptionDetectiveProps> = ({ onGa
 
       {/* Discovered Historical Fact Reveal */}
       {lastDiscovered && (
-        <div className="p-5 bg-gradient-to-r from-emerald-950/80 via-gray-900 to-emerald-950/80 border border-emerald-500/50 rounded-2xl mb-6 shadow-xl animate-fade-in">
-          <div className="flex items-center gap-2 text-emerald-300 font-black text-sm mb-1">
-            <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+        <div className="p-5 bg-white border-2 border-emerald-500 rounded-2xl mb-6 shadow-xl animate-fade-in text-black">
+          <div className="flex items-center gap-2 text-emerald-800 font-black text-sm sm:text-base mb-1">
+            <CheckCircle2 className="w-5 h-5 text-emerald-600" />
             Historical Error Unmasked: "{lastDiscovered.distortedText}" (+75 pts)
           </div>
-          <div className="text-xs text-amber-300 font-bold mb-2">
+          <div className="text-xs sm:text-sm text-amber-900 font-black mb-2">
             Authentic History: {lastDiscovered.truth}
           </div>
-          <p className="text-xs sm:text-sm text-gray-300">{lastDiscovered.explanation}</p>
+          <p className="text-xs sm:text-sm text-gray-800 font-bold">{lastDiscovered.explanation}</p>
         </div>
       )}
 
       {/* Game Over Banner */}
       {isGameOver && (
-        <div className="bg-gradient-to-r from-indigo-950/90 via-black to-rose-950/90 border-2 border-indigo-500/60 rounded-3xl p-8 text-center shadow-2xl animate-fade-in">
-          <Trophy className="w-14 h-14 text-amber-400 mx-auto mb-2" />
-          <h2 className="text-3xl font-black text-white mb-2">
+        <div className="bg-white border-4 border-amber-500 rounded-3xl p-8 text-center shadow-2xl animate-fade-in text-black">
+          <Trophy className="w-14 h-14 text-amber-500 mx-auto mb-2" />
+          <h2 className="text-3xl font-black text-black mb-2">
             {scores.p1 > scores.p2
               ? '👑 Player 1 Crowned Master Epigrapher!'
               : scores.p2 > scores.p1
               ? '👑 Player 2 Crowned Master Epigrapher!'
               : 'Scholarly Tie! Both Unlocked Ancient Secrets!'}
           </h2>
-          <p className="text-sm text-gray-300 mb-6">
+          <p className="text-base font-bold text-gray-700 mb-6">
             Player 1 ({scores.p1} pts) vs Player 2 ({scores.p2} pts)
           </p>
           <button

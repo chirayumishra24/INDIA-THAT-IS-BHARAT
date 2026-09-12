@@ -7,7 +7,7 @@ import { IndiaCulturalMapModal } from '@/components/interactive/IndiaCulturalMap
 import { NotesAndBookmarksModal } from '@/components/interactive/NotesAndBookmarksModal';
 import { CivilizationalEntryPortal } from '@/components/ui/CivilizationalEntryPortal';
 import { BackgroundVideo } from '@/components/ui/BackgroundVideo';
-import { ActivityArena, ActivityMode } from '@/components/activities/ActivityArena';
+import { ActivityArena, ActivityMode, ACTIVITIES_CATALOG } from '@/components/activities/ActivityArena';
 
 const STORAGE_KEY = 'bharat_learning_studio_state_v1';
 const PORTAL_SEEN_KEY = 'bharat_portal_seen_session_v1';
@@ -29,6 +29,9 @@ export default function Home() {
   const [showEntryPortal, setShowEntryPortal] = useState(true);
   const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<ActivityMode>('all-games');
+  const [isTutorialOpen, setIsTutorialOpen] = useState(false);
+
+  const activeActivity = ACTIVITIES_CATALOG.find(a => a.id === selectedActivityId) || null;
 
   // Modal states
   const [activeModal, setActiveModal] = useState<'notes' | 'bookmarks' | null>(null);
@@ -159,15 +162,20 @@ export default function Home() {
         onOpenNotes={() => setActiveModal('notes')}
         onOpenBookmarks={() => setActiveModal('bookmarks')}
         onOpenCulturalMap={() => setIsMapModalOpen(true)}
+        activeActivity={activeActivity}
+        onBackToArena={() => setSelectedActivityId(null)}
+        onOpenTutorial={() => setIsTutorialOpen(true)}
       />
 
       {/* Main Content Area: Pure Activity Arena */}
-      <main className="flex-1 pb-16 relative z-10">
+      <main className="flex-1 pb-16">
         <ActivityArena
           selectedActivityId={selectedActivityId}
           onSelectActivity={setSelectedActivityId}
           activeTab={activeTab}
           onTabChange={setActiveTab}
+          isTutorialOpen={isTutorialOpen}
+          onTutorialOpenChange={setIsTutorialOpen}
         />
       </main>
 
@@ -177,7 +185,7 @@ export default function Home() {
           <strong>India, That Is Bharat • Activity & Game Arena</strong> • Class VI Social Science
         </div>
         <div>
-          10 Interactive Team & 1v1 Battle Activities
+          8 Interactive Team & 1v1 Battle Activities
         </div>
       </footer>
 

@@ -136,7 +136,7 @@ export const MapPuzzleRace: React.FC<MapPuzzleRaceProps> = ({ onGameComplete }) 
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-4 sm:p-6 bg-white/85 backdrop-blur-xl rounded-3xl border border-amber-500/40 text-[#14213D] shadow-2xl">
+    <div className="w-full text-[#14213D] space-y-4">
       <TeamScoreboard
         teamLionScore={scores.lion}
         teamPeacockScore={scores.peacock}
