@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { NAME_TRAIL_CHAINS, NameTrailItem } from '@/data/activityGamesData';
 import { TeamScoreboard } from './TeamScoreboard';
-import { ArrowRight, CheckCircle2, RotateCcw, Sparkles, Timer, ShieldAlert } from 'lucide-react';
+import { ArrowRight, CheckCircle2, RotateCcw, Sparkles, Timer, ShieldAlert, Shuffle } from 'lucide-react';
 
 interface NameTrailRelayProps {
   onGameComplete?: (winner: 'lion' | 'peacock' | 'tie', scores: { lion: number; peacock: number }) => void;
@@ -15,6 +15,10 @@ export const NameTrailRelay: React.FC<NameTrailRelayProps> = ({ onGameComplete }
   const [activeTeam, setActiveTeam] = useState<'lion' | 'peacock'>('lion');
   const [scores, setScores] = useState({ lion: 0, peacock: 0 });
   const [isMatchComplete, setIsMatchComplete] = useState(false);
+  const [teamQuestionIndices, setTeamQuestionIndices] = useState<{ lion: number; peacock: number }>({
+    lion: 0,
+    peacock: 1
+  });
 
   const activeChain = NAME_TRAIL_CHAINS[chainIndex] || NAME_TRAIL_CHAINS[0];
 
@@ -42,8 +46,37 @@ export const NameTrailRelay: React.FC<NameTrailRelayProps> = ({ onGameComplete }
   };
 
   useEffect(() => {
-    startRoundForTeam('lion', 0);
+    // Start with a randomized distinct question pair
+    const total = NAME_TRAIL_CHAINS.length;
+    const initialLion = Math.floor(Math.random() * total);
+    const initialPeacock = (initialLion + 1 + Math.floor(Math.random() * (total - 1))) % total;
+    setTeamQuestionIndices({ lion: initialLion, peacock: initialPeacock });
+    startRoundForTeam('lion', initialLion);
   }, []);
+
+  const handleSwitchQuestion = (specificIndex?: number) => {
+    if (isRoundOver || isMatchComplete) return;
+    const total = NAME_TRAIL_CHAINS.length;
+    let nextIdx: number;
+
+    if (specificIndex !== undefined) {
+      nextIdx = specificIndex;
+    } else {
+      const rivalTeam = activeTeam === 'lion' ? 'peacock' : 'lion';
+      const rivalIdx = teamQuestionIndices[rivalTeam];
+      let candidate = (chainIndex + 1) % total;
+      if (candidate === rivalIdx && total > 2) {
+        candidate = (candidate + 1) % total;
+      }
+      nextIdx = candidate;
+    }
+
+    setTeamQuestionIndices(prev => ({
+      ...prev,
+      [activeTeam]: nextIdx
+    }));
+    startRoundForTeam(activeTeam, nextIdx);
+  };
 
   // Timer countdown
   useEffect(() => {
@@ -117,9 +150,17 @@ export const NameTrailRelay: React.FC<NameTrailRelayProps> = ({ onGameComplete }
     setIsRoundOver(true);
     if (isSuccess) {
       confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
-      setRoundWinner(activeTeam === 'lion' ? 'Team Lion 🦁 Solved Question 1!' : 'Team Peacock 🦚 Solved Question 2!');
+      setRoundWinner(
+        activeTeam === 'lion'
+          ? `Team Lion 🦁 Solved "${activeChain.title.split(':')[0]}"!`
+          : `Team Peacock 🦚 Solved "${activeChain.title.split(':')[0]}"!`
+      );
     } else {
-      setRoundWinner(activeTeam === 'lion' ? 'Team Lion 🦁: Time Expired!' : 'Team Peacock 🦚: Time Expired!');
+      setRoundWinner(
+        activeTeam === 'lion'
+          ? `Team Lion 🦁: Time Expired on "${activeChain.title.split(':')[0]}"!`
+          : `Team Peacock 🦚: Time Expired on "${activeChain.title.split(':')[0]}"!`
+      );
     }
 
     if (activeTeam === 'peacock') {
@@ -131,13 +172,17 @@ export const NameTrailRelay: React.FC<NameTrailRelayProps> = ({ onGameComplete }
 
   const handleNextTurnOrRound = () => {
     if (activeTeam === 'lion') {
-      // Peacock gets a completely DIFFERENT question (Question 2: chainIndex = 1)
-      startRoundForTeam('peacock', 1);
+      // Peacock gets a completely DIFFERENT question from pool
+      startRoundForTeam('peacock', teamQuestionIndices.peacock);
     } else {
-      // Match completed: restart fresh match
+      // Pick a fresh pair of distinct questions from pool for rematch
+      const total = NAME_TRAIL_CHAINS.length;
+      const nextLion = (teamQuestionIndices.lion + 2) % total;
+      const nextPeacock = (nextLion + 1) % total;
+      setTeamQuestionIndices({ lion: nextLion, peacock: nextPeacock });
       setScores({ lion: 0, peacock: 0 });
       setIsMatchComplete(false);
-      startRoundForTeam('lion', 0);
+      startRoundForTeam('lion', nextLion);
     }
   };
 
@@ -153,9 +198,9 @@ export const NameTrailRelay: React.FC<NameTrailRelayProps> = ({ onGameComplete }
       />
 
       {/* Header Info */}
-      <div className="flex flex-wrap items-center justify-between gap-4 bg-amber-50/80 backdrop-blur-md p-4 rounded-2xl border border-amber-200 mb-6">
+      <div className="flex flex-wrap items-center justify-between gap-4 bg-amber-50/80 backdrop-blur-md p-4 rounded-2xl border border-amber-200 mb-4">
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className="px-2.5 py-0.5 bg-amber-200 text-amber-950 text-xs font-black rounded-full border border-amber-300 uppercase tracking-wide">
               Activity 1 • Relay Race
             </span>
@@ -164,7 +209,10 @@ export const NameTrailRelay: React.FC<NameTrailRelayProps> = ({ onGameComplete }
                 ? 'bg-amber-100 text-amber-900 border-amber-300'
                 : 'bg-teal-100 text-teal-900 border-teal-300'
             }`}>
-              Question {activeTeam === 'lion' ? '1 of 2 (Team Lion 🦁)' : '2 of 2 (Team Peacock 🦚)'}
+              Round {activeTeam === 'lion' ? '1: Team Lion 🦁' : '2: Team Peacock 🦚'}
+            </span>
+            <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-white border border-amber-300 text-amber-900">
+              Chain {chainIndex + 1} of {NAME_TRAIL_CHAINS.length}
             </span>
           </div>
           <h2 className="text-xl sm:text-2xl font-black text-amber-950 mt-1">
@@ -181,12 +229,66 @@ export const NameTrailRelay: React.FC<NameTrailRelayProps> = ({ onGameComplete }
         </div>
 
         <div className="flex items-center gap-3">
+          {!isRoundOver && !isMatchComplete && (
+            <button
+              onClick={() => handleSwitchQuestion()}
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-amber-100 border-2 border-amber-300 hover:border-amber-400 rounded-xl text-xs font-black text-amber-950 shadow-sm transition-all active:scale-95 cursor-pointer"
+              title="Switch to a different historical question chain"
+            >
+              <Shuffle className="w-4 h-4 text-amber-700" />
+              <span>Different Question</span>
+            </button>
+          )}
+
           <div className="flex items-center gap-2 px-4 py-2 bg-amber-100/90 border-2 border-amber-400 rounded-xl shadow-sm">
             <Timer className={`w-5 h-5 ${timerSeconds < 15 ? 'text-rose-600 animate-spin' : 'text-amber-700'}`} />
             <span className="text-xl font-black tracking-wider text-amber-950 font-mono">
               {timerSeconds}s
             </span>
           </div>
+        </div>
+      </div>
+
+      {/* Available Question Set Selector Pills */}
+      <div className="mb-6 p-3 bg-white/80 backdrop-blur-sm rounded-2xl border border-amber-200">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[11px] font-black uppercase text-amber-900 tracking-wider flex items-center gap-1">
+            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+            Historical Question Chains ({NAME_TRAIL_CHAINS.length} Topics Available):
+          </span>
+          <span className="text-[11px] text-gray-500 font-semibold hidden sm:inline">
+            Each team receives a distinct question
+          </span>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {NAME_TRAIL_CHAINS.map((chain, idx) => {
+            const isCurrent = chainIndex === idx;
+            const rivalTeam = activeTeam === 'lion' ? 'peacock' : 'lion';
+            const isAssignedToRival = teamQuestionIndices[rivalTeam] === idx;
+
+            return (
+              <button
+                key={chain.id}
+                onClick={() => handleSwitchQuestion(idx)}
+                disabled={isRoundOver || isMatchComplete}
+                className={`text-xs px-3 py-1.5 rounded-xl font-bold transition-all flex items-center gap-1.5 border cursor-pointer ${
+                  isCurrent
+                    ? 'bg-amber-600 text-white border-amber-700 shadow-md scale-105'
+                    : isAssignedToRival
+                    ? 'bg-teal-50 text-teal-900 border-teal-300 hover:bg-teal-100'
+                    : 'bg-white text-gray-800 border-amber-200 hover:border-amber-400 hover:bg-amber-50'
+                }`}
+              >
+                <span>{idx + 1}. {chain.title.split(':')[0]}</span>
+                {isCurrent && <span className="text-[10px] bg-white/20 px-1.5 py-0.5 rounded-full font-black">Active</span>}
+                {isAssignedToRival && (
+                  <span className="text-[10px] bg-teal-200/80 text-teal-950 px-1.5 py-0.5 rounded-full font-bold">
+                    {rivalTeam === 'lion' ? '🦁 Lion' : '🦚 Peacock'}
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -299,8 +401,8 @@ export const NameTrailRelay: React.FC<NameTrailRelayProps> = ({ onGameComplete }
             {isMatchComplete
               ? `Both teams completed their unique historical questions! Final Score: Team Lion ${scores.lion} pts — Team Peacock ${scores.peacock} pts.`
               : activeTeam === 'lion'
-              ? 'Team Lion completed Question 1! To ensure fairness and prevent copying, Team Peacock receives Question 2 (a completely different historical milestone sequence).'
-              : 'Question 2 concluded! Check the final scoreboard.'}
+              ? `Team Lion completed their question! To ensure fairness and prevent copying, Team Peacock receives a completely distinct question sequence: "${NAME_TRAIL_CHAINS[teamQuestionIndices.peacock]?.title.split(':')[0]}".`
+              : 'Match concluded! Check the final scoreboard.'}
           </p>
 
           <button
@@ -308,8 +410,8 @@ export const NameTrailRelay: React.FC<NameTrailRelayProps> = ({ onGameComplete }
             className="px-8 py-3.5 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-black font-black rounded-xl text-sm uppercase tracking-wider transition-all shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
           >
             {activeTeam === 'lion'
-              ? 'Pass Relay to Team Peacock 🦚 (New Question 2 ➔)'
-              : 'Play Rematch ↺'}
+              ? `Pass Relay to Team Peacock 🦚 (New Question: ${NAME_TRAIL_CHAINS[teamQuestionIndices.peacock]?.title.split(':')[0]} ➔)`
+              : 'Play Rematch with Fresh Questions ↺'}
           </button>
         </div>
       )}

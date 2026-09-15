@@ -202,6 +202,174 @@ export const NAME_TRAIL_CHAINS: NameTrailChain[] = [
         orderIndex: 5
       }
     ]
+  },
+  {
+    id: 'jambudvipa-chain',
+    title: 'Jambudvipa: Continent of the Sacred Jambu Tree',
+    description: 'Sequence the historical evolution of the continent name Jambudvipa across ancient records.',
+    items: [
+      {
+        id: 'j1',
+        name: 'Bronze Age Meluhha (Sumerian Records)',
+        periodOrLanguage: 'c. 2300–1800 BCE (Cuneiform)',
+        significance: 'Ancient Mesopotamian trade records referencing the seafaring Indus civilization.',
+        orderIndex: 1
+      },
+      {
+        id: 'j2',
+        name: 'Ashokan Rock Edict ("Jambudvipe")',
+        periodOrLanguage: 'c. 250 BCE (Brahmi Inscriptions)',
+        significance: 'Emperor Ashoka declares his moral dharma spanning the entirety of Jambudvipa.',
+        orderIndex: 2
+      },
+      {
+        id: 'j3',
+        name: 'Buddhist Jatakas & Mahavamsa',
+        periodOrLanguage: '3rd–1st Century BCE (Pali Canon)',
+        significance: 'Described Jambudvipa as the sacred southern continent where Buddhas appear.',
+        orderIndex: 3
+      },
+      {
+        id: 'j4',
+        name: 'Tiloyapannatti (Jain Cosmography)',
+        periodOrLanguage: 'c. 5th–6th Century CE (Prakrit)',
+        significance: 'Exact cosmological mapping of the central ring continent surrounded by the Lavana ocean.',
+        orderIndex: 4
+      },
+      {
+        id: 'j5',
+        name: 'Maritime Southeast Asian Epigraphy',
+        periodOrLanguage: 'c. 7th–11th Century CE',
+        significance: 'Inscriptions across Java, Sumatra, and Cambodia acknowledging cultural descent from Jambudvipa.',
+        orderIndex: 5
+      }
+    ]
+  },
+  {
+    id: 'aryavarta-chain',
+    title: 'Aryavarta & Sacred Geography of the Rivers',
+    description: 'Arrange historical definitions of Aryavarta across ancient legal and grammatical treatises.',
+    items: [
+      {
+        id: 'a1',
+        name: 'Rigvedic Sapta Sindhu',
+        periodOrLanguage: 'c. 1500 BCE (Early Vedic)',
+        significance: 'The original homeland of the seven sacred northwestern rivers praised in the hymns.',
+        orderIndex: 1
+      },
+      {
+        id: 'a2',
+        name: 'Baudhayana Dharmasutra',
+        periodOrLanguage: 'c. 6th–5th Century BCE',
+        significance: 'Geographically bounds the sacred cultural territory east of where the river Sarasvati vanishes.',
+        orderIndex: 2
+      },
+      {
+        id: 'a3',
+        name: 'Manusmriti: Land of the Noble',
+        periodOrLanguage: 'c. 2nd Century BCE – 2nd Century CE',
+        significance: 'Defines Aryavarta bounded by the Himalayas in the north and the Vindhyas in the south.',
+        orderIndex: 3
+      },
+      {
+        id: 'a4',
+        name: 'Patanjali’s Mahabhashya',
+        periodOrLanguage: 'c. 150 BCE (Classical Sanskrit)',
+        significance: 'Grammatical treatise outlining Aryavarta stretching between the eastern and western seas.',
+        orderIndex: 4
+      },
+      {
+        id: 'a5',
+        name: 'Prayag Prashasti (Samudragupta)',
+        periodOrLanguage: 'c. 350 CE (Gupta Epigraphy)',
+        significance: 'Celebrated Allahabad Pillar inscription recording royal unifications across Aryavarta.',
+        orderIndex: 5
+      }
+    ]
+  },
+  {
+    id: 'hindustan-chain',
+    title: 'The Journey of Hindustan & Al-Hind',
+    description: 'Chronologically trace how Persian, Arab, and Indian records evolved the term Hindustan.',
+    items: [
+      {
+        id: 'h1',
+        name: 'Achaemenid Naqsh-e Rustam Inscription',
+        periodOrLanguage: '515 BCE (Old Persian)',
+        significance: 'Emperor Darius I lists the eastern satrapy province as "Hindush" on the river basin.',
+        orderIndex: 1
+      },
+      {
+        id: 'h2',
+        name: 'Ka’ba-ye Zartosht Inscription (Shapur I)',
+        periodOrLanguage: 'c. 262 CE (Middle Persian Sasanian)',
+        significance: 'Earliest known epigraphical stone inscription recording the compound name "Hindustan".',
+        orderIndex: 2
+      },
+      {
+        id: 'h3',
+        name: 'Al-Biruni: Kitab Tarikh al-Hind',
+        periodOrLanguage: 'c. 1030 CE (Classical Arabic)',
+        significance: 'Monumental cultural and scientific study documenting the civilization, sciences, and people of Hind.',
+        orderIndex: 3
+      },
+      {
+        id: 'h4',
+        name: 'Baburnama & Ain-i-Akbari',
+        periodOrLanguage: '16th Century CE (Chagatai & Persian)',
+        significance: 'Imperial chronicles defining Hindustan as a distinctive subcontinent with unique climate and fauna.',
+        orderIndex: 4
+      },
+      {
+        id: 'h5',
+        name: 'The Sovereign Salute: "Jai Hind"',
+        periodOrLanguage: '1941–1947 CE (Freedom Movement)',
+        significance: 'Coinage by Chempakaraman Pillai and popularized by Netaji Subhas Chandra Bose as the national greeting.',
+        orderIndex: 5
+      }
+    ]
+  },
+  {
+    id: 'travelers-chain',
+    title: 'Ancient Global Observers of Bharat',
+    description: 'Place foreign ambassadors and pilgrim scholars who documented India into chronological order.',
+    items: [
+      {
+        id: 'tr1',
+        name: 'Megasthenes (Seleucid Ambassador)',
+        periodOrLanguage: 'c. 300 BCE (Mauryan Pataliputra)',
+        significance: 'Author of "Indica", describing Chandragupta Maurya’s capital, palace administration, and fertile lands.',
+        orderIndex: 1
+      },
+      {
+        id: 'tr2',
+        name: 'Faxian (Chinese Buddhist Pilgrim)',
+        periodOrLanguage: 'c. 405 CE (Gupta Empire)',
+        significance: 'Walked thousands of miles recording northern Indian hospitals, peaceful rule, and Buddhist shrines.',
+        orderIndex: 2
+      },
+      {
+        id: 'tr3',
+        name: 'Xuanzang (Master Pilgrim & Scholar)',
+        periodOrLanguage: 'c. 637 CE (Nalanda University)',
+        significance: 'Master monk who studied 17 years in India, transcribing the name "Yintu" and translating Sanskrit texts.',
+        orderIndex: 3
+      },
+      {
+        id: 'tr4',
+        name: 'Yijing / I-Tsing (Maritime Pilgrim)',
+        periodOrLanguage: 'c. 673 CE (Tang Dynasty)',
+        significance: 'Arrived by sea at Tamralipti, documenting Nalanda monastic codes and translating hundreds of texts.',
+        orderIndex: 4
+      },
+      {
+        id: 'tr5',
+        name: 'Al-Biruni (Polymath & Indologist)',
+        periodOrLanguage: 'c. 1020 CE (Punjab & Multan)',
+        significance: 'Learned Sanskrit to read the Bhagavad Gita and astronomical treatises, compiling the Tarikh al-Hind.',
+        orderIndex: 5
+      }
+    ]
   }
 ];
 
