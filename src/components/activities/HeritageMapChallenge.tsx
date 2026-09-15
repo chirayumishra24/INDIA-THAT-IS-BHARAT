@@ -28,6 +28,7 @@ export const HeritageMapChallenge: React.FC = () => {
   const [availableItems, setAvailableItems] = useState<HeritageMapItem[]>([]);
   const [placedItems, setPlacedItems] = useState<PlacedItem[]>([]);
   const [draggedItem, setDraggedItem] = useState<HeritageMapItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<HeritageMapItem | null>(null);
   const [hoveredZone, setHoveredZone] = useState<string | null>(null);
   const [feedbackMsg, setFeedbackMsg] = useState<{ text: string; type: 'good' | 'bad'; funFact?: string } | null>(null);
   const [showHint, setShowHint] = useState<string | null>(null);
@@ -85,6 +86,7 @@ export const HeritageMapChallenge: React.FC = () => {
     setAvailableItems(peacockItems);
     setPlacedItems([]);
     setDraggedItem(null);
+    setSelectedItem(null);
     setFeedbackMsg(null);
     setShowHint(null);
   };
@@ -182,6 +184,7 @@ export const HeritageMapChallenge: React.FC = () => {
       });
     }
 
+    setSelectedItem(null);
     setTimeout(() => setFeedbackMsg(null), 3500);
   };
 
@@ -200,6 +203,7 @@ export const HeritageMapChallenge: React.FC = () => {
     setFeedbackMsg(null);
     setShowHint(null);
     setDraggedItem(null);
+    setSelectedItem(null);
   };
 
   const winner = scores.lion > scores.peacock ? 'lion' : scores.peacock > scores.lion ? 'peacock' : 'tie';
@@ -306,41 +310,53 @@ export const HeritageMapChallenge: React.FC = () => {
           {/* LEFT: Map with drop zones */}
           <div
             ref={mapRef}
-            className="relative flex-shrink-0 w-full lg:w-[55%] aspect-[3/4] bg-gradient-to-b from-amber-50 to-orange-50 rounded-2xl border-2 border-orange-200 overflow-hidden shadow-inner"
+            className="relative flex-shrink-0 w-full lg:w-[54%] aspect-[896/1200] bg-[#FAF6EE] rounded-2xl border-2 border-amber-300/80 overflow-hidden shadow-academic select-none"
           >
             {/* Map background image */}
             <img
-              src="/images/india_cultural_map.jpg"
-              alt="India Cultural Map"
-              className="absolute inset-0 w-full h-full object-contain pointer-events-none opacity-90"
+              src="/images/bharat_heritage_map.jpg"
+              alt="Cultural & Educational Map of India"
+              className="absolute inset-0 w-full h-full object-fill pointer-events-none"
               draggable={false}
             />
 
             {/* Drop zones overlay */}
             {HERITAGE_DROP_ZONES.map(zone => {
               const isPlaced = placedItems.some(p => p.item.correctStateId === zone.id && p.correct);
+              const isTargetForSelected = selectedItem?.correctStateId === zone.id;
               return (
                 <div
                   key={zone.id}
                   data-zone-id={zone.id}
-                  className={`absolute w-10 h-10 -ml-5 -mt-5 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 z-10 ${
+                  className={`group absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 z-10 ${
                     isPlaced
-                      ? 'bg-green-400/50 ring-2 ring-green-500 scale-110'
+                      ? 'bg-green-600/85 ring-2 ring-green-400 scale-110 shadow-md'
                       : hoveredZone === zone.id
-                      ? 'bg-amber-300/60 ring-2 ring-amber-500 scale-125 shadow-lg'
-                      : 'bg-white/30 hover:bg-amber-200/40 ring-1 ring-gray-300/50'
+                      ? 'bg-amber-400/90 ring-4 ring-amber-500 scale-125 shadow-xl'
+                      : isTargetForSelected
+                      ? 'bg-amber-400/60 ring-2 ring-amber-400 animate-pulse scale-110'
+                      : 'bg-orange-500/50 hover:bg-amber-400/80 ring-2 ring-white/90 shadow'
                   }`}
                   style={{ top: zone.top, left: zone.left }}
                   title={zone.name}
+                  onClick={() => {
+                    if (selectedItem) {
+                      processPlacement(selectedItem, zone.id);
+                    }
+                  }}
                   onDragOver={e => handleDragOver(e, zone.id)}
                   onDragLeave={handleDragLeave}
                   onDrop={e => handleDrop(e, zone.id)}
                 >
                   {isPlaced ? (
-                    <CheckCircle className="w-5 h-5 text-green-700" />
+                    <CheckCircle className="w-4 h-4 text-white" />
                   ) : (
-                    <div className="w-2 h-2 rounded-full bg-orange-400/60" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-white shadow-sm" />
                   )}
+                  {/* Hover tooltip */}
+                  <div className="opacity-0 group-hover:opacity-100 pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 bg-[#14213D] text-amber-200 text-[10px] font-bold px-2 py-0.5 rounded shadow-lg whitespace-nowrap z-30 transition-opacity border border-amber-400/30">
+                    {zone.name}
+                  </div>
                 </div>
               );
             })}
@@ -352,9 +368,9 @@ export const HeritageMapChallenge: React.FC = () => {
               return (
                 <div
                   key={p.item.id}
-                  className="absolute text-[9px] font-bold bg-green-100/90 text-green-800 px-1.5 py-0.5 rounded-full whitespace-nowrap pointer-events-none z-20 border border-green-300"
+                  className="absolute text-[9px] font-bold bg-green-100/95 text-green-900 px-1.5 py-0.5 rounded-full whitespace-nowrap pointer-events-none z-20 border border-green-400 shadow-sm"
                   style={{
-                    top: `calc(${zone.top} + 16px)`,
+                    top: `calc(${zone.top} + 14px)`,
                     left: zone.left,
                     transform: 'translateX(-50%)'
                   }}
@@ -369,51 +385,62 @@ export const HeritageMapChallenge: React.FC = () => {
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-sm font-bold text-gray-700">
-                🎯 Drag to the correct state ({availableItems.length} left)
+                {selectedItem ? (
+                  <span className="text-amber-700">🎯 Tap <b>{selectedItem.name}</b>'s state on the map!</span>
+                ) : (
+                  <span>🎯 Drag or tap an item to place ({availableItems.length} left)</span>
+                )}
               </h3>
             </div>
             <div
-              className="space-y-2 max-h-[60vh] overflow-y-auto pr-1"
+              className="space-y-2 max-h-[65vh] overflow-y-auto pr-1"
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
             >
-              {availableItems.map(item => (
-                <div
-                  key={item.id}
-                  draggable
-                  onDragStart={e => handleDragStart(e, item)}
-                  onTouchStart={e => handleTouchStart(e, item)}
-                  className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-grab active:cursor-grabbing transition-all select-none ${
-                    draggedItem?.id === item.id
-                      ? 'border-amber-500 bg-amber-50 shadow-lg scale-[1.02] opacity-70'
-                      : 'border-gray-200 bg-white hover:border-amber-300 hover:bg-amber-50/50 shadow-sm hover:shadow-md'
-                  }`}
-                >
-                  <div className="flex-shrink-0 text-gray-300">
-                    <GripVertical className="w-4 h-4" />
-                  </div>
-                  <div className="text-2xl flex-shrink-0">{item.emoji}</div>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-bold text-sm text-[#14213D] truncate">{item.name}</div>
-                    <div className="text-[10px] text-gray-500 uppercase tracking-wider">{item.category}</div>
-                  </div>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setShowHint(showHint === item.id ? null : item.id);
-                    }}
-                    className="flex-shrink-0 p-1.5 rounded-lg hover:bg-amber-100 text-amber-600 transition-colors"
-                    title="Show hint"
+              {availableItems.map(item => {
+                const isSelected = selectedItem?.id === item.id;
+                const isDragged = draggedItem?.id === item.id;
+                return (
+                  <div
+                    key={item.id}
+                    draggable
+                    onDragStart={e => handleDragStart(e, item)}
+                    onTouchStart={e => handleTouchStart(e, item)}
+                    onClick={() => setSelectedItem(isSelected ? null : item)}
+                    className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer active:cursor-grabbing transition-all select-none ${
+                      isDragged
+                        ? 'border-amber-500 bg-amber-50 shadow-lg scale-[1.02] opacity-70'
+                        : isSelected
+                        ? 'border-amber-500 bg-amber-50/90 shadow-md ring-2 ring-amber-400 scale-[1.01]'
+                        : 'border-gray-200 bg-white hover:border-amber-300 hover:bg-amber-50/50 shadow-sm hover:shadow-md'
+                    }`}
                   >
-                    <Lightbulb className="w-4 h-4" />
-                  </button>
-                  {showHint === item.id && (
-                    <div className="absolute right-14 bg-amber-100 text-amber-800 text-xs font-medium px-2 py-1 rounded-lg shadow-md border border-amber-200 z-30 whitespace-nowrap">
-                      💡 {item.hint}
+                    <div className="flex-shrink-0 text-gray-300">
+                      <GripVertical className="w-4 h-4" />
                     </div>
-                  )}
-                </div>
-              ))}
+                    <div className="text-2xl flex-shrink-0">{item.emoji}</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-sm text-[#14213D] truncate">{item.name}</div>
+                      <div className="text-[10px] text-gray-500 uppercase tracking-wider">{item.category}</div>
+                    </div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowHint(showHint === item.id ? null : item.id);
+                      }}
+                      className="flex-shrink-0 p-1.5 rounded-lg hover:bg-amber-100 text-amber-600 transition-colors"
+                      title="Show hint"
+                    >
+                      <Lightbulb className="w-4 h-4" />
+                    </button>
+                    {showHint === item.id && (
+                      <div className="absolute right-14 bg-amber-100 text-amber-800 text-xs font-medium px-2 py-1 rounded-lg shadow-md border border-amber-200 z-30 whitespace-nowrap">
+                        💡 {item.hint}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
 
               {availableItems.length === 0 && (
                 <div className="text-center py-8 text-gray-400">
