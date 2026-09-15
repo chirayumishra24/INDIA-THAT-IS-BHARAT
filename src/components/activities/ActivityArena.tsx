@@ -29,6 +29,7 @@ import { InscriptionDetective } from './InscriptionDetective';
 import { NameMatchMemory } from './NameMatchMemory';
 import { RiverToNameFlow } from './RiverToNameFlow';
 import { FactSniper } from './FactSniper';
+import { HeritageMapChallenge } from './HeritageMapChallenge';
 
 export type ActivityMode = 'team-battles' | 'one-on-one' | 'all-games';
 
@@ -82,6 +83,18 @@ export const ACTIVITIES_CATALOG: ActivityMeta[] = [
     icon: '🏛️',
     description: 'Use ancient gold coins to bid on real quotes from Megasthenes, Faxian, Xuanzang, and Al-Biruni to reconstruct historical boundaries.',
     tags: ['Auction', 'Primary Quotes', 'Resource Management']
+  },
+  {
+    id: 'act-heritage-map',
+    number: 9,
+    title: 'Bharat Heritage Map Challenge',
+    category: 'team',
+    type: 'Cultural Geography Drag & Drop',
+    players: '2 Teams (Lion vs Peacock)',
+    duration: '4-5 min',
+    icon: '🗺️',
+    description: 'Drag famous cultural treasures — dances, food, crafts, monuments — onto the correct state on the India map before time runs out.',
+    tags: ['Geography', 'Drag & Drop', 'Cultural Heritage']
   },
 
   // 1v1 Duel Activities
@@ -319,6 +332,7 @@ export const ActivityArena: React.FC<ActivityArenaProps> = ({
             {selectedActivityId === 'act-memory-flip' && <NameMatchMemory />}
             {selectedActivityId === 'act-river-flow' && <RiverToNameFlow />}
             {selectedActivityId === 'act-fact-sniper' && <FactSniper />}
+            {selectedActivityId === 'act-heritage-map' && <HeritageMapChallenge />}
           </div>
         ) : (
           <div>
@@ -327,7 +341,7 @@ export const ActivityArena: React.FC<ActivityArenaProps> = ({
                 {activeTab === 'team-battles' ? (
                   <>
                     <Users className="w-5 h-5 text-amber-700" />
-                    2-Team Competitive Arena (3 Team Games)
+                    2-Team Competitive Arena (4 Team Games)
                   </>
                 ) : activeTab === 'one-on-one' ? (
                   <>

@@ -87,7 +87,7 @@ export const INDIA_STATES_CULTURE: StateCultureData[] = [
     name: 'Himachal Pradesh',
     hindiName: 'हिमाचल प्रदेश (Devbhoomi)',
     region: 'North',
-    capital: 'Shimla (Summer) / Dharamshala (Winter)',
+    capital: 'Shimla',
     monuments: ['Hadimba Devi Temple Manali', 'Tabo Monastery Spiti (over 1000 yrs old)', 'Kangra Fort', 'Naggar Castle', 'Key Monastery'],
     danceAndMusic: ['Nati Dance (Guinness World Record Holder)', 'Dangi', 'Chhamb Dance', 'Jhori'],
     artAndHandicrafts: ['Kullu Handwoven Shawls (GI)', 'Kangra Miniature Paintings', 'Chamba Rumaal Needlework (GI)', 'Kinnauri Shawls'],

@@ -44,7 +44,7 @@ const MAP_HOTSPOTS: { id: string; name: string; top: string; left: string; tag: 
   { id: 'rajasthan', name: 'Rajasthan', top: '35%', left: '32%', tag: 'Amer Fort & Ghoomar' },
   { id: 'gujarat', name: 'Gujarat', top: '46%', left: '28%', tag: 'Garba & Statue of Unity' },
   { id: 'maharashtra', name: 'Maharashtra', top: '58%', left: '36%', tag: 'Ajanta Caves & Shivaji Forts' },
-  { id: 'goa', name: 'Goa', top: '72%', left: '33%', tag: 'UNESCO Baroque Churches & Beaches' },
+  { id: 'goa', name: 'Goa', top: '68%', left: '33%', tag: 'UNESCO Baroque Churches & Beaches' },
 
   // East & Central
   { id: 'bihar', name: 'Bihar', top: '38%', left: '60%', tag: 'Nalanda Mahavihara & Madhubani' },
@@ -58,8 +58,8 @@ const MAP_HOTSPOTS: { id: string; name: string; top: string; left: string; tag: 
   { id: 'karnataka', name: 'Karnataka', top: '74%', left: '40%', tag: 'Hampi Ruins & Mysore Palace' },
   { id: 'andhra-pradesh', name: 'Andhra Pradesh', top: '68%', left: '50%', tag: 'Kuchipudi & Tirupati Balaji' },
   { id: 'telangana', name: 'Telangana', top: '62%', left: '46%', tag: 'Charminar & Ramappa Temple' },
-  { id: 'tamil-nadu', name: 'Tamil Nadu', top: '85%', left: '46%', tag: 'Brihadeeswarar & Bharatanatyam' },
-  { id: 'kerala', name: 'Kerala', top: '87%', left: '40%', tag: 'Kathakali & Serene Backwaters' },
+  { id: 'tamil-nadu', name: 'Tamil Nadu', top: '82%', left: '48%', tag: 'Brihadeeswarar & Bharatanatyam' },
+  { id: 'kerala', name: 'Kerala', top: '84%', left: '40%', tag: 'Kathakali & Serene Backwaters' },
 
   // North-East
   { id: 'sikkim', name: 'Sikkim', top: '31%', left: '65%', tag: 'Kanchenjunga Peak & Rumtek' },

@@ -105,6 +105,15 @@ const TUTORIAL_DATA: Record<string, {
       { step: 3, title: 'Fire & Snipe', desc: 'Click to fire! Sniping facts earns points; shooting false myths deducts points.', icon: '💥' },
     ],
     proTip: 'Verify before pulling the trigger: not every common myth is grounded in authentic archaeology!',
+  },
+  'act-heritage-map': {
+    headline: 'Drag India\'s cultural treasures onto the correct state on the map!',
+    steps: [
+      { step: 1, title: 'Pick a Heritage Card', desc: 'Drag a cultural item — dance, food, craft, or monument — from the right panel.', icon: '🗺️' },
+      { step: 2, title: 'Drop on the State', desc: 'Place it on the correct state dot on the India map. Correct = +50 pts, wrong = -15 pts!', icon: '📍' },
+      { step: 3, title: 'Beat the Clock', desc: 'Each team gets 90 seconds and 10 unique items. Place them all before time runs out!', icon: '⏱️' },
+    ],
+    proTip: 'Use the 💡 hint button on each card if you\'re unsure — it reveals a one-word regional clue!',
   }
 };
 

@@ -115,6 +115,23 @@ export interface FactSniperItem {
   correctionIfMyth?: string;
 }
 
+export interface HeritageMapItem {
+  id: string;
+  name: string;
+  emoji: string;
+  category: 'dance' | 'food' | 'monument' | 'craft' | 'festival' | 'wildlife' | 'landmark';
+  correctStateId: string;
+  hint: string;
+  funFact: string;
+}
+
+export interface HeritageDropZone {
+  id: string;
+  name: string;
+  top: string;
+  left: string;
+}
+
 // ----------------------------------------------------
 // 1. NAME TRAIL CHAINS DATA
 // ----------------------------------------------------
@@ -1052,3 +1069,142 @@ export const FACT_SNIPER_TARGETS: FactSniperItem[] = [
     sourceCitation: 'Al-Biruni Tarikh al-Hind'
   }
 ];
+
+// ----------------------------------------------------
+// 9. HERITAGE MAP CHALLENGE DATA
+// ----------------------------------------------------
+export const HERITAGE_DROP_ZONES: HeritageDropZone[] = [
+  // North
+  { id: 'jammu-kashmir', name: 'Jammu & Kashmir', top: '13%', left: '37%' },
+  { id: 'ladakh', name: 'Ladakh', top: '11%', left: '43%' },
+  { id: 'himachal-pradesh', name: 'Himachal Pradesh', top: '18%', left: '42%' },
+  { id: 'punjab', name: 'Punjab', top: '22%', left: '36%' },
+  { id: 'haryana', name: 'Haryana', top: '25%', left: '39%' },
+  { id: 'delhi', name: 'Delhi (NCT)', top: '28%', left: '41%' },
+  { id: 'uttarakhand', name: 'Uttarakhand', top: '23%', left: '46%' },
+  { id: 'uttar-pradesh', name: 'Uttar Pradesh', top: '34%', left: '48%' },
+  // West
+  { id: 'rajasthan', name: 'Rajasthan', top: '35%', left: '32%' },
+  { id: 'gujarat', name: 'Gujarat', top: '46%', left: '28%' },
+  { id: 'maharashtra', name: 'Maharashtra', top: '58%', left: '36%' },
+  { id: 'goa', name: 'Goa', top: '68%', left: '33%' },
+  // East & Central
+  { id: 'bihar', name: 'Bihar', top: '38%', left: '60%' },
+  { id: 'jharkhand', name: 'Jharkhand', top: '46%', left: '60%' },
+  { id: 'west-bengal', name: 'West Bengal', top: '48%', left: '66%' },
+  { id: 'odisha', name: 'Odisha', top: '56%', left: '60%' },
+  { id: 'madhya-pradesh', name: 'Madhya Pradesh', top: '46%', left: '45%' },
+  { id: 'chhattisgarh', name: 'Chhattisgarh', top: '53%', left: '52%' },
+  // South
+  { id: 'karnataka', name: 'Karnataka', top: '74%', left: '40%' },
+  { id: 'andhra-pradesh', name: 'Andhra Pradesh', top: '68%', left: '50%' },
+  { id: 'telangana', name: 'Telangana', top: '62%', left: '46%' },
+  { id: 'tamil-nadu', name: 'Tamil Nadu', top: '82%', left: '48%' },
+  { id: 'kerala', name: 'Kerala', top: '84%', left: '40%' },
+  // North-East
+  { id: 'sikkim', name: 'Sikkim', top: '31%', left: '65%' },
+  { id: 'assam', name: 'Assam', top: '34%', left: '77%' },
+  { id: 'arunachal-pradesh', name: 'Arunachal Pradesh', top: '26%', left: '82%' },
+  { id: 'meghalaya', name: 'Meghalaya', top: '39%', left: '74%' },
+  { id: 'nagaland', name: 'Nagaland', top: '35%', left: '86%' },
+  { id: 'manipur', name: 'Manipur', top: '42%', left: '85%' },
+  { id: 'mizoram', name: 'Mizoram', top: '47%', left: '81%' },
+  { id: 'tripura', name: 'Tripura', top: '45%', left: '76%' }
+];
+
+export const HERITAGE_MAP_ITEMS: HeritageMapItem[] = [
+  // Jammu & Kashmir
+  { id: 'hm-jk1', name: 'Pashmina Shawl', emoji: '🧣', category: 'craft', correctStateId: 'jammu-kashmir', hint: 'Valley of Saffron', funFact: 'Authentic Pashmina comes from the Changthangi goat at altitudes above 14,000 ft in Ladakh & Kashmir.' },
+  { id: 'hm-jk2', name: 'Wazwan Feast', emoji: '🍖', category: 'food', correctStateId: 'jammu-kashmir', hint: 'Land of Shikaras', funFact: 'Wazwan is a grand 36-course Kashmiri feast traditionally served at weddings and celebrations.' },
+  // Ladakh
+  { id: 'hm-la1', name: 'Hemis Monastery', emoji: '🏔️', category: 'monument', correctStateId: 'ladakh', hint: 'Land of High Passes', funFact: 'Hemis is the largest Buddhist monastery in Ladakh, famous for its annual Cham masked dance festival.' },
+  { id: 'hm-la2', name: 'Pangong Tso Lake', emoji: '💧', category: 'landmark', correctStateId: 'ladakh', hint: 'High altitude desert', funFact: 'Pangong Tso stretches 134 km across India and China, changing colors from azure to turquoise through the day.' },
+  // Punjab
+  { id: 'hm-pb1', name: 'Bhangra Dance', emoji: '💃', category: 'dance', correctStateId: 'punjab', hint: 'Land of Five Rivers', funFact: 'Bhangra originated as a harvest celebration dance performed by Punjabi farmers during Baisakhi.' },
+  { id: 'hm-pb2', name: 'Golden Temple', emoji: '🏛️', category: 'monument', correctStateId: 'punjab', hint: 'Amritsar', funFact: 'Sri Harmandir Sahib serves free meals (langar) to over 100,000 visitors daily — world\'s largest community kitchen.' },
+  // Haryana
+  { id: 'hm-hr1', name: 'Kurukshetra Battlefield', emoji: '⚔️', category: 'landmark', correctStateId: 'haryana', hint: 'Bhagavad Gita birthplace', funFact: 'The Bhagavad Gita was delivered by Lord Krishna to Arjuna at Jyotisar, Kurukshetra before the Mahabharata war.' },
+  { id: 'hm-hr2', name: 'Surajkund Crafts Fair', emoji: '🎨', category: 'festival', correctStateId: 'haryana', hint: 'Near Delhi', funFact: 'Surajkund International Crafts Mela is the largest crafts fair in the world, attracting artisans from 20+ nations.' },
+  // Himachal Pradesh
+  { id: 'hm-hp1', name: 'Kullu Shawl', emoji: '🧶', category: 'craft', correctStateId: 'himachal-pradesh', hint: 'Devbhoomi', funFact: 'Kullu handwoven shawls are a GI-tagged craft with geometric patterns unique to the Kullu Valley.' },
+  { id: 'hm-hp2', name: 'Nati Dance', emoji: '💃', category: 'dance', correctStateId: 'himachal-pradesh', hint: 'Apple orchards', funFact: 'The Nati dance holds the Guinness World Record for the largest folk dance — performed by over 9,000 dancers.' },
+  // Uttarakhand
+  { id: 'hm-uk1', name: 'Char Dham Pilgrimage', emoji: '🕉️', category: 'landmark', correctStateId: 'uttarakhand', hint: 'Land of the Gods', funFact: 'Char Dham covers Badrinath, Kedarnath, Gangotri, and Yamunotri — four sacred Himalayan shrines.' },
+  { id: 'hm-uk2', name: 'Ganga Aarti at Rishikesh', emoji: '🔥', category: 'festival', correctStateId: 'uttarakhand', hint: 'Yoga Capital', funFact: 'The Triveni Ghat Ganga Aarti at Rishikesh is performed every evening with fire, bells, and Sanskrit chants.' },
+  // Uttar Pradesh
+  { id: 'hm-up1', name: 'Taj Mahal', emoji: '🕌', category: 'monument', correctStateId: 'uttar-pradesh', hint: 'Heartland of ancient wisdom', funFact: 'The Taj Mahal was built by Shah Jahan in memory of Mumtaz Mahal, using 22,000 workers over 22 years.' },
+  { id: 'hm-up2', name: 'Banarasi Silk Saree', emoji: '👘', category: 'craft', correctStateId: 'uttar-pradesh', hint: 'World\'s oldest living city', funFact: 'Banarasi silk sarees use real gold and silver zari threads — a tradition dating back to the Mughal era.' },
+  // Delhi
+  { id: 'hm-dl1', name: 'Red Fort', emoji: '🏰', category: 'monument', correctStateId: 'delhi', hint: 'Heart of the Nation', funFact: 'The Prime Minister hoists the national flag at Red Fort every Independence Day since 1947.' },
+  { id: 'hm-dl2', name: 'Chandni Chowk Chaat', emoji: '🍽️', category: 'food', correctStateId: 'delhi', hint: 'National Capital', funFact: 'Chandni Chowk, built in the 17th century by Jahanara Begum, is one of Asia\'s oldest and busiest markets.' },
+  // Rajasthan
+  { id: 'hm-rj1', name: 'Ghoomar Dance', emoji: '💃', category: 'dance', correctStateId: 'rajasthan', hint: 'Land of Kings', funFact: 'Ghoomar is a traditional Rajput dance performed by women in swirling ghaghra skirts during festivals.' },
+  { id: 'hm-rj2', name: 'Dal Baati Churma', emoji: '🍲', category: 'food', correctStateId: 'rajasthan', hint: 'Desert forts', funFact: 'Dal Baati Churma is Rajasthan\'s signature dish — baked wheat balls drenched in ghee, served with spiced lentils.' },
+  // Gujarat
+  { id: 'hm-gj1', name: 'Garba Dance', emoji: '💃', category: 'dance', correctStateId: 'gujarat', hint: 'Navratri celebrations', funFact: 'Gujarat\'s Garba was inscribed on UNESCO\'s Intangible Cultural Heritage list — world\'s longest dance festival during Navratri.' },
+  { id: 'hm-gj2', name: 'Rann of Kutch', emoji: '🏜️', category: 'landmark', correctStateId: 'gujarat', hint: 'White salt desert', funFact: 'The Great Rann of Kutch is the world\'s largest salt desert, stretching over 7,500 sq km of dazzling white salt flats.' },
+  // Maharashtra
+  { id: 'hm-mh1', name: 'Warli Art', emoji: '🎨', category: 'craft', correctStateId: 'maharashtra', hint: 'Ajanta & Ellora', funFact: 'Warli tribal art uses geometric shapes (triangles, circles) depicting daily life — practiced for over 2,500 years.' },
+  { id: 'hm-mh2', name: 'Vada Pav', emoji: '🍔', category: 'food', correctStateId: 'maharashtra', hint: 'Mumbai megacity', funFact: 'Vada Pav is Mumbai\'s iconic street food — a spiced potato fritter in a bun, invented by Ashok Vaidya in 1966.' },
+  // Goa
+  { id: 'hm-go1', name: 'Basilica of Bom Jesus', emoji: '⛪', category: 'monument', correctStateId: 'goa', hint: 'Pearl of the Arabian Sea', funFact: 'This UNESCO World Heritage Basilica holds the mortal remains of St. Francis Xavier in a silver casket since 1613.' },
+  { id: 'hm-go2', name: 'Goa Carnival', emoji: '🎭', category: 'festival', correctStateId: 'goa', hint: 'Beaches & churches', funFact: 'The Goa Carnival is a 3-day festival of parades, music, and revelry — a 500-year-old Portuguese tradition.' },
+  // Bihar
+  { id: 'hm-br1', name: 'Nalanda University Ruins', emoji: '🏛️', category: 'monument', correctStateId: 'bihar', hint: 'Land of enlightenment', funFact: 'Nalanda was the world\'s first residential university (5th century CE), hosting 10,000+ scholars from across Asia.' },
+  { id: 'hm-br2', name: 'Madhubani Painting', emoji: '🎨', category: 'craft', correctStateId: 'bihar', hint: 'Mithila region', funFact: 'Madhubani art uses natural dyes from turmeric, indigo, and flower extracts — traditionally painted by women on mud walls.' },
+  // Jharkhand
+  { id: 'hm-jh1', name: 'Chhau Dance', emoji: '🎭', category: 'dance', correctStateId: 'jharkhand', hint: 'Land of forests', funFact: 'Seraikela Chhau is a UNESCO-recognized masked dance depicting epic battles from the Mahabharata and Ramayana.' },
+  { id: 'hm-jh2', name: 'Sohrai Mural Art', emoji: '🎨', category: 'craft', correctStateId: 'jharkhand', hint: 'Tribal heritage', funFact: 'Sohrai-Khovar GI-tagged murals are created by tribal women during harvest using fingers and twigs on mud walls.' },
+  // West Bengal
+  { id: 'hm-wb1', name: 'Durga Puja', emoji: '🎊', category: 'festival', correctStateId: 'west-bengal', hint: 'Bengal Renaissance', funFact: 'Kolkata\'s Durga Puja was inscribed as UNESCO Intangible Cultural Heritage of Humanity in 2021.' },
+  { id: 'hm-wb2', name: 'Rosogolla', emoji: '🍬', category: 'food', correctStateId: 'west-bengal', hint: 'Land of Tagore', funFact: 'Banglar Rosogolla received GI tag in 2017 — soft cottage cheese balls soaked in sugar syrup, invented in Kolkata.' },
+  // Odisha
+  { id: 'hm-od1', name: 'Konark Sun Temple', emoji: '☀️', category: 'monument', correctStateId: 'odisha', hint: 'Land of Jagannath', funFact: 'Konark\'s 13th-century temple is shaped as a giant chariot with 24 intricately carved stone wheels and 7 horses.' },
+  { id: 'hm-od2', name: 'Odissi Dance', emoji: '💃', category: 'dance', correctStateId: 'odisha', hint: 'Kalinga coast', funFact: 'Odissi is one of India\'s oldest classical dance forms, originating in temples of Bhubaneswar over 2,000 years ago.' },
+  // Madhya Pradesh
+  { id: 'hm-mp1', name: 'Sanchi Stupa', emoji: '🏛️', category: 'monument', correctStateId: 'madhya-pradesh', hint: 'Heart of India', funFact: 'The Great Stupa at Sanchi was commissioned by Emperor Ashoka in the 3rd century BCE to house Buddha\'s relics.' },
+  { id: 'hm-mp2', name: 'Bhimbetka Cave Paintings', emoji: '🎨', category: 'landmark', correctStateId: 'madhya-pradesh', hint: 'Prehistoric caves', funFact: 'Bhimbetka rock shelters contain paintings dating back 30,000 years — among the oldest known human art on Earth.' },
+  // Chhattisgarh
+  { id: 'hm-cg1', name: 'Bastar Dhokra Craft', emoji: '🔔', category: 'craft', correctStateId: 'chhattisgarh', hint: 'Rice Bowl of India', funFact: 'Dhokra is a 4,500-year-old lost-wax bell metal casting technique — the famous "Dancing Girl" of Mohenjo-daro used this method.' },
+  { id: 'hm-cg2', name: 'Chitrakote Falls', emoji: '💧', category: 'landmark', correctStateId: 'chhattisgarh', hint: 'Tribal Bastar', funFact: 'Chitrakote Falls on the Indravati River is India\'s widest waterfall, nicknamed the "Niagara of India".' },
+  // Karnataka
+  { id: 'hm-ka1', name: 'Hampi Ruins', emoji: '🏛️', category: 'monument', correctStateId: 'karnataka', hint: 'Vijayanagara Empire', funFact: 'Hampi was the capital of the Vijayanagara Empire — once the world\'s second largest city after Beijing.' },
+  { id: 'hm-ka2', name: 'Mysore Silk Saree', emoji: '👘', category: 'craft', correctStateId: 'karnataka', hint: 'City of palaces', funFact: 'Mysore Silk is a GI-tagged pure mulberry silk product woven with real gold zari in the city\'s government-owned factory.' },
+  // Andhra Pradesh
+  { id: 'hm-ap1', name: 'Tirupati Balaji Temple', emoji: '🕉️', category: 'monument', correctStateId: 'andhra-pradesh', hint: 'Sacred hills', funFact: 'Tirumala Venkateswara Temple is the world\'s most visited religious place — receiving 50,000-100,000 pilgrims daily.' },
+  { id: 'hm-ap2', name: 'Kalamkari Fabric', emoji: '🎨', category: 'craft', correctStateId: 'andhra-pradesh', hint: 'Kuchipudi homeland', funFact: 'Kalamkari is hand-painted cotton using a bamboo pen (kalam) with natural vegetable dyes — a 3,000-year-old art.' },
+  // Telangana
+  { id: 'hm-tg1', name: 'Charminar', emoji: '🕌', category: 'monument', correctStateId: 'telangana', hint: 'City of Pearls', funFact: 'Charminar was built in 1591 by Sultan Muhammad Quli Qutb Shah to celebrate the end of a deadly plague.' },
+  { id: 'hm-tg2', name: 'Hyderabadi Biryani', emoji: '🍚', category: 'food', correctStateId: 'telangana', hint: 'Golconda diamonds', funFact: 'Hyderabadi Dum Biryani is a GI-tagged delicacy — rice and meat slow-cooked in a sealed pot (dum) since the Nizam era.' },
+  // Tamil Nadu
+  { id: 'hm-tn1', name: 'Bharatanatyam Dance', emoji: '💃', category: 'dance', correctStateId: 'tamil-nadu', hint: 'Land of temples', funFact: 'Bharatanatyam is one of the oldest classical dance forms, originating over 2,000 years ago in Tamil temple traditions.' },
+  { id: 'hm-tn2', name: 'Kanchipuram Silk Saree', emoji: '👘', category: 'craft', correctStateId: 'tamil-nadu', hint: 'Dravidian gopurams', funFact: 'Kanchipuram silk sarees are woven with pure mulberry silk and 24-karat gold zari — a single saree takes 15-20 days.' },
+  // Kerala
+  { id: 'hm-kl1', name: 'Kathakali Dance', emoji: '🎭', category: 'dance', correctStateId: 'kerala', hint: 'God\'s Own Country', funFact: 'Kathakali performers spend 3-4 hours on elaborate green facial makeup (paccha) using natural pigments and rice paste.' },
+  { id: 'hm-kl2', name: 'Onam Sadhya Feast', emoji: '🍽️', category: 'food', correctStateId: 'kerala', hint: 'Backwater paradise', funFact: 'Onam Sadhya is a grand vegetarian feast of 26 dishes served on a fresh banana leaf — celebrating King Mahabali\'s return.' },
+  // Assam
+  { id: 'hm-as1', name: 'Kaziranga Rhino', emoji: '🦏', category: 'wildlife', correctStateId: 'assam', hint: 'Red River & Blue Hills', funFact: 'Kaziranga National Park hosts two-thirds of the world\'s one-horned rhinoceros — a UNESCO World Heritage Site.' },
+  { id: 'hm-as2', name: 'Muga Golden Silk', emoji: '✨', category: 'craft', correctStateId: 'assam', hint: 'Land of Bihu', funFact: 'Muga silk is the golden-hued silk exclusive to Assam — it becomes more lustrous with each wash and is naturally UV resistant.' },
+  // Arunachal Pradesh
+  { id: 'hm-ar1', name: 'Tawang Monastery', emoji: '🏔️', category: 'monument', correctStateId: 'arunachal-pradesh', hint: 'Dawn-lit mountains', funFact: 'Tawang Monastery is the 2nd largest Buddhist monastery in the world after Potala Palace in Lhasa, Tibet.' },
+  { id: 'hm-ar2', name: 'Ziro Valley', emoji: '🌿', category: 'landmark', correctStateId: 'arunachal-pradesh', hint: 'First sunrise in India', funFact: 'Ziro Valley is a UNESCO World Heritage tentative site, home to the Apatani tribe\'s unique sustainable rice-fish farming.' },
+  // Meghalaya
+  { id: 'hm-mg1', name: 'Living Root Bridges', emoji: '🌳', category: 'landmark', correctStateId: 'meghalaya', hint: 'Abode of the Clouds', funFact: 'Living root bridges are grown over 15-30 years by training the roots of Ficus elastica trees — some are 500 years old.' },
+  { id: 'hm-mg2', name: 'Wangala 100-Drum Festival', emoji: '🥁', category: 'festival', correctStateId: 'meghalaya', hint: 'Rainiest place on Earth', funFact: 'The Wangala festival celebrates the harvest season with 100 drums played simultaneously by the Garo tribe.' },
+  // Nagaland
+  { id: 'hm-nl1', name: 'Hornbill Festival', emoji: '🦅', category: 'festival', correctStateId: 'nagaland', hint: 'Land of brave warriors', funFact: 'The Hornbill Festival showcases 16 Naga tribes\' cultures — warrior dances, indigenous food, and clan shawls every December.' },
+  { id: 'hm-nl2', name: 'Naga Clan Shawl', emoji: '🧣', category: 'craft', correctStateId: 'nagaland', hint: 'Festival capital of India', funFact: 'Each Naga tribe has a distinct shawl pattern — the Tsungkotepsu shawl\'s design indicates the wearer\'s social status.' },
+  // Manipur
+  { id: 'hm-mn1', name: 'Loktak Floating Lake', emoji: '🏞️', category: 'landmark', correctStateId: 'manipur', hint: 'Jewel of India', funFact: 'Loktak Lake has Keibul Lamjao — the world\'s only floating national park, home to the endangered Sangai deer.' },
+  { id: 'hm-mn2', name: 'Manipuri Raas Leela', emoji: '💃', category: 'dance', correctStateId: 'manipur', hint: 'Land of polo', funFact: 'Manipuri classical dance is known for its graceful, slow circular movements depicting Krishna\'s Raas Leela.' },
+  // Mizoram
+  { id: 'hm-mz1', name: 'Cheraw Bamboo Dance', emoji: '🎋', category: 'dance', correctStateId: 'mizoram', hint: 'Land of Highlanders', funFact: 'In Cheraw, dancers step between bamboo poles struck rhythmically on the ground — one misstep and you\'re out!' },
+  { id: 'hm-mz2', name: 'Chapchar Kut Festival', emoji: '🎉', category: 'festival', correctStateId: 'mizoram', hint: 'Blue Mountain peak', funFact: 'Chapchar Kut is Mizoram\'s biggest spring festival marking the clearing of forests for jhum cultivation.' },
+  // Tripura
+  { id: 'hm-tr1', name: 'Unakoti Rock Carvings', emoji: '🗿', category: 'monument', correctStateId: 'tripura', hint: 'Land of Fourteen Gods', funFact: 'Unakoti has colossal 8th-century rock carvings of Shiva heads — "Unakoti" means "one less than a crore" (9,999,999).' },
+  { id: 'hm-tr2', name: 'Neermahal Water Palace', emoji: '🏰', category: 'monument', correctStateId: 'tripura', hint: 'Royal palaces', funFact: 'Neermahal is India\'s only water palace, built in 1930 by King Bir Bikram on Rudrasagar Lake, blending Hindu and Mughal styles.' },
+  // Sikkim
+  { id: 'hm-sk1', name: 'Kanchenjunga Peak', emoji: '🏔️', category: 'landmark', correctStateId: 'sikkim', hint: '100% organic state', funFact: 'Kanchenjunga is the world\'s 3rd highest peak at 8,586m — worshipped as a guardian deity by the Sikkimese people.' },
+  { id: 'hm-sk2', name: 'Momos', emoji: '🥟', category: 'food', correctStateId: 'sikkim', hint: 'Valley of sacred peaks', funFact: 'Sikkim\'s momos are steamed dumplings with spiced fillings served with fiery tomato-chili achaar — a Himalayan comfort food.' }
+];
+
