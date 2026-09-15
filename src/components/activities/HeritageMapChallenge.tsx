@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import confetti from 'canvas-confetti';
 import { HERITAGE_MAP_ITEMS, HERITAGE_DROP_ZONES, HeritageMapItem } from '@/data/activityGamesData';
 import { TeamScoreboard } from './TeamScoreboard';
-import { MapPin, CheckCircle, X, Sparkles, Trophy, Lightbulb, Clock, GripVertical, RotateCcw } from 'lucide-react';
+import { MapPin, CheckCircle, X, Sparkles, Trophy, Lightbulb, Clock, GripVertical, RotateCcw, XCircle } from 'lucide-react';
 
 const ITEMS_PER_ROUND = 10;
 const ROUND_SECONDS = 90;
@@ -31,6 +31,7 @@ export const HeritageMapChallenge: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<HeritageMapItem | null>(null);
   const [hoveredZone, setHoveredZone] = useState<string | null>(null);
   const [feedbackMsg, setFeedbackMsg] = useState<{ text: string; type: 'good' | 'bad'; funFact?: string } | null>(null);
+  const [zoneFeedback, setZoneFeedback] = useState<{ zoneId: string; type: 'correct' | 'wrong'; stateName: string } | null>(null);
   const [showHint, setShowHint] = useState<string | null>(null);
 
   // Touch drag state
@@ -170,22 +171,25 @@ export const HeritageMapChallenge: React.FC = () => {
       setScores(prev => ({ ...prev, [activeTeam]: prev[activeTeam] + 50 }));
       setPlacedItems(prev => [...prev, { item, correct: true }]);
       setAvailableItems(prev => prev.filter(i => i.id !== item.id));
+      setZoneFeedback({ zoneId, type: 'correct', stateName: zone?.name || zoneId });
       setFeedbackMsg({
-        text: `✅ ${item.emoji} ${item.name} → ${zone?.name || zoneId}`,
+        text: `✅ Correct! ${item.emoji} ${item.name} belongs to ${zone?.name || zoneId}`,
         type: 'good',
         funFact: item.funFact
       });
-      confetti({ particleCount: 40, spread: 50, origin: { y: 0.7 } });
+      confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
     } else {
       setScores(prev => ({ ...prev, [activeTeam]: Math.max(0, prev[activeTeam] - 15) }));
+      setZoneFeedback({ zoneId, type: 'wrong', stateName: zone?.name || zoneId });
       setFeedbackMsg({
-        text: `❌ Wrong! ${item.emoji} ${item.name} doesn't belong to ${zone?.name || zoneId}`,
+        text: `❌ Incorrect! ${item.emoji} ${item.name} does NOT belong to ${zone?.name || zoneId}`,
         type: 'bad'
       });
     }
 
     setSelectedItem(null);
-    setTimeout(() => setFeedbackMsg(null), 3500);
+    setTimeout(() => setZoneFeedback(null), 2800);
+    setTimeout(() => setFeedbackMsg(null), 4000);
   };
 
   const resetGame = () => {
@@ -201,6 +205,7 @@ export const HeritageMapChallenge: React.FC = () => {
     setPhase('playing');
     setTimerSeconds(ROUND_SECONDS);
     setFeedbackMsg(null);
+    setZoneFeedback(null);
     setShowHint(null);
     setDraggedItem(null);
     setSelectedItem(null);
@@ -320,16 +325,60 @@ export const HeritageMapChallenge: React.FC = () => {
               draggable={false}
             />
 
+            {/* Real-time result banner directly on map */}
+            {feedbackMsg && (
+              <div
+                className={`absolute top-3 left-3 right-3 z-40 p-3 rounded-xl shadow-2xl backdrop-blur-md border-2 flex items-start gap-3 transition-all duration-300 animate-in fade-in slide-in-from-top-2 ${
+                  feedbackMsg.type === 'good'
+                    ? 'bg-[#0a2f1d]/95 border-emerald-400 text-white ring-2 ring-emerald-500/50'
+                    : 'bg-[#400e0e]/95 border-rose-400 text-white ring-2 ring-rose-500/50'
+                }`}
+              >
+                {feedbackMsg.type === 'good' ? (
+                  <CheckCircle className="w-6 h-6 text-emerald-400 flex-shrink-0 mt-0.5 animate-bounce" />
+                ) : (
+                  <XCircle className="w-6 h-6 text-rose-400 flex-shrink-0 mt-0.5 animate-pulse" />
+                )}
+                <div className="flex-1 min-w-0">
+                  <div className="font-black text-sm tracking-wide">
+                    {feedbackMsg.text}
+                  </div>
+                  {feedbackMsg.funFact && (
+                    <div className="text-xs text-emerald-200 mt-1 font-medium bg-black/30 rounded-lg p-2 border border-emerald-500/30">
+                      💡 {feedbackMsg.funFact}
+                    </div>
+                  )}
+                  {feedbackMsg.type === 'bad' && (
+                    <div className="text-[11px] text-rose-200 mt-0.5 font-medium">
+                      Try another state or click the 💡 hint button on the card!
+                    </div>
+                  )}
+                </div>
+                <button
+                  onClick={() => setFeedbackMsg(null)}
+                  className="text-white/60 hover:text-white text-xs p-1"
+                >
+                  ✕
+                </button>
+              </div>
+            )}
+
             {/* Drop zones overlay */}
             {HERITAGE_DROP_ZONES.map(zone => {
               const isPlaced = placedItems.some(p => p.item.correctStateId === zone.id && p.correct);
               const isTargetForSelected = selectedItem?.correctStateId === zone.id;
+              const feedbackOnThisZone = zoneFeedback?.zoneId === zone.id ? zoneFeedback : null;
+
               return (
                 <div
                   key={zone.id}
                   data-zone-id={zone.id}
                   className={`group absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 z-10 ${
-                    isPlaced
+                    feedbackOnThisZone?.type === 'correct'
+                      ? 'bg-emerald-500 ring-4 ring-emerald-300 scale-150 shadow-2xl z-30'
+                      : feedbackOnThisZone?.type === 'wrong'
+                      ? 'bg-rose-600 ring-4 ring-rose-300 scale-150 shadow-2xl z-30 animate-bounce'
+                      : isPlaced
                       ? 'bg-green-600/85 ring-2 ring-green-400 scale-110 shadow-md'
                       : hoveredZone === zone.id
                       ? 'bg-amber-400/90 ring-4 ring-amber-500 scale-125 shadow-xl'
@@ -348,15 +397,33 @@ export const HeritageMapChallenge: React.FC = () => {
                   onDragLeave={handleDragLeave}
                   onDrop={e => handleDrop(e, zone.id)}
                 >
-                  {isPlaced ? (
+                  {feedbackOnThisZone?.type === 'correct' ? (
+                    <CheckCircle className="w-5 h-5 text-white animate-bounce" />
+                  ) : feedbackOnThisZone?.type === 'wrong' ? (
+                    <X className="w-5 h-5 text-white font-black animate-spin" />
+                  ) : isPlaced ? (
                     <CheckCircle className="w-4 h-4 text-white" />
                   ) : (
                     <div className="w-2.5 h-2.5 rounded-full bg-white shadow-sm" />
                   )}
+
+                  {/* Immediate Floating Feedback Pill on Zone */}
+                  {feedbackOnThisZone && (
+                    <div className={`pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-full text-[11px] font-black shadow-xl whitespace-nowrap z-40 border animate-bounce ${
+                      feedbackOnThisZone.type === 'correct'
+                        ? 'bg-emerald-600 text-white border-emerald-300 ring-2 ring-emerald-400'
+                        : 'bg-rose-600 text-white border-rose-300 ring-2 ring-rose-400'
+                    }`}>
+                      {feedbackOnThisZone.type === 'correct' ? '+50 ✅ Correct!' : '-15 ❌ Not this state!'}
+                    </div>
+                  )}
+
                   {/* Hover tooltip */}
-                  <div className="opacity-0 group-hover:opacity-100 pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 bg-[#14213D] text-amber-200 text-[10px] font-bold px-2 py-0.5 rounded shadow-lg whitespace-nowrap z-30 transition-opacity border border-amber-400/30">
-                    {zone.name}
-                  </div>
+                  {!feedbackOnThisZone && (
+                    <div className="opacity-0 group-hover:opacity-100 pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 bg-[#14213D] text-amber-200 text-[10px] font-bold px-2 py-0.5 rounded shadow-lg whitespace-nowrap z-30 transition-opacity border border-amber-400/30">
+                      {zone.name}
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -382,7 +449,7 @@ export const HeritageMapChallenge: React.FC = () => {
           </div>
 
           {/* RIGHT: Draggable heritage cards */}
-          <div className="flex-1 min-w-0">
+          <div className="flex-1 min-w-0 bg-[#FAF6EE]/95 backdrop-blur-md p-4 rounded-2xl border-2 border-amber-300/80 shadow-academic">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-sm font-bold text-gray-700">
                 {selectedItem ? (
