@@ -96,15 +96,17 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Center: Navigation Tabs OR Active Activity Control Strip */}
         {activeActivity ? (
           <div className="flex items-center gap-2 sm:gap-3 bg-white/90 backdrop-blur-md p-1.5 rounded-2xl border border-amber-500/40 shadow-sm min-w-0">
-            <button
-              onClick={onBackToArena}
-              className="px-3 sm:px-4 py-1.5 bg-gray-900 hover:bg-black text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow active:scale-95 cursor-pointer shrink-0"
-              title="Return to Arena Games"
-            >
-              <span className="text-amber-400 font-black">←</span>
-              <span className="hidden md:inline">Back to Arena Games</span>
-              <span className="md:hidden">Back</span>
-            </button>
+            {onBackToArena && (
+              <button
+                onClick={onBackToArena}
+                className="px-3 sm:px-4 py-1.5 bg-gray-900 hover:bg-black text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow active:scale-95 cursor-pointer shrink-0"
+                title="Return to Arena Games"
+              >
+                <span className="text-amber-400 font-black">←</span>
+                <span className="hidden md:inline">Back to Arena Games</span>
+                <span className="md:hidden">Back</span>
+              </button>
+            )}
 
             <div className="flex items-center gap-1.5 px-2 py-0.5 min-w-0">
               <span className="text-xs text-gray-500 hidden xl:inline">Playing:</span>

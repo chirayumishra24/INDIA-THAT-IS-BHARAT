@@ -7,7 +7,8 @@ import { IndiaCulturalMapModal } from '@/components/interactive/IndiaCulturalMap
 import { NotesAndBookmarksModal } from '@/components/interactive/NotesAndBookmarksModal';
 import { CivilizationalEntryPortal } from '@/components/ui/CivilizationalEntryPortal';
 import { BackgroundVideo } from '@/components/ui/BackgroundVideo';
-import { ActivityArena, ActivityMode, ACTIVITIES_CATALOG } from '@/components/activities/ActivityArena';
+import { SourceTugOfWar } from '@/components/activities/SourceTugOfWar';
+import { ActivityTutorialModal } from '@/components/activities/ActivityTutorialModal';
 
 const STORAGE_KEY = 'bharat_learning_studio_state_v1';
 const PORTAL_SEEN_KEY = 'bharat_portal_seen_session_v1';
@@ -27,11 +28,13 @@ export default function Home() {
   const [studentState, setStudentState] = useState<StudentState>(INITIAL_STATE);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showEntryPortal, setShowEntryPortal] = useState(true);
-  const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<ActivityMode>('all-games');
   const [isTutorialOpen, setIsTutorialOpen] = useState(false);
 
-  const activeActivity = ACTIVITIES_CATALOG.find(a => a.id === selectedActivityId) || null;
+  const activeActivity = {
+    id: 'act-source-tug',
+    title: 'Source vs Source — Tug of War',
+    icon: '⚔️'
+  };
 
   // Modal states
   const [activeModal, setActiveModal] = useState<'notes' | 'bookmarks' | null>(null);
@@ -86,8 +89,6 @@ export default function Home() {
       ...prev,
       currentSectionId: sectionId
     }));
-    setSelectedActivityId(null);
-    setActiveTab('all-games');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -163,29 +164,30 @@ export default function Home() {
         onOpenBookmarks={() => setActiveModal('bookmarks')}
         onOpenCulturalMap={() => setIsMapModalOpen(true)}
         activeActivity={activeActivity}
-        onBackToArena={() => setSelectedActivityId(null)}
         onOpenTutorial={() => setIsTutorialOpen(true)}
       />
 
-      {/* Main Content Area: Pure Activity Arena */}
-      <main className="flex-1 pb-16">
-        <ActivityArena
-          selectedActivityId={selectedActivityId}
-          onSelectActivity={setSelectedActivityId}
-          activeTab={activeTab}
-          onTabChange={setActiveTab}
-          isTutorialOpen={isTutorialOpen}
-          onTutorialOpenChange={setIsTutorialOpen}
-        />
+      {/* Main Content Area: Pure Source vs Source Tug of War */}
+      <main className="flex-1 max-w-7xl mx-auto w-full px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
+        <SourceTugOfWar />
       </main>
+
+      {/* How to Play Animated Modal */}
+      <ActivityTutorialModal
+        activityId="act-source-tug"
+        activityTitle="Source vs Source — Tug of War"
+        activityIcon="⚔️"
+        isOpen={isTutorialOpen}
+        onClose={() => setIsTutorialOpen(false)}
+      />
 
       {/* Footer */}
       <footer className="bg-[#FAF6EE] border-t border-[#EAE0CF] py-6 px-4 text-center text-xs text-gray-500 space-y-1 relative z-10">
         <div>
-          <strong>India, That Is Bharat • Activity & Game Arena</strong> • Class VI Social Science
+          <strong>India, That Is Bharat • Source vs Source Tug of War</strong> • Class VI Social Science
         </div>
         <div>
-          8 Interactive Team & 1v1 Battle Activities
+          Primary Inscriptions, Ancient Texts & Epigraphical Verification Battle
         </div>
       </footer>
 

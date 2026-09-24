@@ -43,7 +43,7 @@ export const TeamScoreboard: React.FC<TeamScoreboardProps> = ({
           </span>
           <span className="text-xs sm:text-sm 2xl:text-base font-black uppercase tracking-widest text-amber-900 flex items-center gap-1.5">
             <Users className="w-4 h-4 2xl:w-5 2xl:h-5 text-amber-700" />
-            2-Team Battle Arena
+            2-Team Source Battle
           </span>
         </div>
 
